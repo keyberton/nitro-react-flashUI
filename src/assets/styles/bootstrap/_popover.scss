@@ -22,8 +22,8 @@
   .popover-arrow {
     position: absolute;
     display: block;
-    width: 11px;
-    height: 18px;
+    width: 12px!important;
+    height: 20px!important;
     background-image: url(@/assets/flash/navigator/info_pointer.png);
 
 
@@ -58,7 +58,7 @@
 
 .bs-popover-end {
   > .popover-arrow {
-    left: -7px;
+    left: -9px;
     width: $popover-arrow-height;
     height: $popover-arrow-width;
 

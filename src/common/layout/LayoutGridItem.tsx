@@ -16,17 +16,20 @@ export interface LayoutGridItemProps extends ColumnProps
     itemUnseen?: boolean;
     itemHighlight?: boolean;
     disabled?: boolean;
+    rounded?: boolean;
 }
 
 export const LayoutGridItem: FC<LayoutGridItemProps> = props =>
 {
-    const { itemImage = undefined, itemColor = undefined, itemActive = false, itemCount = 1, itemCountMinimum = 1, itemUniqueSoldout = false, itemUniqueNumber = -2, itemUnseen = false, itemHighlight = false, disabled = false, center = true, column = true, style = {}, classNames = [], position = 'relative', overflow = 'hidden', children = null, ...rest } = props;
+    const { itemImage = undefined, rounded = true, itemColor = undefined, itemActive = false, itemCount = 1, itemCountMinimum = 1, itemUniqueSoldout = false, itemUniqueNumber = -2, itemUnseen = false, itemHighlight = false, disabled = false, center = true, column = true, style = {}, classNames = [], position = 'relative', overflow = 'hidden', children = null, ...rest } = props;
 
     const getClassNames = useMemo(() =>
     {
-        const newClassNames: string[] = [ 'layout-grid-item', 'border', 'border-2', 'border-muted', 'rounded' ];
+        const newClassNames: string[] = [ 'layout-grid-item', 'border', 'border-2', 'border-muted' ];
 
         if(itemActive) newClassNames.push('active');
+
+        if(rounded) newClassNames.push('rounded');
 
         if(itemUniqueSoldout || (itemUniqueNumber > 0)) newClassNames.push('unique-item');
 
@@ -43,7 +46,7 @@ export const LayoutGridItem: FC<LayoutGridItemProps> = props =>
         if(classNames.length) newClassNames.push(...classNames);
 
         return newClassNames;
-    }, [ itemActive, itemUniqueSoldout, itemUniqueNumber, itemUnseen, itemHighlight, disabled, itemImage, classNames ]);
+    }, [ itemActive, rounded, itemUniqueSoldout, itemUniqueNumber, itemUnseen, itemHighlight, disabled, itemImage, classNames ]);
 
     const getStyle = useMemo(() =>
     {

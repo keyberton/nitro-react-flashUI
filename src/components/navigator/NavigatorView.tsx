@@ -200,9 +200,9 @@ export const NavigatorView: FC<{}> = props =>
             { isVisible &&
                 <NitroCardView uniqueKey="navigator" className={ `nitro-navigator ${ isOpenSavesSearchs ? 'expanded' : '' }` }>
                     <NitroCardHeaderView headerText={ LocalizeText('navigator.title') } isInfoToHabboPages={ true } onClickInfoHabboPages={ () => CreateLinkEvent('habbopages/navigator') } onCloseClick={ event => setIsVisible(false) } />
-                    <NitroCardTabsView>
+                    <NitroCardTabsView className='bg-white'>
                         <Base className="mt-1">
-                            <LayoutSearchSavesView style={ { marginRight: !isOpenSavesSearchs ? '11px' : '91px', marginLeft: '-2px', marginTop: '1px' } } title={ LocalizeText('navigator.tooltip.left.show.hide') } onClick={ () => setIsOpenSavesSearchs(prevValue => !prevValue) } />
+                            <LayoutSearchSavesView style={ { marginRight: !isOpenSavesSearchs ? '14px' : '94px', marginLeft: '8px', marginTop: '1px' } } title={ LocalizeText('navigator.tooltip.left.show.hide') } onClick={ () => setIsOpenSavesSearchs(prevValue => !prevValue) } />
                         </Base>
                         { topLevelContexts && (topLevelContexts.length > 0) && topLevelContexts.map((context, index) =>
                         {

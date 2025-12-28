@@ -192,6 +192,10 @@ export const DraggableWindow: FC<DraggableWindowProps> = props =>
                 element.style.top = 50 + offsetTop + 'px';
                 element.style.left = 50 + offsetLeft + 'px';
                 break;
+            case DraggableWindowPosition.TOP_RIGHT:
+                element.style.top = 1 + offsetTop + 'px';
+                element.style.right = 190 + 'px';
+                break;
         }
 
         setDelta({ x: 0, y: 0 });

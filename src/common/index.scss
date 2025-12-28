@@ -2,14 +2,10 @@
     height: var(--nitro-grid-column-min-height, unset);
     background-position: center;
     background-repeat: no-repeat;
-    background-color: $grid-bg-color;
+    background-color: #cbcbcb;
 
     &.active {
         border-color: $grid-active-border-color  !important;
-
-        &:not(.clear-bg) {
-            background-color: $grid-active-bg-color  !important;
-        }
     }
 
     &.disabled {
@@ -110,8 +106,17 @@
 }
 
 .catalog-grid-active {
+    width: 53px;
+    height: 50px;
+    padding: 2px;
 
-    width: 44px;
+    &.price {
+        height: 60px;
+    }
+
+    &.doubled {
+        height: 80px;
+    }
 
     &.active {
         border-image-source: url(@/assets/flash/catalogue/item_grid_highlight.png);
@@ -126,7 +131,7 @@
 }
 
 .layout-catalog-grid-item {
-    height: 38px;
+    height: 42px;
     background-position: center top 6px;
     background-repeat: no-repeat;
     padding: 2px;
@@ -511,7 +516,7 @@
             }
         }
 
-        &::after {
+        /*&::after {
             position: absolute;
             content: '';
             top: 0;
@@ -523,7 +528,7 @@
             border-right: 2px solid white;
             box-shadow: -2px -2px rgba(0, 0, 0, 0.4),
                 inset 3px 3px rgba(0, 0, 0, 0.2);
-        }
+        }*/
     }
 }
 
@@ -616,10 +621,6 @@
     width: 170px;
     height: 29px;
     background: url('@/assets/images/unique/catalog-info-amount-bg.png') no-repeat center;
-    z-index: 0;
-    padding-top: 3px;
-    position: absolute;
-    right: 0.30rem;
 
     .plate-container {
         margin-left: 45px;

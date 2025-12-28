@@ -22,7 +22,7 @@ export const RoomPromotesWidgetView: FC<{}> = props =>
     return (
         <>
             { (promoteInformation?.data.adId === -1 && navigatorData?.enteredGuestRoom?.ownerId === GetSessionDataManager().userId) &&
-                <Base className="nitro-notification-bubble">
+                <Base className="nitro-notification-bubble not-notification">
                     <Column>
                         <Flex className="grouproom-header" alignItems="center" justifyContent="between" pointer onClick={ event => CreateLinkEvent('catalog/open/room_event') }>
                             <Flex className="icon-style">
@@ -37,7 +37,7 @@ export const RoomPromotesWidgetView: FC<{}> = props =>
                 </Base>
             }
             { promoteInformation.data.adId !== -1 &&
-                <Base className="nitro-notification-bubble">
+                <Base className="nitro-notification-bubble not-notification">
                     <Column>
                         <Flex className="grouproom-header" alignItems="center" justifyContent="between" pointer onClick={ event => setIsOpen(value => !value) }>
                             <Flex className="icon-style">

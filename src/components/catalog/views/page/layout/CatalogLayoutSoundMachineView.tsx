@@ -118,7 +118,7 @@ export const CatalogLayoutSoundMachineView: FC<CatalogLayoutProps> = props =>
                     }
                 </Column>
                 <Column>
-                    <Column position="absolute" className="grid-bg p-2 bottom-5 mb-1" size={ 7 } overflow="hidden" style={ { height: 'calc(100% - 480px)', width: '64%' } }>
+                    <Column position="absolute" className="grid-bg p-1 bottom-5 mb-1" size={ 7 } overflow="hidden" style={ { height: 'calc(100% - 480px)', width: '64%' } }>
                         <CatalogItemGridWidgetView />
                     </Column>
                     <Flex gap={ 2 } position="absolute" className="purchase-buttons align-items-end bottom-3" style={ { width: '64%' } }>

@@ -41,7 +41,7 @@ export const CatalogLayouGuildCustomFurniView: FC<CatalogLayoutProps> = props =>
                         </Base>
                     </> }
             </Column>
-            <Column className="grid-bg group-furni-picker p-2" size={ 7 } overflow="hidden">
+            <Column className="grid-bg group-furni-picker p-1" size={ 7 } overflow="hidden">
                 <CatalogItemGridWidgetView />
             </Column>
             <Flex gap={ 2 } className="purchase-buttons align-items-end mt-2">

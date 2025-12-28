@@ -1,11 +1,11 @@
+import { AddFavouriteRoomMessageComposer, DeleteFavouriteRoomMessageComposer } from '@nitrots/nitro-renderer';
 import { SendMessageComposer } from '..';
-import {
-    DeleteFavouriteRoomMessageComposer,
-    AddFavouriteRoomMessageComposer
-} from '@nitrots/nitro-renderer';
 
-
-export const ToggleFavoriteRoom = (roomId: number, isFavorite: boolean) =>
+export const ToggleFavoriteRoom = (roomId: number, isFavorite: boolean): void =>
 {
-    SendMessageComposer(isFavorite ? new DeleteFavouriteRoomMessageComposer(roomId) : new AddFavouriteRoomMessageComposer(roomId));
+    if(roomId <= 0) return;
+
+    SendMessageComposer(isFavorite 
+        ? new DeleteFavouriteRoomMessageComposer(roomId) 
+        : new AddFavouriteRoomMessageComposer(roomId));
 }

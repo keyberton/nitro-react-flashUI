@@ -100,7 +100,7 @@ export const AvatarEditorWardrobeView: FC<AvatarEditorWardrobeViewProps> = props
         });
 
         return items;
-    }, [ savedFigures, saveFigureAtWardrobeIndex, wearFigureAtIndex ]);
+    }, [ savedFigures, hcDisabled, saveFigureAtWardrobeIndex, wearFigureAtIndex ]);
 
     return (
         <div>
@@ -109,9 +109,7 @@ export const AvatarEditorWardrobeView: FC<AvatarEditorWardrobeViewProps> = props
                     { LocalizeText('avatareditor.wardrobe.title') }
                 </span>
                 <span className="mt-2">
-                    { !hcDisabled && getClubLevel() > 0 && (
-                        <LayoutCurrencyIcon type="hc" />
-                    ) }
+                    <LayoutCurrencyIcon type="hc" />
                 </span>
             </div>
             <div className="saved-outfit-container mt-2">

@@ -34,22 +34,22 @@ export const NavigatorRoomSettingsAccessTabView: FC<NavigatorRoomSettingsTabView
         <Flex column className="px-3">
             <Column className="pb-3" gap={ 0 }>
                 <Text bold>{ LocalizeText('navigator.roomsettings.roomaccess.caption') }</Text>
-                <Text fontSize={ 11 }>{ LocalizeText('navigator.roomsettings.roomaccess.info') }</Text>
+                <Text>{ LocalizeText('navigator.roomsettings.roomaccess.info') }</Text>
             </Column>
             <Column gap={ 5 } overflow="auto">
                 <Column className="pb-3" gap={ 1 }>
-                    <Text fontSize={ 11 } bold>{ LocalizeText('navigator.roomsettings.doormode') }</Text>
+                    <Text bold>{ LocalizeText('navigator.roomsettings.doormode') }</Text>
                     <Flex alignItems="center" gap={ 1 }>
                         <input className="flash-form-check-input" type="radio" name="lockState" checked={ (roomData.lockState === RoomDataParser.OPEN_STATE) && !isTryingPassword } onChange={ event => handleChange('lock_state', RoomDataParser.OPEN_STATE) } />
-                        <Text fontSize={ 11 }>{ LocalizeText('navigator.roomsettings.doormode.open') }</Text>
+                        <Text>{ LocalizeText('navigator.roomsettings.doormode.open') }</Text>
                     </Flex>
                     <Flex alignItems="center" gap={ 1 }>
                         <input className="flash-form-check-input" type="radio" name="lockState" checked={ (roomData.lockState === RoomDataParser.DOORBELL_STATE) && !isTryingPassword } onChange={ event => handleChange('lock_state', RoomDataParser.DOORBELL_STATE) } />
-                        <Text fontSize={ 11 }>{ LocalizeText('navigator.roomsettings.doormode.doorbell') }</Text>
+                        <Text>{ LocalizeText('navigator.roomsettings.doormode.doorbell') }</Text>
                     </Flex>
                     <Flex alignItems="center" gap={ 1 }>
                         <input className="flash-form-check-input" type="radio" name="lockState" checked={ (roomData.lockState === RoomDataParser.INVISIBLE_STATE) && !isTryingPassword } onChange={ event => handleChange('lock_state', RoomDataParser.INVISIBLE_STATE) } />
-                        <Text fontSize={ 11 }>{ LocalizeText('navigator.roomsettings.doormode.invisible') }</Text>
+                        <Text>{ LocalizeText('navigator.roomsettings.doormode.invisible') }</Text>
                     </Flex>
                     <Flex fullWidth gap={ 1 }>
                         <input className="flash-form-check-input" type="radio" name="lockState" checked={ (roomData.lockState === RoomDataParser.PASSWORD_STATE) || isTryingPassword } onChange={ event => setIsTryingPassword(event.target.checked) } />
@@ -72,14 +72,14 @@ export const NavigatorRoomSettingsAccessTabView: FC<NavigatorRoomSettingsTabView
                     </Flex>
                 </Column>
                 <Column gap={ 1 }>
-                    <Text fontSize={ 11 } bold>{ LocalizeText('navigator.roomsettings.pets') }</Text>
+                    <Text bold>{ LocalizeText('navigator.roomsettings.pets') }</Text>
                     <Flex alignItems="center" gap={ 1 }>
                         <input className="flash-form-check-input" type="checkbox" checked={ roomData.allowPets } onChange={ event => handleChange('allow_pets', event.target.checked) } />
-                        <Text fontSize={ 11 }>{ LocalizeText('navigator.roomsettings.allowpets') }</Text>
+                        <Text>{ LocalizeText('navigator.roomsettings.allowpets') }</Text>
                     </Flex>
                     <Flex alignItems="center" gap={ 1 }>
                         <input className="flash-form-check-input" type="checkbox" checked={ roomData.allowPetsEat } onChange={ event => handleChange('allow_pets_eat', event.target.checked) } />
-                        <Text fontSize={ 11 }>{ LocalizeText('navigator.roomsettings.allowfoodconsume') }</Text>
+                        <Text>{ LocalizeText('navigator.roomsettings.allowfoodconsume') }</Text>
                     </Flex>
                 </Column>
             </Column>

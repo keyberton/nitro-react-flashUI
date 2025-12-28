@@ -137,7 +137,7 @@ export const FriendsMessengerView: FC<{}> = props =>
 
     return (
         <NitroCardView className="nitro-friends-messenger" uniqueKey="nitro-friends-messenger" theme="messenger">
-            <NitroCardHeaderView headerText={ LocalizeText('messenger.window.title', [ 'OPEN_CHAT_COUNT' ], [ visibleThreads.length.toString() ]) } hideButtonClose={ true } onCloseClick={ event => setIsVisible(false) } />
+            <NitroCardHeaderView isMessenger={ true } headerText={ LocalizeText('messenger.window.title', [ 'OPEN_CHAT_COUNT' ], [ visibleThreads.length.toString() ]) } hideButtonClose={ true } onCloseClick={ event => setIsVisible(false) } />
             <NitroCardContentView>
                 <Column fullWidth size={ 4 }>
                     <div className="d-flex h-100 overflow-auto gap-2">

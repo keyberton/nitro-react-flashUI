@@ -39,19 +39,25 @@ export const UserSettingsView: FC<{}> = props =>
                 SendMessageComposer(new UserSettingsCameraFollowComposer(clone.cameraFollow));
                 break;
             case 'system_volume':
+            case 'system_volume_save':
                 clone.volumeSystem = value as number;
                 clone.volumeSystem = Math.max(0, clone.volumeSystem);
                 clone.volumeSystem = Math.min(100, clone.volumeSystem);
+                if(type === 'system_volume_save') SendMessageComposer(new UserSettingsSoundComposer(Math.round(clone.volumeSystem), Math.round(clone.volumeFurni), Math.round(clone.volumeTrax)));
                 break;
             case 'furni_volume':
+            case 'furni_volume_save':
                 clone.volumeFurni = value as number;
                 clone.volumeFurni = Math.max(0, clone.volumeFurni);
                 clone.volumeFurni = Math.min(100, clone.volumeFurni);
+                if(type === 'furni_volume_save') SendMessageComposer(new UserSettingsSoundComposer(Math.round(clone.volumeSystem), Math.round(clone.volumeFurni), Math.round(clone.volumeTrax)));
                 break;
             case 'trax_volume':
+            case 'trax_volume_save':
                 clone.volumeTrax = value as number;
                 clone.volumeTrax = Math.max(0, clone.volumeTrax);
                 clone.volumeTrax = Math.min(100, clone.volumeTrax);
+                if(type === 'trax_volume_save') SendMessageComposer(new UserSettingsSoundComposer(Math.round(clone.volumeSystem), Math.round(clone.volumeFurni), Math.round(clone.volumeTrax)));
                 break;
         }
 
@@ -136,7 +142,7 @@ export const UserSettingsView: FC<{}> = props =>
     return (
         <>
             { (isVisible) &&
-                <LayoutNotificationBubbleView fadesOut={ false } className="flex-column nitro-notification" onClose={ null }>
+                <LayoutNotificationBubbleView animated={ false } className="flex-column nitro-darker-bubble nitro-notification" onClose={ null }>
                     <Column gap={ 1 } pointer className="mb-1">
                         <Text>{ LocalizeText('widget.memenu.settings.character') }</Text>
                         <Text onClick={ () => onSettings('audio') }>{ LocalizeText('widget.memenu.settings.audio') }</Text>

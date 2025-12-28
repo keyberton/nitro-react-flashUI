@@ -54,6 +54,23 @@
 
 }
 
+.btn-bold {
+  border-image-source: url("@/assets/flash/buttons/button_bold.png");
+  color: #000000;
+  font-family: ubuntuBold;
+  border-image-slice: 6 6 6 6 fill;
+  border-image-width: 6px 6px 6px 6px;
+  padding: 5px 0 !important;
+
+  &:hover {
+    border-image-source: url("@/assets/flash/buttons/button_bold_hover.png");
+  }
+
+  &:active {
+    border-image-source: url("@/assets/flash/buttons/button_bold_active.png");
+  }
+}
+
 .btn-gray {
   border-image-source: url("@/assets/flash/buttons/button_gray.png");
   color: #fff;
@@ -65,21 +82,6 @@
 
   &:active {
     border-image-source: url("@/assets/flash/buttons/button_gray_active.png");
-  }
-}
-
-.btn-illumina {
-  border-image-source: url("@/assets/flash/boxes/card/illumina.png");
-  border-image-slice: 6 6 6 6 fill;
-  border-image-width: 6px 6px 6px 6px;
-  border-image-repeat: repeat repeat;
-
-  &:hover {
-    border-image-source: url("@/assets/flash/boxes/card/illumina.png");
-  }
-
-  &:active {
-      border-image-source: url("@/assets/flash/boxes/card/illumina-active.png");
   }
 }
 

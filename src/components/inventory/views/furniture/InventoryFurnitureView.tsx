@@ -257,23 +257,27 @@ export const InventoryFurnitureView: FC<InventoryFurnitureViewProps> = props =>
                         <LayoutLimitedEditionCompactPlateView className="top-2 end-2" position="absolute" uniqueNumber={ selectedItem.stuffData.uniqueNumber } uniqueSeries={ selectedItem.stuffData.uniqueSeries } /> }
                     { (selectedItem && selectedItem.stuffData.rarityLevel > -1) &&
                         <LayoutRarityLevelView className="top-2 end-2" position="absolute" level={ selectedItem.stuffData.rarityLevel } /> }
+                    { selectedItem && (
+                        <>
+                            <Text grow truncate bold>{ selectedItem.name }</Text>
+                            { selectedItem.description && <Text grow truncate small>{ selectedItem.description }</Text> }
+                        </>
+                    ) }
                 </Column>
                 { selectedItem &&
                     <Column grow justifyContent="between" gap={ 2 }>
                         <Column gap={ 1 } position={ !isTrading ? 'absolute' : 'relative' } className="bottom-1" style={ { width: !isTrading ? '39%' : '' } }>
-                            <Text grow truncate bold>{ selectedItem.name }</Text>
-                            { (selectedItem.description) && <Text grow truncate small>{ selectedItem.description }</Text> }
                             { (!isTrading) &&
-                                <>
+                                <Column className="pe-4 pb-1" gap={ 1 }>
                                     { !!roomSession &&
-                                        <Button className="p-0 px-2" onClick={ event => attemptItemPlacement(selectedItem) }>
+                                        <Button className="p-0 px-2 me-4" onClick={ event => attemptItemPlacement(selectedItem) }>
                                             { LocalizeText('inventory.furni.placetoroom') }
                                         </Button> }
                                     { (selectedItem && selectedItem.isSellable) &&
                                         <Button className="p-0 px-2" onClick={ event => attemptPlaceMarketplaceOffer(selectedItem) }>
                                             { LocalizeText('inventory.marketplace.sell') }
                                         </Button> }
-                                </>
+                                </Column>
                             }
                             { (isTrading) &&
                                 <Column gap={ 1 } alignItems="start">

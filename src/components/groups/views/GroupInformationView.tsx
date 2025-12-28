@@ -101,12 +101,12 @@ export const GroupInformationView: FC<GroupInformationViewProps> = props =>
 
     return (
         <Grid className="border rounded bg-muted profile-grey-bg-border p-2" overflow={ overflow } { ...rest }>
-            <Column alignItems="center" size={ 3 } overflow="hidden">
+            <Column center size={ 3 } overflow="hidden">
                 <Flex alignItems="center" overflow="hidden" className="group-badge">
                     <LayoutBadgeImageView badgeCode={ groupInformation.badge } isGroup={ true } scale={ 2 } />
                 </Flex>
                 <Column alignItems="center" gap={ 1 }>
-                    <Text style={{ fontSize: 12 }} small bold underline pointer onClick={ () => handleAction('members') }>{ LocalizeText('group.membercount', [ 'totalMembers' ], [ groupInformation.membersCount.toString() ]) }</Text>
+                    <Text small bold underline pointer onClick={ () => handleAction('members') }>{ LocalizeText('group.membercount', [ 'totalMembers' ], [ groupInformation.membersCount.toString() ]) }</Text>
                     { (groupInformation.pendingRequestsCount > 0) &&
                         <Text small underline pointer onClick={ () => handleAction('members_pending') }>{ LocalizeText('group.pendingmembercount', [ 'amount' ], [ groupInformation.pendingRequestsCount.toString() ]) }</Text> }
                     { groupInformation.isOwner &&

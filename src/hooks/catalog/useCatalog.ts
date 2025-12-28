@@ -2,7 +2,7 @@ import { BuildersClubFurniCountMessageEvent, BuildersClubPlaceRoomItemMessageCom
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useBetween } from 'use-between';
 import { BuilderFurniPlaceableStatus, CatalogNode, CatalogPage, CatalogPetPalette, CatalogType, CreateLinkEvent, DispatchUiEvent, FurniCategory, GetFurnitureData, GetProductDataForLocalization, GetRoomEngine, GetRoomSession, GiftWrappingConfiguration, ICatalogNode, ICatalogOptions, ICatalogPage, IPageLocalization, IProduct, IPurchasableOffer, IPurchaseOptions, LocalizeText, NotificationAlertType, Offer, PageLocalization, PlacedObjectPurchaseData, PlaySound, Product, ProductTypeEnum, RequestedPage, SearchResult, SendMessageComposer, SoundNames } from '../../api';
-import { CatalogPurchasedEvent, CatalogPurchaseFailureEvent, CatalogPurchaseNotAllowedEvent, CatalogPurchaseSoldOutEvent, InventoryFurniAddedEvent } from '../../events';
+import { CatalogPurchaseConfirmationEvent, CatalogPurchasedEvent, CatalogPurchaseFailureEvent, CatalogPurchaseNotAllowedEvent, CatalogPurchaseSoldOutEvent, InventoryFurniAddedEvent } from '../../events';
 import { useMessageEvent, useRoomEngineEvent, useUiEvent } from '../events';
 import { useNotification } from '../notification';
 import { useCatalogPlaceMultipleItems } from './useCatalogPlaceMultipleItems';
@@ -757,18 +757,9 @@ const useCatalogState = () =>
 
                 if(roomObject) roomObject.model.setValue(RoomObjectVariable.FURNITURE_ALPHA_MULTIPLIER, 0.5);
 
-                if(catalogSkipPurchaseConfirmation)
-                {
-                    SendMessageComposer(new PurchaseFromCatalogComposer(pageId, purchasableOffer.offerId, product.extraParam, 1));
+                DispatchUiEvent(new CatalogPurchaseConfirmationEvent(purchasableOffer, pageId, product.extraParam, 1));
 
-                    if(catalogPlaceMultipleObjects) requestOfferToMover(purchasableOffer);
-                }
-                else
-                {
-                    // confirm
-
-                    if(catalogPlaceMultipleObjects) requestOfferToMover(purchasableOffer);
-                }
+                if(catalogPlaceMultipleObjects) requestOfferToMover(purchasableOffer);
                 break;
             }
             case CatalogType.BUILDER: {

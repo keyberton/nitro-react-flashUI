@@ -220,7 +220,7 @@
 .saved-outfit-container {
     display: flex;
     width: 100% !important;
-    height: 91.5%;
+    height: 90%;
 
     .avatar-image {
         width: 40px !important;
@@ -238,8 +238,6 @@
         background-color: #cacaca;
         border-radius: 0.3rem;
         border: solid 1px #000;
-        height: 386px;
-        width: 100%;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-gap: 10px;
@@ -297,6 +295,16 @@
     max-width: $avatar-editor-width;
     max-height: $avatar-editor-height;
 
+    .nitro-card-tabs {
+        min-height: 110px;
+        max-height: 110px;
+    }
+
+    &.expanded {
+        max-width: $avatar-editor-width + 185px;
+        min-width: $avatar-editor-width + 185px;
+    }
+
     .category-item {
         height: 40px;
     }
@@ -350,24 +358,25 @@
             background: url(@/assets/flash/avatareditor/avatar_shadow.png);
             z-index: 2;
         }
+
+    
     }
 }
 
-.nitro-avatar-editor.expanded {
-    max-width: $avatar-editor-width + 164px;
-    min-width: $avatar-editor-width + 164px;
-}
+    .avatar-container { 
+        width: 101%;
+    }
 
     .choose-clothing {
-        width: 320px;
+        width: 360px;
     }
 
     .color-picker-frame {
         border-image-source: url(@/assets/flash/avatareditor/color_frame.png);
         border-image-slice: 6 6 6 6 fill;
         border-image-width: 6px 6px 6px 6px;
-        width: 13px;
-        height: 19px;
+        width: 14px;
+        height: 21px;
         border-radius: 4px;
 
         &.active {
@@ -395,6 +404,13 @@
         position: relative;
         background-color: #1c3d4f !important;
 
+        .card-tab-username {
+            height: 67px;
+            font-weight: bold;
+            font-size: 26px;
+            margin-left: 40%;
+        }
+
         .tab {
             background-position-x: 0;
             background-position-y: 0;
@@ -419,13 +435,15 @@
         }
 
         .tab-wardrobe {
-            width: 40px;
-            height: 28px;
-            background-size: 38px 28px;
-            background-image: url(@/assets/flash/wardrobe/wardrobe.png);
-            background-repeat: no-repeat;
-            background-position: center;
-            filter: contrast(1.2) brightness(1.05);
+            
+            .icon {
+                width: 29px;
+                height: 21px;
+                background-image: url(@/assets/flash/wardrobe/wardrobe.png);
+                background-repeat: no-repeat;
+                background-position: center;
+                filter: contrast(1.2) brightness(1.05);
+            }
         }
 
 
@@ -438,6 +456,31 @@
             border-image-repeat: repeat repeat;
             margin-bottom: -2px;
             margin-left: -2px;
+
+            &.tab-wardrobe {
+                border-image-source: url("@/assets/flash/buttons/button.png");
+                border-image-slice: 4 4 4 4 fill;
+                border-image-width: 4px 4px 4px 4px;
+                border-image-outset: 0px 0px 0px 0px;
+                border-image-repeat: stretch;
+                padding: .375rem .75rem;
+                min-height: 22px;
+                color: #000;
+                font-size: 13px;
+                cursor: pointer;
+                left: 262px;
+                bottom: 2px;
+                height: 30px;
+
+                &:hover {
+                    border-image-source: url("@/assets/flash/buttons/button_hover.png");
+                }
+
+                &:active {
+                    border-image-source: url("@/assets/flash/buttons/button_active.png");
+
+                }
+            }
 
             &:hover {
                 border-image-source: url(@/assets/flash/boxes/card/tabs_active.png);
@@ -474,17 +517,6 @@
 
     .avatar-container {
         padding: 3px;
-    }
-
-    .avatar-parts-item-container {
-        border: none !important;
-        height: 42px;
-        width: 42px;
-        background-position: center;
-        background-repeat: no-repeat;
-        border-radius: 2rem !important;
-        overflow: visible !important;
-        background-color: transparent;
     }
 
     .avatar-parts {
@@ -528,8 +560,6 @@
 .avatar-editor-palette-set-view {
     padding-right: 15px !important;
     flex-grow: 1;
-    row-gap: 4px !important;
-    column-gap: 1px !important;
 }
 
 .clothing-container {
@@ -538,4 +568,14 @@
 
 .action-buttons {
     gap: 5px;
+}
+
+.wardrobe-blank {
+    width: 242px;
+    border-right: 1px solid black;
+    background: #e9e9e1;
+
+    &.hidden {
+        display: none !important;
+    }
 }

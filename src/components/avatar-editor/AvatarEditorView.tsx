@@ -7,6 +7,7 @@ import { useMessageEvent } from '../../hooks';
 import { AvatarEditorFigurePreviewView } from './views/AvatarEditorFigurePreviewView';
 import { AvatarEditorModelView } from './views/AvatarEditorModelView';
 import { AvatarEditorWardrobeView } from './views/AvatarEditorWardrobeView';
+import { AvatarCardTabsView } from './views/AvatarCardTabsView';
 
 const DEFAULT_MALE_FIGURE: string = 'hr-100.hd-180-7.ch-215-66.lg-270-79.sh-305-62.ha-1002-70.wa-2007';
 const DEFAULT_FEMALE_FIGURE: string = 'hr-515-33.hd-600-1.ch-635-70.lg-716-66-62.sh-735-68';
@@ -21,7 +22,7 @@ export const AvatarEditorView: FC<{}> = props =>
     const [ figureSetIds, setFigureSetIds ] = useState<number[]>([]);
     const [ boundFurnitureNames, setBoundFurnitureNames ] = useState<string[]>([]);
     const [ savedFigures, setSavedFigures ] = useState<[ IAvatarFigureContainer, string ][]>([]);
-    const [ isWardrobeVisible, setIsWardrobeVisible ] = useState(false);
+    const [ isWardrobeVisible, setIsWardrobeVisible ] = useState(true);
     const [ lastFigure, setLastFigure ] = useState<string>(null);
     const [ lastGender, setLastGender ] = useState<string>(null);
     const [ needsReset, setNeedsReset ] = useState(true);
@@ -32,6 +33,7 @@ export const AvatarEditorView: FC<{}> = props =>
     const DEFAULT_MALE_FOOTBALL_GATE = (GetLocalStorage('nitro.look.footballgate.M') || 'ch-3109-92-1408.lg-3116-82-1408.sh-3115-1408-1408') as string;
     const DEFAULT_FEMALE_FOOTBALL_GATE = (GetLocalStorage('nitro.look.footballgate.F') || 'ch-3112-1408-1408.lg-3116-71-1408.sh-3115-1408-1408') as string;
     const maxWardrobeSlots = useMemo(() => GetConfiguration<number>('avatar.wardrobe.max.slots', 10), []);
+    const username = GetSessionDataManager().userName;
 	
     const onClose = () =>
     {
@@ -295,7 +297,7 @@ export const AvatarEditorView: FC<{}> = props =>
     return (
         <NitroCardView uniqueKey="avatar-editor" className={ avatarEditorClasses }>
             <NitroCardHeaderView headerText={ !genderFootballGate ? LocalizeText('avatareditor.title') : LocalizeText('widget.furni.clothingchange.editor.title') } onCloseClick={ onClose } />
-            <NitroCardTabsView className="avatar-editor-tabs">
+            <AvatarCardTabsView username={ username } wardrobeVisible={ isWardrobeVisible } className="avatar-editor-tabs">
                 { categories && (categories.size > 0) && Array.from(categories.keys()).map(category =>
                 {
                     const isActive = (activeCategory && (activeCategory.name === category));
@@ -307,24 +309,24 @@ export const AvatarEditorView: FC<{}> = props =>
                     );
                 }) }
                 { (!genderFootballGate) &&
-                    <NitroCardTabsItemView onClick={ event => setIsWardrobeVisible(!isWardrobeVisible) }>
-                        <div className="tab-wardrobe"></div>
+                    <NitroCardTabsItemView className="tab-wardrobe" onClick={ event => setIsWardrobeVisible(!isWardrobeVisible) }>
+                        <div className="icon"></div>
                     </NitroCardTabsItemView>
                 }
-            </NitroCardTabsView>
-            <NitroCardContentView>
-                <Grid>
-                    <Column size={ isWardrobeVisible ? 6 : 8 } overflow="hidden">
+            </AvatarCardTabsView>
+            <NitroCardContentView className="pt-0">
+                <Grid columnCount={ isWardrobeVisible ? 8 : 9 }>
+                    <Column size={ isWardrobeVisible ? 4 : 6 } overflow="hidden">
                         { (activeCategory) &&
                             <AvatarEditorModelView model={ activeCategory } gender={ figureData.gender } setGender={ setGender } /> 
                         }
                     </Column>
-                    <Column size={ isWardrobeVisible ? 6 : 4 } overflow="hidden">
+                    <Column className="avatar-container" size={ isWardrobeVisible ? 4 : 3 } overflow="hidden">
                         <Flex gap={ 2 } className="w-100 h-100">
                             <Flex column={ true } className="w-100">
                                 <AvatarEditorFigurePreviewView figureData={ figureData } />
-                                <Column grow gap={ 1 }>
-                                    { (!genderFootballGate) &&
+                                <Column className="mb-3" grow gap={ 1 }>
+                                    { /* (!genderFootballGate) &&
                                         <ButtonGroup className="action-buttons w-100">
                                             <Button variant="secondary" onClick={ event => processAction(AvatarEditorAction.ACTION_RESET) }>
                                                 <FaUndo className="fa-icon" />
@@ -336,14 +338,14 @@ export const AvatarEditorView: FC<{}> = props =>
                                                 <FaDice className="fa-icon" />
                                             </Button>
                                         </ButtonGroup>
-                                    }
-                                    <Button className="w-10" variant="success" onClick={ event => processAction(AvatarEditorAction.ACTION_SAVE) }>
+                                     */ }
+                                    <Button justifyContent="end" className="w-10 btn-bold m-auto px-4" onClick={ event => processAction(AvatarEditorAction.ACTION_SAVE) }>
                                         { LocalizeText('avatareditor.save') }
                                     </Button>
                                 </Column>
                             </Flex>
                             { isWardrobeVisible &&
-                                <Column overflow="hidden" className="w-100">
+                                <Column style={ { borderLeft: '1px solid #000000' } } alignItems="center" overflow="hidden" className="w-100">
                                     <AvatarEditorWardrobeView figureData={ figureData } savedFigures={ savedFigures } setSavedFigures={ setSavedFigures } loadAvatarInEditor={ loadAvatarInEditor } />
                                 </Column>
                             }

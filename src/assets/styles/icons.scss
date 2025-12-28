@@ -47,6 +47,76 @@
         width: 32px;
     }
 
+     &.icon-navigator-my-room {
+        background: url(@/assets/flash/navigator/icons/house-active.png) no-repeat;
+        width: 13px;
+        height: 12px;
+
+        &.active {
+            background: url(@/assets/flash/navigator/icons/house.png) no-repeat;
+        }
+    }
+
+    &.icon-navigator-favorite-room {
+        background: url(@/assets/flash/navigator/icons/favorite.png);
+        width: 13px;
+        height: 12px;
+
+        &.active {
+            background: url('@/assets/flash/navigator/icons/favorite-active.png');
+        }
+    }
+
+    &.icon-navigator-room-settings {
+        background: url('@/assets/flash/navigator/icons/settings.png');
+        width: 13px;
+        height: 14px;
+    }
+
+    &.icon-navigator-room-report {
+        background: url('@/assets/flash/navigator/icons/report.png') no-repeat;
+        width: 13px;
+        height: 15px;
+    }
+
+    &.icon-inline-view {
+        background: url('@/assets/flash/navigator/inline_view.png');
+        width: 11px;
+        height: 11px;
+    }
+
+    &.icon-thumbnail-view {
+        background: url('@/assets/flash/navigator/thumbnail_view.png');
+        width: 11px;
+        height: 11px;
+    }
+
+    &.icon-catalogue-arrows {
+        background: url('@/assets/flash/catalogue/arrows_up.png');
+        width: 10px;
+        height: 5px;
+        margin-right: 5px;
+        background-position: 0px 5px;
+
+        &.open {
+            background: url('@/assets/flash/catalogue/arrows.png') no-repeat;
+            width: 5px;
+            height: 10px;
+            background-position: -6px 0;
+            margin-right: 10px;
+        }
+    }
+
+    &.icon-show-more {
+        background: url('@/assets/flash/navigator/icons/similar_results.png');
+        width: 11px;
+        height: 11px;
+
+        &.active {
+            background: url('@/assets/flash/navigator/icons/similar_results_active.png');
+        }
+    }
+
     &.gray {
         filter: grayscale(100%);
         opacity: 0.6;
@@ -702,81 +772,27 @@
     }
 
     &.icon-navigator-room-locked {
-        background: url('@/assets/images/navigator/icons/room_locked.png');
+        background: url('@/assets/flash/navigator/icons/room_locked.png');
         width: 13px;
         height: 16px;
     }
 
     &.icon-navigator-room-password {
-        background: url('@/assets/images/navigator/icons/room_password.png');
+        background: url('@/assets/flash/navigator/icons/room_password.png');
         width: 13px;
         height: 16px;
     }
 
     &.icon-navigator-room-invisible {
-        background: url('@/assets/images/navigator/icons/room_invisible.png');
+        background: url('@/assets/flash/navigator/icons/room_invisible.png');
         width: 13px;
         height: 16px;
     }
 
     &.icon-navigator-room-group {
-        background: url('@/assets/images/navigator/icons/room_group.png');
+        background: url('@/assets/flash/navigator/icons/room_group.png');
         width: 13px;
         height: 11px;
-    }
-
-    &.icon-navigator-my-room {
-        background: url('@/assets/images/navigator/icons/house-active.png') no-repeat;
-        width: 13px;
-        height: 12px;
-
-        &.active {
-            background: url('@/assets/images/navigator/icons/house.png') no-repeat;
-        }
-    }
-
-    &.icon-navigator-favorite-room {
-        background: url('@/assets/images/navigator/icons/favorite.png');
-        width: 13px;
-        height: 12px;
-
-        &.active {
-            background: url('@/assets/images/navigator/icons/favorite-active.png');
-        }
-    }
-
-    &.icon-navigator-room-settings {
-        background: url('@/assets/images/navigator/icons/settings.png');
-        width: 13px;
-        height: 14px;
-    }
-
-    &.icon-navigator-room-report {
-        background: url('@/assets/images/navigator/icons/report.png') no-repeat;
-        width: 13px;
-        height: 15px;
-    }
-
-    &.icon-inline-view {
-        background: url('@/assets/flash/navigator/inline_view.png');
-        width: 11px;
-        height: 11px;
-    }
-
-    &.icon-thumbnail-view {
-        background: url('@/assets/flash/navigator/thumbnail_view.png');
-        width: 11px;
-        height: 11px;
-    }
-
-    &.icon-show-more {
-        background: url('@/assets/flash/navigator/similar_results.png');
-        width: 11px;
-        height: 11px;
-
-        &.active {
-            background: url('@/assets/flash/navigator/similar_results_active.png');
-        }
     }
 
     &.icon-youtube-next {
@@ -929,7 +945,9 @@
         height: 38px;
     }
 
-    &.icon-search_save {
+    &.icon-search_save {    
+        margin-left: 10px;
+        margin-right: 3px;
         background-image: url('@/assets/flash/navigator/saves-search/search_save.png');
         width: 18px;
         height: 18px;

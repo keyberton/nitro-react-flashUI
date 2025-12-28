@@ -53,7 +53,7 @@ export const NavigatorRoomSettingsModTabView: FC<NavigatorRoomSettingsTabViewPro
             <Text fontSize={ 6 }>{ LocalizeText('navigator.roomsettings.moderation.header') }</Text>
             <Column>
                 <Column gap={ 1 }>
-                    <Text fontSize={ 11 } bold>{ LocalizeText('navigator.roomsettings.moderation.mute.header') }</Text>
+                    <Text bold>{ LocalizeText('navigator.roomsettings.moderation.mute.header') }</Text>
                     <Flex className="pe-5" alignItems="center" gap={ 1 }>
                         <select className="w-100 form-select form-select-sm" value={ roomData.moderationSettings.allowMute } onChange={ event => handleChange('moderation_mute', event.target.value) }>
                             <option value={ RoomModerationSettings.MODERATION_LEVEL_NONE }>
@@ -66,7 +66,7 @@ export const NavigatorRoomSettingsModTabView: FC<NavigatorRoomSettingsTabViewPro
                     </Flex>
                 </Column>
                 <Column gap={ 1 }>
-                    <Text fontSize={ 11 } bold>{ LocalizeText('navigator.roomsettings.moderation.kick.header') }</Text>
+                    <Text bold>{ LocalizeText('navigator.roomsettings.moderation.kick.header') }</Text>
                     <Flex className="pe-5" alignItems="center" gap={ 1 }>
                         <select className="w-100 form-select form-select-sm" value={ roomData.moderationSettings.allowKick } onChange={ event => handleChange('moderation_kick', event.target.value) }>
                             <option value={ RoomModerationSettings.MODERATION_LEVEL_NONE }>
@@ -82,7 +82,7 @@ export const NavigatorRoomSettingsModTabView: FC<NavigatorRoomSettingsTabViewPro
                     </Flex>
                 </Column>
                 <Column gap={ 1 }>
-                    <Text fontSize={ 11 } bold>{ LocalizeText('navigator.roomsettings.moderation.ban.header') }</Text>
+                    <Text bold>{ LocalizeText('navigator.roomsettings.moderation.ban.header') }</Text>
                     <Flex className="pe-5" alignItems="center" gap={ 1 }>
                         <select className="w-100 form-select form-select-sm" value={ roomData.moderationSettings.allowBan } onChange={ event => handleChange('moderation_ban', event.target.value) }>
                             <option value={ RoomModerationSettings.MODERATION_LEVEL_NONE }>
@@ -111,7 +111,7 @@ export const NavigatorRoomSettingsModTabView: FC<NavigatorRoomSettingsTabViewPro
                         </Column>
                     </Column>
                     <Column justifyContent="center" alignItems="center" size={ 5 } >
-                        <Text fontSize={ 10 }>{ LocalizeText('navigator.roomsettings.moderation.banned.users') } ({ bannedUsers.length })</Text>
+                        <Text>{ LocalizeText('navigator.roomsettings.moderation.banned.users') } ({ bannedUsers.length })</Text>
                         <Button onClick={ event => unBanUser(selectedUserId) }>
                             { LocalizeText('navigator.roomsettings.moderation.unban') } { selectedUserId > 0 && bannedUsers.find(user => (user.userId === selectedUserId))?.userName }
                         </Button>

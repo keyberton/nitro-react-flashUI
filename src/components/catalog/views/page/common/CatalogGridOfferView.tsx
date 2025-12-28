@@ -53,7 +53,7 @@ export const CatalogGridOfferView: FC<CatalogGridOfferViewProps> = props =>
     if(!product) return null;
 
     return (
-        <Column className="catalog-grid-active cursor-pointer" gap={ 0 } itemActive={ itemActive } onMouseDown={ onMouseEvent } onMouseUp={ onMouseEvent } onMouseOut={ onMouseEvent }>
+        <Column className={ `catalog-grid-active${ (offer.priceInCredits > 0 && offer.priceInActivityPoints > 0) ? ' doubled' : (offer.priceInCredits > 0 || offer.priceInActivityPoints > 0) ? ' price' : '' }` } gap={ 0 } itemActive={ itemActive } onMouseDown={ onMouseEvent } onMouseUp={ onMouseEvent } onMouseOut={ onMouseEvent }>
             <LayoutCatalogGridItem itemImage={ iconUrl } itemCount={ ((offer.pricingModel === Offer.PRICING_MODEL_MULTI) ? product.productCount : 1) } itemUniqueSoldout={ (product.uniqueLimitedItemSeriesSize && !product.uniqueLimitedItemsLeft) } itemUniqueNumber={ product.uniqueLimitedItemSeriesSize } { ...rest }>
                 { (offer.clubLevel !== HabboClubLevelEnum.NO_CLUB) && <Base className="icon icon-hc_mini position-absolute top-0 end-1" /> }
                 { (offer.product.productType === ProductTypeEnum.ROBOT) &&

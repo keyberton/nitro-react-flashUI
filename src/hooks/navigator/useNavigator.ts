@@ -17,7 +17,7 @@ import {
     NavigatorEventCategoryDataParser,
     NavigatorHomeRoomEvent,
     NavigatorMetadataEvent,
-    NavigatorOpenRoomCreatorEvent, NavigatorSavedSearch, NavigatorSearchesEvent,
+    NavigatorOpenRoomCreatorEvent,
     NavigatorSearchEvent,
     NavigatorSearchResultSet,
     NavigatorTopLevelContext,
@@ -28,7 +28,7 @@ import {
     RoomForwardEvent,
     RoomScoreEvent,
     RoomSettingsUpdatedEvent,
-    SecurityLevel, ThumbnailStatusMessageEvent,
+    SecurityLevel,
     UserEventCatsEvent,
     UserFlatCatsEvent,
     UserInfoEvent,
@@ -48,7 +48,6 @@ const useNavigatorState = () =>
     const [ topLevelContexts, setTopLevelContexts ] = useState<NavigatorTopLevelContext[]>(null);
     const [ doorData, setDoorData ] = useState<{ roomInfo: RoomDataParser, state: number }>({ roomInfo: null, state: DoorStateType.NONE });
     const [ searchResult, setSearchResult ] = useState<NavigatorSearchResultSet>(null);
-    const [ navigatorSearches, setNavigatorSearches ] = useState<NavigatorSavedSearch[]>(null);
     const [ favouriteRoomIds, setFavouriteRoomIds ] = useState<number[]>([]);
     const [ navigatorData, setNavigatorData ] = useState<INavigatorData>({
         settingsReceived: false,
@@ -478,37 +477,9 @@ const useNavigatorState = () =>
         VisitDesktop();
     });
 
-    useMessageEvent<ThumbnailStatusMessageEvent>(ThumbnailStatusMessageEvent, event =>
-    {
-        const parser = event.getParser();
-
-        if (!parser) return;
-
-        if (parser.ok)
-        {
-            simpleAlert(LocalizeText('navigator.thumbnail.camera.success'), NotificationAlertType.DEFAULT, null, null, LocalizeText('navigator.thumbnail.camera.title'));
-        }
-        else
-        {
-            if (parser.isRenderLimitHit)
-            {
-                simpleAlert(LocalizeText('camera.render.count.info'), NotificationAlertType.DEFAULT, null, null, LocalizeText('generic.alert.title'));
-            }
-        }
-    });
-
     useMessageEvent<NavigatorOpenRoomCreatorEvent>(NavigatorOpenRoomCreatorEvent, event => CreateLinkEvent('navigator/show'));
 
-    useMessageEvent<NavigatorSearchesEvent>(NavigatorSearchesEvent, event =>
-    {
-        const parser = event.getParser();
-
-        if (!parser) return;
-
-        setNavigatorSearches(parser.searches);
-    });
-
-    return { categories, doorData, setDoorData, topLevelContext, topLevelContexts, searchResult, navigatorData, navigatorSearches, favouriteRoomIds };
+    return { categories, doorData, setDoorData, topLevelContext, topLevelContexts, searchResult, navigatorData, favouriteRoomIds };
 }
 
 export const useNavigator = () => useBetween(useNavigatorState);

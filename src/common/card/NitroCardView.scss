@@ -68,7 +68,7 @@ $nitro-card-tabs-height: 35px;
         }
 
         .nitro-card-tabs {
-            background-color: #feffff;
+            background-color: #e9e9e1;
         }
 
         .content-area {
@@ -78,6 +78,7 @@ $nitro-card-tabs-height: 35px;
             border-image-repeat: repeat repeat;
             color: #000;
         }
+
     }
 
     // MOD TOOL
@@ -355,6 +356,62 @@ $nitro-card-tabs-height: 35px;
             }
         }
 
+        .friends-input-container {
+            height: 100%;
+            margin-top: 1px;
+            margin-left: 4px;
+            position: relative;
+
+            .search-input {
+                width: 109px;
+                height: 20px;
+                padding-left: 5px;
+                border: solid 1px black;
+                background-color: white;
+
+                &:focus {
+                    color: #000;
+                    border: solid 1px black;
+                    background-color: white;
+                    outline: 0;
+                }
+            }
+
+            .close-saarch {
+                background-image: url(@/assets/flash/friendlist/close_search.png);
+                background-repeat: no-repeat;
+                width: 9px;
+                height: 9px;
+                cursor: pointer;
+                position: absolute;
+                right: 6px;
+                top: 6px;
+            }
+        }
+
+        .friends-search-icon {
+            background-image: url(@/assets/flash/friendlist/search_icon.png);
+            background-repeat: no-repeat;
+            width: 23px;
+            height: 22px;
+            cursor: pointer;
+            position: absolute;
+            right: 36px;
+
+            &.active {
+                background-image: url(@/assets/flash/friendlist/search_icon.png);
+                cursor: pointer;
+
+                &:hover {
+                    background-image: url(@/assets/flash/friendlist/search_icon_hover.png);
+                }
+
+                &:active {
+                    background-image: url(@/assets/flash/friendlist/search_icon_active.png);
+                }
+            }
+        }
+
         .friend-delete-icon {
             background-image: url(@/assets/flash/friendlist/delete_friend.png);
             background-repeat: no-repeat;
@@ -616,7 +673,6 @@ $nitro-card-tabs-height: 35px;
 }
 
 .nav-tabs {
-    margin-left: 10px;
     display: flex;
     flex-wrap: nowrap;
     .nav-link {

@@ -22,8 +22,6 @@
 
                 &:nth-child(odd) {
                     background-color: #daecfd;
-                    border-top-right-radius: 6px;
-                    border-bottom-right-radius: 6px;
                 }
 
                 &:nth-child(even) {
@@ -55,13 +53,6 @@
 .nitro-room-info {
     width: $room-info-width;
     resize: none;
-
-    .report-text {
-        padding-bottom: 0.2em;
-        font-size: 14px;
-        text-shadow: #ffffff 0 1px;
-        text-rendering: geometricPrecision;
-    }
 }
 
 .text-tag {
@@ -83,7 +74,6 @@
 
 .nitro-room-settings {
     width: 355px;
-    height: 510px;
 
     .list-container {
         height: 100px;

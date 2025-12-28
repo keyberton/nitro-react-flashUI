@@ -18,6 +18,8 @@ export const FriendsListView: FC<{}> = props =>
     const [ showRemoveFriendsConfirmation, setShowRemoveFriendsConfirmation ] = useState<boolean>(false);
     const [ showHoverText, setShowHoverText ] = useState<string>(null);
     const [ isFromSearchToolbar, setIsFromSearchToolbar ] = useState<boolean>(false);
+    const [ showSearchInput, setShowSearchInput ] = useState<boolean>(false);
+    const [ searchQuery, setSearchQuery ] = useState<string>('');
     const { onlineFriends = [], offlineFriends = [], requests = [], requestFriend = null } = useFriends();
 
     const removeFriendsText = useMemo(() =>
@@ -39,6 +41,20 @@ export const FriendsListView: FC<{}> = props =>
 
         return LocalizeText('friendlist.removefriendconfirm.userlist', [ 'user_names' ], [ userNames.join(', ') ]);
     }, [ offlineFriends, onlineFriends, selectedFriendsIds ]);
+
+    const filteredOnlineFriends = useMemo(() =>
+    {
+        if(!searchQuery || !searchQuery.length) return onlineFriends;
+
+        return onlineFriends.filter(f => f.name.toLowerCase().includes(searchQuery.toLowerCase()));
+    }, [ onlineFriends, searchQuery ]);
+
+    const filteredOfflineFriends = useMemo(() =>
+    {
+        if(!searchQuery || !searchQuery.length) return offlineFriends;
+
+        return offlineFriends.filter(f => f.name.toLowerCase().includes(searchQuery.toLowerCase()));
+    }, [ offlineFriends, searchQuery ]);
 
     const selectFriend = useCallback((userId: number) =>
     {
@@ -140,16 +156,25 @@ export const FriendsListView: FC<{}> = props =>
                             <Column className="w-100 h-100 position-relative">
                                 <Column overflow="auto" gap={ 0 } style={ { height: 'calc(100% - 40px)' } }>
                                     <NitroCardAccordionSetInnerView headerText={ LocalizeText('friendlist.friends') + ` (${ onlineFriends.length })` } isExpanded={ true }>
-                                        <FriendsListGroupView list={ onlineFriends } selectedFriendsIds={ selectedFriendsIds } selectFriend={ selectFriend } setShowHoverText={ (e) => setShowHoverText(e) } />
+                                        <FriendsListGroupView list={ filteredOnlineFriends } selectedFriendsIds={ selectedFriendsIds } selectFriend={ selectFriend } setShowHoverText={ (e) => setShowHoverText(e) } />
                                     </NitroCardAccordionSetInnerView>
                                     <NitroCardAccordionSetInnerView headerText={ LocalizeText('friendlist.friends.offlinecaption') + ` (${ offlineFriends.length })` } isExpanded={ true }>
-                                        <FriendsListGroupView list={ offlineFriends } selectedFriendsIds={ selectedFriendsIds } selectFriend={ selectFriend } setShowHoverText={ (e) => setShowHoverText(e) } />
+                                        <FriendsListGroupView list={ filteredOfflineFriends } selectedFriendsIds={ selectedFriendsIds } selectFriend={ selectFriend } setShowHoverText={ (e) => setShowHoverText(e) } />
                                     </NitroCardAccordionSetInnerView>
                                 </Column>
                                 <Column className="position-absolute bottom-0 w-100">
                                     <Flex gap={ 1 } className="friend-active-tab p-1">
                                         <div className={ `friend-follow-icon ${ selectedFriendsIds && selectedFriendsIds.length === 0 ? '' : 'active' }` } onClick={ selectedFriendsIds && selectedFriendsIds.length === 0 ? null : () => setShowRoomInvite(true) } onMouseEnter={ selectedFriendsIds && selectedFriendsIds.length === 0 ? null : () => setShowHoverText(LocalizeText('friendlist.tip.invite')) } onMouseLeave={ selectedFriendsIds && selectedFriendsIds.length === 0 ? null : () => setShowHoverText('') } />
                                         <div className={ `friend-profile-icon ${ selectedFriendsIds && selectedFriendsIds.length === 0 ? '' : 'active' }` } onMouseEnter={ selectedFriendsIds && selectedFriendsIds.length === 0 ? null : () => setShowHoverText(LocalizeText('friendlist.tip.home')) } onMouseLeave={ selectedFriendsIds && selectedFriendsIds.length === 0 ? null : () => setShowHoverText('') } />
+                                        { !showSearchInput && <div className={ 'friends-search-icon active' } onClick={ () => setShowSearchInput(true) } /> }
+                                        { showSearchInput && 
+                                            <div className="friends-input-container align-items-center rounded h-full ">
+                                                <div>
+                                                    <input className="search-input" type="text" value={ searchQuery } onChange={ event => setSearchQuery(event.target.value) } />
+                                                </div>
+                                                <i className="close-saarch" onClick={ () => setShowSearchInput(false) } />
+                                            </div>
+                                        }
                                         <div className={ `friend-delete-icon ${ selectedFriendsIds && selectedFriendsIds.length === 0 ? '' : 'active' }` } onClick={ selectedFriendsIds && selectedFriendsIds.length === 0 ? null : () => setShowRemoveFriendsConfirmation(true) } onMouseEnter={ selectedFriendsIds && selectedFriendsIds.length === 0 ? null : () => setShowHoverText(LocalizeText('friendlist.tip.remove')) } onMouseLeave={ selectedFriendsIds && selectedFriendsIds.length === 0 ? null : () => setShowHoverText('') } />
                                     </Flex>
                                 </Column>

@@ -85,12 +85,10 @@ export const ToolbarView: FC<{ isInRoom: boolean }> = props =>
                             { GetConfiguration('game.center.enabled') && <Base pointer className="navigation-item icon icon-game" title={ LocalizeText('toolbar.icon.label.games') } onClick={ event => CreateLinkEvent('games/toggle') } /> }
                         </Flex> }
                         <Base pointer className="navigation-item icon icon-catalog" title={ LocalizeText('tooltip.shop') } onClick={ event => CreateLinkEvent('catalog/toggle') } />
-                        { isInRoom &&
-                            <Base pointer className="navigation-item icon icon-inventory" onClick={ event => CreateLinkEvent('inventory/toggle') }>
-                                { (getFullCount > 0) &&
-                                    <LayoutItemCountView count={ getFullCount } /> }
-                            </Base>
-                        }
+                        <Base pointer className="navigation-item icon icon-inventory" title={ LocalizeText('toolbar.icon.label.inventory') } onClick={ event => CreateLinkEvent('inventory/toggle') }>
+                            { (getFullCount > 0) &&
+                                <LayoutItemCountView count={ getFullCount } /> }
+                        </Base>
                         <Flex center pointer className={ 'navigation-item item-avatar ' + (isMeExpanded ? 'active ' : '') } title={ LocalizeText('toolbar.icon.label.memenu') } onClick={ event => setMeExpanded(!isMeExpanded) }>
                             <LayoutAvatarImageView figure={ userFigure } direction={ 2 } position="absolute" />
                             { (getTotalUnseen > 0) &&

@@ -63,6 +63,10 @@
     border: 0px;
     box-shadow: none;
 
+    .popover-arrow {
+        background-image: none;
+    }
+
     :before {
         border-top-color: transparent !important;
     }

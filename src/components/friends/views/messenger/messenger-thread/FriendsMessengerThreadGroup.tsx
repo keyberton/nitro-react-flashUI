@@ -42,9 +42,9 @@ export const FriendsMessengerThreadGroup: FC<{ thread: MessengerThread, group: M
                                         <Base>{ LocalizeText('messenger.notification.persisted_messages') }</Base>
                                     </Flex> }
                                 { (chat.type === MessengerThreadChat.ROOM_INVITE) &&
-                                    <Flex gap={ 2 } alignItems="center" className="bg-light rounded mb-2 px-2 py-1 small text-black">
+                                    <Flex gap={ 2 } alignItems="center" className="room-invite-message mb-2 px-2 py-1">
                                         <Base className="messenger-notification-icon flex-shrink-0" />
-                                        <Base>{ (LocalizeText('messenger.invitation') + ' ') }{ chat.message }</Base>
+                                        <Base fullWidth className="text-center">{ (LocalizeText('messenger.invitation') + ' ') }{ chat.message }</Base>
                                     </Flex> }
                             </Base>
                         </Flex>
@@ -55,7 +55,7 @@ export const FriendsMessengerThreadGroup: FC<{ thread: MessengerThread, group: M
     }
     
     return (
-        <>
+        <Flex column>
             <Flex fullWidth justifyContent={ isOwnChat ? 'end' : 'start' } gap={ 2 }>
                 { ((group.type === MessengerGroupType.PRIVATE_CHAT) && !isOwnChat) &&
                     <Base shrink className="message-avatar">
@@ -68,20 +68,20 @@ export const FriendsMessengerThreadGroup: FC<{ thread: MessengerThread, group: M
                 <Base className={ 'message-bubble text-black mt-2 py-1 px-2 messages-group-' + (isOwnChat ? 'right' : 'left') }>
                     <Base className="username">
                         { isOwnChat && GetSessionDataManager().userName }
-                        { !isOwnChat && (groupChatData ? groupChatData.username : thread.participant.name) }
+                        { !isOwnChat && (groupChatData ? groupChatData.username : thread.participant.name) }:
                     </Base>
                     { group.chats.map((chat, index) => <Base key={ index } className="text-break">{ chat.message }</Base>) }
                 </Base>
                 { isOwnChat &&
                     <Base shrink className="message-avatar">
-                        <LayoutAvatarImageView figure={ GetSessionDataManager().figure } direction={ 4 } />
+                        <LayoutAvatarImageView className={ `${ isOwnChat ? 'oposite' : '' }` } figure={ GetSessionDataManager().figure } direction={ 4 } />
                     </Base> }
             </Flex>
             { (group.chats.length > 0) &&
-                <Flex className={ `text-black ${ !isOwnChat ? 'px-5' : '' }` }>
+                <Flex className={ `text-black text-timeago ${ !isOwnChat ? 'not-own' : '' }` }>
                     <Text variant="muted" className={ !isOwnChat ? 'px-3' : 'px-1' }>{ FriendlyTime.format(((new Date().getTime() - group.chats[group.chats.length - 1].date.getTime()) / 1000), '.ago', 2) }</Text>
                 </Flex>
             }
-        </>
+        </Flex>
     );
 }

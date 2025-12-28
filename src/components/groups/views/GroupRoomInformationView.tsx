@@ -104,7 +104,7 @@ export const GroupRoomInformationView: FC<{}> = props =>
     if(!groupInformation) return null;
 
     return (
-        <Base className="nitro-notification-bubble">
+        <Base className="nitro-notification-bubble not-notification">
             <Column>
                 <Flex className="grouproom-header" alignItems="center" justifyContent="between" pointer onClick={ event => setIsOpen(value => !value) }>
                     <Flex className="icon-style">

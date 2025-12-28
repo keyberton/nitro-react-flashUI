@@ -37,7 +37,7 @@ export const MysteryBoxExtensionView: FC<{}> = props =>
     if(keyColor === '' && boxColor === '') return null;
 
     return (
-        <Base className="nitro-notification-bubble mysterybox-extension">
+        <Base className="nitro-notification-bubble not-notification mysterybox-extension">
             <Column>
                 <Flex className="grouproom-header px-1" alignItems="center" justifyContent="between" pointer onClick={ event => setIsOpen(value => !value) }>
                     <Text bold variant="white">{ LocalizeText('mysterybox.tracker.title') }</Text>

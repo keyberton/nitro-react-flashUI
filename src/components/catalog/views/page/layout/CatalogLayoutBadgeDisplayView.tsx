@@ -41,7 +41,7 @@ export const CatalogLayoutBadgeDisplayView: FC<CatalogLayoutProps> = props =>
                     }
                 </Column>
                 <Column size={ 6 } overflow="auto" className="grid-bg p-2">
-                    <Column overflow="auto">
+                    <Column className="p-1" overflow="auto">
                         <CatalogItemGridWidgetView shrink />
                     </Column>
                     <Text className="selectproduct-title bottom-5">

@@ -1,7 +1,26 @@
 .user-settings-window
 {
-    width: 310px;
+    width: 242px;
+    height: 170px;
+    min-width: 242px;
+    min-height: 170px;
     resize: none;
+
+    &.sound {
+        width: 312px;
+        min-width: 312px;
+        height: 190px;
+        min-height: 190px;
+    }
+
+    .nitro-card-header-text { 
+        font-size: 12px;
+    }
+
+    .content-area {
+        font-size: 12px;
+        padding-top: 0;
+    }
 
     input[type=range] {
         background: url(@/assets/flash/settings/range.png);

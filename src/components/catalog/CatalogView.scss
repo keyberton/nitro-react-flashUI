@@ -3,7 +3,7 @@
     height: $catalog-height;
     min-width: $catalog-width;
     max-width: $catalog-width;
-    min-height: $catalog-height - 39px;
+    min-height: $catalog-height - 20px;
 
     font[size='16'] {
         font-size: 20px;
@@ -25,7 +25,7 @@
     }
 
     .grid-price-view {
-        font-size: 10px;
+        font-size: 12px;
         padding-right: 2px;
         padding-bottom: 2px;
     }
@@ -38,13 +38,23 @@
     }
 
     .quantity-input {
-        min-height: 17px;
-        width: 34px;
+        min-height: 25px;
+        width: 30px;
         padding: 0 4px;
     }
 
     .grid-bg {
         border-image-source: url(@/assets/flash/catalogue/cata_bg.png);
+        border-image-slice: 6 6 6 6 fill;
+        border-image-width: 6px 6px 6px 6px;
+    }
+
+    .none-bg {
+        border-image-source: none;
+    }
+
+    .currencies-bg {
+        border-image-source: url(@/assets/flash/catalogue/currencies_bg.png);
         border-image-slice: 6 6 6 6 fill;
         border-image-width: 6px 6px 6px 6px;
     }
@@ -69,8 +79,9 @@
 
     .item-title {
         position: absolute;
-        top: 20px;
-        left: 10px;
+        padding: 1rem 6px 1rem 6px;
+        z-index: 99;
+        height: 60px;
     }
 
     .selectproduct-title {
@@ -110,7 +121,7 @@
 
         .btn {
             width: 100%;
-            height: 20px;
+            height: 24px;
         }
     }
 }
@@ -304,7 +315,7 @@
 }
 
 .font-size-marketplace {
-    font-size: 13px;
+    font-size: 12px;
 }
 
 .font-size-marketplace-small {
@@ -332,19 +343,17 @@
     width: 299px;
 
     .image-preview {
-        width: 48px !important;
-        height: 48px !important;
+        width: 70px !important;
+        height: 70px !important;
         overflow: hidden !important;
         display: flex !important;
         justify-content: center !important;
         align-items: center !important;
-        background-color: #F0F0F0 !important;
-        border: 1px solid #5D5D5D !important;
-        border-radius: 8px !important;
+        background-color: #EEEEEE !important;
     }
 
     .textarea-height {
-        height: 51px;
+        height: 60px;
     }
 }
 
@@ -455,6 +464,45 @@
     width: 38px;
     height: 30px;
     margin-right: 4px;
+}
+
+.pets-3 {
+    background-color: #8798a1;
+}
+
+.catalog-purchase-confirm-view {
+    width: $catalog-confirmation-width;
+    height: $catalog-confirmation-height;
+    min-width: $catalog-confirmation-width;
+    max-width: $catalog-confirmation-width;
+    min-height: $catalog-confirmation-height;
+
+    .image-preview-container {
+        width: 126px;
+        height: 150px;
+        justify-content: center;
+        align-items: center;
+        background-color: #F0F0F0;
+        border: 1px solid #5D5D5A;
+        border-radius: 8px;
+    }
+
+    .btn {
+        height: 27px;
+        width: 110px;
+    }
+}
+
+.catalog-not-enough-view {
+    width: $catalog-not-enough-width;
+    height: $catalog-not-enough-height;
+    min-width: $catalog-not-enough-width;
+    max-width: $catalog-not-enough-width;
+    min-height: $catalog-not-enough-height;
+
+    .catalog-not-enough-text {
+        font-size: 12px;
+    }
 }
 
 @import './views/targeted-offer/Offer.scss';

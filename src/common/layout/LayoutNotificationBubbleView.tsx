@@ -6,12 +6,13 @@ export interface LayoutNotificationBubbleViewProps extends FlexProps
 {
     fadesOut?: boolean;
     timeoutMs?: number;
+    animated?: boolean;
     onClose: () => void;
 }
 
 export const LayoutNotificationBubbleView: FC<LayoutNotificationBubbleViewProps> = props =>
 {
-    const { fadesOut = true, timeoutMs = 8000, onClose = null, overflow = 'hidden', classNames = [], ...rest } = props;
+    const { fadesOut = true, timeoutMs = 8000, animated = false, onClose = null, overflow = 'hidden', classNames = [], ...rest } = props;
     const [ isVisible, setIsVisible ] = useState(false);
 
     const getClassNames = useMemo(() =>
@@ -20,8 +21,10 @@ export const LayoutNotificationBubbleView: FC<LayoutNotificationBubbleViewProps>
 
         if(classNames.length) newClassNames.push(...classNames);
 
+        if(animated) newClassNames.push('animated');
+
         return newClassNames;
-    }, [ classNames ]);
+    }, [ classNames, animated ]);
 
     useEffect(() =>
     {
