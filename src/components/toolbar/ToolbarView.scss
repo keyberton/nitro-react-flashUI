@@ -81,20 +81,45 @@
             position: relative;
             overflow: visible;
 
-            &::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 45px;
-                height: 45px;
-                background-image: url(@/assets/flash/toolbar/memenu_bg.png);
-                background-repeat: no-repeat;
-                background-position: center;
-                background-size: 45px 45px;
-                opacity: 0.9;
-                z-index: 0;
-                border-radius: 50%;
+            .avatar-image {
+                &.noclip {
+                    bottom: 2px;
+                    height: 65px;
+                }
+            }
+
+            &.clipped {
+                
+                &::before {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 45px;
+                    height: 45px;
+                    background-image: url(@/assets/flash/toolbar/memenu_bg.png);
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: 45px 45px;
+                    opacity: 0.9;
+                    z-index: 0;
+                    border-radius: 50%;
+                }
+                
+                &::after {
+                    content: '';
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 45px;
+                    height: 45px;
+                    background-image: url(@/assets/flash/toolbar/memenu_circle.png);
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: 45px 45px;
+                    z-index: 2;
+                    pointer-events: none;
+                }
             }
 
             .avatar-clip-wrapper {
@@ -102,10 +127,13 @@
                 top: 0;
                 left: 0;
                 width: 42px;
-                height: 43px;
+                height: 44px;
                 overflow: hidden;
-                border-radius: 50%;
                 z-index: 1;
+
+                &.radius {
+                    border-radius: 50%;
+                }
 
                 .avatar-image {
                     position: absolute;
@@ -113,21 +141,6 @@
                     left: 50%;
                     transform: translate(-50%, -50%);
                 }
-            }
-
-            &::after {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 45px;
-                height: 45px;
-                background-image: url(@/assets/flash/toolbar/memenu_circle.png);
-                background-repeat: no-repeat;
-                background-position: center;
-                background-size: 45px 45px;
-                z-index: 2;
-                pointer-events: none;
             }
 
             .nitro-item-count {

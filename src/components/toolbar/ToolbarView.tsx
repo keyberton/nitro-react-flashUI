@@ -18,6 +18,7 @@ export const ToolbarView: FC<{ isInRoom: boolean }> = props =>
     const { requests = [] } = useFriends();
     const { iconState = MessengerIconState.HIDDEN } = useMessenger();
     const isMod = GetSessionDataManager().isModerator;
+    const preferOldToolbar = GetConfiguration<boolean>('habbo2025.toolbar', false);
 
     useMessageEvent<PerkAllowancesMessageEvent>(PerkAllowancesMessageEvent, event =>
     {
@@ -89,13 +90,20 @@ export const ToolbarView: FC<{ isInRoom: boolean }> = props =>
                             { (getFullCount > 0) &&
                                 <LayoutItemCountView count={ getFullCount } /> }
                         </Base>
-                        <Flex center pointer className={ 'navigation-item item-avatar ' + (isMeExpanded ? 'active ' : '') } title={ LocalizeText('toolbar.icon.label.memenu') } onClick={ event => setMeExpanded(!isMeExpanded) }>
-                            <div className="avatar-clip-wrapper">
-                                <LayoutAvatarImageView figure={ userFigure } direction={ 3 } position="absolute" />
-                            </div>
-                            { (getTotalUnseen > 0) &&
-                                <LayoutItemCountView count={ getTotalUnseen } /> }
-                        </Flex>
+                        { !preferOldToolbar ? 
+                            <Flex center pointer className={ 'navigation-item item-avatar clipped ' + (isMeExpanded ? 'active ' : '') } title={ LocalizeText('toolbar.icon.label.memenu') } onClick={ event => setMeExpanded(!isMeExpanded) }>
+                                <div className="avatar-clip-wrapper radius">
+                                    <LayoutAvatarImageView figure={ userFigure } direction={ 3 } position="absolute" />
+                                </div>
+                                { (getTotalUnseen > 0) &&
+                                    <LayoutItemCountView count={ getTotalUnseen } /> }
+                            </Flex> :
+                            <Flex center pointer className={ 'navigation-item item-avatar ' + (isMeExpanded ? 'active ' : '') } title={ LocalizeText('toolbar.icon.label.memenu') } onClick={ event => setMeExpanded(!isMeExpanded) }>
+                                <LayoutAvatarImageView className='noclip' figure={ userFigure } direction={ 2 } position="absolute" />
+                                { (getTotalUnseen > 0) &&
+                                    <LayoutItemCountView count={ getTotalUnseen } /> }
+                            </Flex>
+                        }
                         { isInRoom &&
                             <Base pointer className="navigation-item icon icon-camera" title={ LocalizeText('camera.interface.title') } onClick={ event => CreateLinkEvent('camera/toggle') } /> }
                         { isMod &&
