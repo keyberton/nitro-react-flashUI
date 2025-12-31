@@ -23,6 +23,8 @@ Thanks to everyone that has helped out contributing to this UI:
 - Object
 - Habbobba
 - Tardelivinicius
+- Keyberton
+- Yordi
 
 # Nitro Client installation
 
