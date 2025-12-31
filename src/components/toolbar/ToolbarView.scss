@@ -76,13 +76,62 @@
         position: relative;
 
         &.item-avatar {
-            width: 50px;
+            width: 45px;
             height: 45px;
-            overflow: hidden;
+            position: relative;
+            overflow: visible;
 
-            .avatar-image {
-                margin-left: -5px;
-                margin-top: 25px;
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 45px;
+                height: 45px;
+                background-image: url(@/assets/flash/toolbar/memenu_bg.png);
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: 45px 45px;
+                opacity: 0.9;
+                z-index: 0;
+                border-radius: 50%;
+            }
+
+            .avatar-clip-wrapper {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 45px;
+                height: 45px;
+                overflow: hidden;
+                border-radius: 50%;
+                z-index: 1;
+
+                .avatar-image {
+                    position: absolute;
+                    top: 85%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+            }
+
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 45px;
+                height: 45px;
+                background-image: url(@/assets/flash/toolbar/memenu_circle.png);
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: 45px 45px;
+                z-index: 2;
+                pointer-events: none;
+            }
+
+            .nitro-item-count {
+                z-index: 3;
             }
         }
 
