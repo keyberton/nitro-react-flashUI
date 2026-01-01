@@ -53,6 +53,35 @@
 .nitro-room-info {
     width: $room-info-width;
     resize: none;
+    
+    .tag-box {
+        font-size: 12px;
+        padding: 0px 1px;
+        background-color: #CEE9FA;
+        border-radius: 3px;
+        color: #10333B;
+
+        &:hover {
+            background-color: #449FCF;
+            color: #0E333C;
+        }
+    }
+
+    .nitro-report-room {
+        width: 200px;
+        height: 33px;
+        margin-top: 11px;
+        margin-bottom: 14px;
+
+        hr {
+            width: 2px;
+            height: 20px!important;
+            margin-left: 9px;
+            margin-right: 9px;
+            border-right: 1px solid #ECECEC;
+            background-color: #878787;
+        }
+    }
 }
 
 .text-tag {

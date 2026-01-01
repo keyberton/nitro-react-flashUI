@@ -1,16 +1,16 @@
 import { GetCustomRoomFilterMessageComposer, GetGuestRoomMessageComposer, NavigatorSearchComposer, RoomMuteComposer, RoomSettingsComposer, SecurityLevel, ToggleStaffPickMessageComposer, UpdateHomeRoomMessageComposer } from '@nitrots/nitro-renderer';
 import { FC, useEffect, useState } from 'react';
-import { FaLink } from 'react-icons/fa';
-import {
-    CreateLinkEvent,
-    DispatchUiEvent,
-    GetGroupInformation,
-    GetSessionDataManager,
-    LocalizeText,
-    ReportType,
-    SendMessageComposer,
-    ToggleFavoriteRoom
-} from '../../../api';
+import
+    {
+        CreateLinkEvent,
+        DispatchUiEvent,
+        GetGroupInformation,
+        GetSessionDataManager,
+        LocalizeText,
+        ReportType,
+        SendMessageComposer,
+        ToggleFavoriteRoom
+    } from '../../../api';
 import { Base, Button, classNames, Column, Flex, LayoutBadgeImageView, LayoutRoomThumbnailView, NitroCardContentView, NitroCardHeaderView, NitroCardView, Text, UserProfileIconView } from '../../../common';
 
 import { RoomWidgetThumbnailEvent } from '../../../events';
@@ -122,15 +122,15 @@ export const NavigatorRoomInfoView: FC<NavigatorRoomInfoViewProps> = props =>
     return (
         <NitroCardView className="nitro-room-info" theme="primary">
             <NitroCardHeaderView headerText={ LocalizeText('navigator.roomsettings.roominfo') } onCloseClick={ () => processAction('close') } />
-            <NitroCardContentView className="text-black">
+            <NitroCardContentView gap={1} className="text-black">
                 { navigatorData.enteredGuestRoom &&
                     <>
                         <Flex gap={ 2 } overflow="hidden">
                             <Column grow gap={ 1 } overflow="hidden">
                                 <Flex gap={ 1 }>
-                                    <Column grow gap={ 1 }>
-                                        <Flex gap={ 1 }>
-                                            <Text bold>{ navigatorData.enteredGuestRoom.roomName }</Text>
+                                    <Column grow gap={ 0 }>
+                                        <Flex style={ { maxWidth: 150 } } gap={ 1 }>
+                                            <Text bold wrap textBreak>{ navigatorData.enteredGuestRoom.roomName }</Text>
                                         </Flex>
                                         { navigatorData.enteredGuestRoom.showOwner &&
                                             <Flex alignItems="center" gap={ 1 }>
@@ -145,10 +145,10 @@ export const NavigatorRoomInfoView: FC<NavigatorRoomInfoViewProps> = props =>
                                             <Text small>{ navigatorData.currentRoomRating }</Text>
                                         </Flex>
                                         { (navigatorData.enteredGuestRoom.tags.length > 0) &&
-                                            <Flex alignItems="center" gap={ 1 }>
+                                            <Flex alignItems="center" className='mt-2' gap={ 1 }>
                                                 { navigatorData.enteredGuestRoom.tags.map(tag =>
                                                 {
-                                                    return <Text key={ tag } pointer className="bg-muted rounded p-1" onClick={ event => processAction('navigator_search_tag', tag) }>#{ tag }</Text>
+                                                    return <Text key={ tag } pointer className="tag-box" onClick={ event => processAction('navigator_search_tag', tag) }>#{ tag }</Text>
                                                 }) }
                                             </Flex> }
                                     </Column>
@@ -159,21 +159,21 @@ export const NavigatorRoomInfoView: FC<NavigatorRoomInfoViewProps> = props =>
                                         }
                                     </Flex>
                                 </Flex>
-                                <Text small overflow="auto" style={ { maxHeight: 50 } }>{ navigatorData.enteredGuestRoom.description }</Text>
+                                <Text className='ms-1' small overflow="auto" style={ { maxHeight: 50 } }>{ navigatorData.enteredGuestRoom.description }</Text>
                                 <Flex justifyContent="center">
                                     <LayoutRoomThumbnailView roomId={ navigatorData.enteredGuestRoom.roomId } customUrl={ navigatorData.enteredGuestRoom.officialRoomPicRef }>
                                         { hasPermission('settings') && <i className="icon icon-camera-small position-absolute b-0 r-0 m-1 cursor-pointer top-0" onClick={ () => processAction('open_room_thumbnail_camera') } /> }
                                     </LayoutRoomThumbnailView>
                                 </Flex>
                                 { (navigatorData.enteredGuestRoom.habboGroupId > 0) &&
-                                    <Flex pointer alignItems="center" gap={ 2 } onClick={ () => processAction('open_group_info') }>
+                                    <Flex className='ms-1 mb-2' pointer alignItems="center" gap={ 2 } onClick={ () => processAction('open_group_info') }>
                                         <LayoutBadgeImageView className="flex-none" badgeCode={ navigatorData.enteredGuestRoom.groupBadgeCode } isGroup={ true } />
                                         <Text small underline>
                                             { LocalizeText('navigator.guildbase', [ 'groupName' ], [ navigatorData.enteredGuestRoom.groupName ]) }
                                         </Text>
                                     </Flex>
                                 }
-                                <Flex gap={ 1 } className="w-100 room-tool-item" onClick={ () => processAction('toggle_room_link') }>
+                                <Flex gap={ 1 } className="w-100 room-tool-item ms-1" onClick={ () => processAction('toggle_room_link') }>
                                     <Base pointer title={ LocalizeText('room.like.button.text') } className="icon-width icon icon-link-room float-start" />
                                     <Text underline small >{ LocalizeText('navigator.embed.caption') }</Text>
                                 </Flex>
@@ -184,22 +184,29 @@ export const NavigatorRoomInfoView: FC<NavigatorRoomInfoViewProps> = props =>
                             <Button onClick={ () => processAction('toggle_pick') }>
                                 { LocalizeText(isRoomPicked ? 'navigator.staffpicks.unpick' : 'navigator.staffpicks.pick') }
                             </Button> }
-                            <Button variant="danger" onClick={ () => processAction('report_room') }>
-                                { LocalizeText('help.emergency.main.report.room') }
-                            </Button>
                             { hasPermission('settings') &&
                             <>
                                 <Button onClick={ () => processAction('open_room_settings') }>
                                     { LocalizeText('navigator.room.popup.info.room.settings') }
-                                </Button>
-                                <Button onClick={ () => processAction('toggle_mute') }>
-                                    { LocalizeText(isRoomMuted ? 'navigator.muteall_on' : 'navigator.muteall_off') }
                                 </Button>
                                 <Button onClick={ () => processAction('room_filter') }>
                                     { LocalizeText('navigator.roomsettings.roomfilter') }
                                 </Button>
                                 <Button onClick={ () => processAction('open_floorplan_editor') }>
                                     { LocalizeText('open.floor.plan.editor') }
+                                </Button>
+                            </> }
+                            <Flex alignItems='center' justifyContent='center'>
+                                <Button justifyContent='start' alignItems='center' className="nitro-report-room fs-6" variant="illumina" onClick={ () => processAction('report_room') }>
+                                    <Base className="icon icon-report-room" />
+                                    <hr />
+                                    { LocalizeText('help.emergency.main.report.room') }
+                                </Button>
+                            </Flex>
+                            { hasPermission('settings') &&
+                            <>
+                                <Button onClick={ () => processAction('toggle_mute') }>
+                                    { LocalizeText(isRoomMuted ? 'navigator.muteall_on' : 'navigator.muteall_off') }
                                 </Button>
                             </> }
                         </Column>

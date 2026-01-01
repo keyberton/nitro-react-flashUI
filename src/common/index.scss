@@ -410,6 +410,16 @@
             box-sizing: border-box;
         }
     }
+
+    .achievement-score {
+        border-image-slice: 3 fill;
+        border-image-width: 3px;
+        border-image-source: url(@/assets/flash/inventory/bg-blue.png);
+        height: 17px;
+        justify-content: center;
+        align-items: center;
+        margin-top: 4px;
+    }
 }
 
 

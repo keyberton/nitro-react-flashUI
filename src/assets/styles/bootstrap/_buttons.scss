@@ -55,6 +55,24 @@
 
 }
 
+.btn-illumina {
+  border-image-source: url("@/assets/flash/buttons/button_illumina.png");
+  border-image-slice: 8 fill;
+  border-image-width: 8px;
+  color: black;
+  text-shadow: 0 1px 0 #FFFFFF;
+  font-family: Ubuntu;
+  font-weight: bold;
+
+  &:hover {
+    border-image-source: url("@/assets/flash/buttons/button_illumina.png");
+  }
+
+  &:active {
+    border-image-source: url("@/assets/flash/buttons/button_illumina_active.png");
+  }
+}
+
 .btn-bold {
   border-image-source: url("@/assets/flash/buttons/button_bold.png");
   color: #000000;

@@ -18,7 +18,7 @@ export const ToolbarView: FC<{ isInRoom: boolean }> = props =>
     const { requests = [] } = useFriends();
     const { iconState = MessengerIconState.HIDDEN } = useMessenger();
     const isMod = GetSessionDataManager().isModerator;
-    const preferOldToolbar = GetConfiguration<boolean>('habbo2025.toolbar', false);
+    const preferNewToolbar = GetConfiguration<boolean>('habbo2025.toolbar', false);
 
     useMessageEvent<PerkAllowancesMessageEvent>(PerkAllowancesMessageEvent, event =>
     {
@@ -90,7 +90,7 @@ export const ToolbarView: FC<{ isInRoom: boolean }> = props =>
                             { (getFullCount > 0) &&
                                 <LayoutItemCountView count={ getFullCount } /> }
                         </Base>
-                        { !preferOldToolbar ? 
+                        { preferNewToolbar ? 
                             <Flex center pointer className={ 'navigation-item item-avatar clipped ' + (isMeExpanded ? 'active ' : '') } title={ LocalizeText('toolbar.icon.label.memenu') } onClick={ event => setMeExpanded(!isMeExpanded) }>
                                 <div className="avatar-clip-wrapper radius">
                                     <LayoutAvatarImageView figure={ userFigure } direction={ 3 } position="absolute" />
