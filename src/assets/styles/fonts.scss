@@ -1,39 +1,76 @@
 @font-face {
     font-family: Ubuntu;
     src: url('@/assets/webfonts/Ubuntu.woff');
+    font-weight: normal;
+    font-style: normal;
+    image-rendering: -moz-crisp-edges;
+    --tw-text-opacity: 1;
+    image-rendering: pixelated;
 }
 
 @font-face {
-    font-family: GameUbuntu;
+    font-family: Ubuntu;
     src: url('@/assets/webfonts/UbuntuCondensed.woff');
+    font-stretch: condensed;
+    font-weight: 400;
+    font-style: normal;
+    image-rendering: -moz-crisp-edges;
+    --tw-text-opacity: 1;
+    image-rendering: pixelated;
+}
+
+@font-face {
+    font-family: Ubuntu;
+    src: url('@/assets/webfonts/Ubuntu-i.ttf');
+    font-weight: normal;
+    font-style: italic;
+    image-rendering: -moz-crisp-edges;
+    --tw-text-opacity: 1;
+    image-rendering: pixelated;
+}
+
+@font-face {
+    font-family: Ubuntu;
+    src: url('@/assets/webfonts/UbuntuBoldItalic.woff');
+    font-weight: bold;
+    font-style: italic;
+    image-rendering: -moz-crisp-edges;
+    --tw-text-opacity: 1;
+    image-rendering: pixelated;
+}
+
+@font-face {
+    font-family: Ubuntu;
+    src: url('@/assets/webfonts/UbuntuBold.woff');
+    font-weight: bold;
+    font-style: normal;
+    image-rendering: -moz-crisp-edges;
+    --tw-text-opacity: 1;
+    image-rendering: pixelated;
+}
+
+@font-face {
+    font-family: Ubuntu;
+    src: url('@/assets/webfonts/UbuntuSemi.woff');
+    font-weight: 500;
+    font-style: normal;
+    image-rendering: -moz-crisp-edges;
+    --tw-text-opacity: 1;
+    image-rendering: pixelated;
 }
 
 @font-face {
     font-family: Goldfish;
     src: url('@/assets/webfonts/Volter.woff');
+    image-rendering: -moz-crisp-edges;
+    --tw-text-opacity: 1;
+    image-rendering: pixelated;
 }
 
 @font-face {
     font-family: Goldfish-Bold;
     src: url('@/assets/webfonts/VolterBold.woff');
-}
-
-@font-face {
-    font-family: UbuntuItalics;
-    src: url('@/assets/webfonts/Ubuntu-i.ttf');
-}
-
-@font-face {
-    font-family: UbuntuItalicsBold;
-    src: url('@/assets/webfonts/UbuntuBoldItalic.woff');
-}
-
-@font-face {
-    font-family: UbuntuBold;
-    src: url('@/assets/webfonts/UbuntuBold.woff');
-}
-
-@font-face {
-    font-family: UbuntuMedium;
-    src: url('@/assets/webfonts/UbuntuSemi.woff');
+    image-rendering: -moz-crisp-edges;
+    --tw-text-opacity: 1;
+    image-rendering: pixelated;
 }

@@ -46,7 +46,7 @@ $yellow:  #ffc107 !default;
 $green:   #00800b !default;
 $teal:    #20c997 !default;
 $cyan:    #0dcaf0 !default;
-$muted:   #CBCBCB !default;
+$muted:   #666666 !default;
 // scss-docs-end color-variables
 
 // scss-docs-start colors-map
@@ -916,7 +916,7 @@ $input-focus-width:                     $input-btn-focus-width !default;
 $input-focus-box-shadow:                $input-btn-focus-box-shadow !default;
 
 $input-placeholder-color:               #a5a6a5 !default;
-$input-placeholder-font-family:         UbuntuItalics !default;
+$input-placeholder-font-family:         Ubuntu !default;
 $input-plaintext-color:                 $body-color !default;
 
 $input-height-border:                   $input-border-width * 2 !default;

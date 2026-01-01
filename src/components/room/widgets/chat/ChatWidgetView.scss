@@ -83,7 +83,8 @@
         &.type-1 {
             // whisper
             .message {
-                font-family: ubuntuItalics;
+                font-family: Ubuntu;
+                font-style: italic;
                 color: #595959;
             }
         }
@@ -91,7 +92,8 @@
         &.type-2 {
             // shout
             .message {
-                font-family: ubuntuBold;
+                font-family: Ubuntu;
+                font-weight: bold;
             }
         }
 
@@ -918,5 +920,6 @@
 }
 
 .username {
-    font-family: UbuntuBold;
+    font-family: Ubuntu;
+    font-weight: bold;
 }

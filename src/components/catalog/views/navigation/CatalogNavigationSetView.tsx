@@ -6,11 +6,12 @@ export interface CatalogNavigationSetViewProps
 {
     node: ICatalogNode;
     child?: boolean;
+    className?: string;
 }
 
 export const CatalogNavigationSetView: FC<CatalogNavigationSetViewProps> = props =>
 {
-    const { node = null, child = false } = props;
+    const { node = null, child = false, className = '' } = props;
     
     return (
         <>
@@ -18,7 +19,7 @@ export const CatalogNavigationSetView: FC<CatalogNavigationSetViewProps> = props
             {
                 if(!n.isVisible) return null;
                     
-                return <CatalogNavigationItemView key={ index } node={ n } child={ child } />
+                return <CatalogNavigationItemView className={ className } key={ index } node={ n } child={ child } />
             }) }
         </>
     );

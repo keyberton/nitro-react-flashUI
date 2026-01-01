@@ -225,6 +225,20 @@
 
 .nitro-catalog-navigation-grid-container {
 
+    .nitro-catalog-item {
+        font-family: Ubuntu;
+        font-style: normal;
+        color: #6A6A69;
+        font-weight: bold;
+    }
+
+    .nitro-catalog-subitem {
+        font-family: Ubuntu;
+        font-style: italic;
+        color: #52819A;
+        font-weight: bold;
+    }
+
     .nitro-catalog-navigation-section {
         display: grid;
 
@@ -236,7 +250,7 @@
 
     .layout-grid-item {
         font-size: $font-size-sm;
-        height: 23px !important;
+        height: 24px !important;
         border-color: unset !important;
         border: 0 !important;
         padding: 1px 3px;
@@ -255,7 +269,8 @@
             background-color: #63c5e9 !important;
             border-top: 2px solid #82d1ed !important;
             border-bottom: 2px solid #82d1ed !important;
-            font-family: UbuntuBold;
+            font-family: Ubuntu;
+            font-weight: bold;
             color: #fff;
         }
 
@@ -263,7 +278,8 @@
             background-color: #63c5e9 !important;
             border-top: 2px solid #82d1ed !important;
             border-bottom: 2px solid #82d1ed !important;
-            font-family: UbuntuBold;
+            font-family: Ubuntu;
+            font-weight: bold;
             color: #fff;
         }
     }
@@ -384,7 +400,8 @@
     border-image-slice: 6 6 6 6 fill;
     border-image-width: 6px 6px 6px 6px;
     width: 96%;
-    font-family: Ubuntubold;
+    font-family: Ubuntu;
+    font-weight: bold;
     font-size: 16px;
 }
 
