@@ -18,7 +18,7 @@ export const InventoryCategoryEmptyView: FC<InventoryCategoryEmptyViewProps> = p
             <Column center size={ 7 } overflow="hidden">
                 <div className="empty-image" />
             </Column>
-            <Column className="inventory-empty-container" justifyContent="center" size={ 5 } overflow="hidden">
+            <Column className="inventory-empty-container me-3" justifyContent="center" size={ 5 } overflow="hidden">
                 <Column className="ps-1" gap={ 1 }>
                     <Text className="empty-title" bold overflow="unset">{ title }</Text>
                     <Text overflow="auto" className="mb-4">{ desc }</Text>
