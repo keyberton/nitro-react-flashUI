@@ -35,8 +35,10 @@
             right: -2px;
             background-color: white;
             padding: 0px;
-            padding-left: 3px;
-            padding-right: 3px;
+            min-width: 2px;
+            min-height: 2px;
+            padding-left: 2px;
+            padding-right: 2px;
             color: #306A83;
             border: 1px solid #2F6982;
             font-weight: normal !important;
@@ -112,8 +114,10 @@
             right: -2px;
             background-color: white;
             padding: 0px;
-            padding-left: 3px;
-            padding-right: 3px;
+            padding-left: 2px;
+            padding-right: 2px;
+            min-width: 2px;
+            min-height: 2px;
             color: #306A83;
             border: 1px solid #2F6982;
             font-weight: normal !important;
