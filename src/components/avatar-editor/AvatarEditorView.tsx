@@ -1,13 +1,12 @@
 import { AvatarEditorFigureCategory, FigureSetIdsMessageEvent, GetWardrobeMessageComposer, IAvatarFigureContainer, ILinkEventTracker, SetClothingChangeDataMessageComposer, UserFigureComposer, UserWardrobePageEvent } from '@nitrots/nitro-renderer';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
-import { FaDice, FaTrash, FaUndo } from 'react-icons/fa';
 import { AddEventLinkTracker, AvatarEditorAction, AvatarEditorUtilities, BodyModel, FigureData, GetAvatarRenderManager, GetClubMemberLevel, GetConfiguration, GetLocalStorage, GetSessionDataManager, HeadModel, IAvatarEditorCategoryModel, LegModel, LocalizeText, RemoveLinkEventTracker, SendMessageComposer, SetLocalStorage, TorsoModel, generateRandomFigure } from '../../api';
-import { Button, ButtonGroup, Column, Flex, Grid, NitroCardContentView, NitroCardHeaderView, NitroCardTabsItemView, NitroCardTabsView, NitroCardView } from '../../common';
+import { Button, Column, Flex, Grid, NitroCardContentView, NitroCardHeaderView, NitroCardTabsItemView, NitroCardView } from '../../common';
 import { useMessageEvent } from '../../hooks';
+import { AvatarCardTabsView } from './views/AvatarCardTabsView';
 import { AvatarEditorFigurePreviewView } from './views/AvatarEditorFigurePreviewView';
 import { AvatarEditorModelView } from './views/AvatarEditorModelView';
 import { AvatarEditorWardrobeView } from './views/AvatarEditorWardrobeView';
-import { AvatarCardTabsView } from './views/AvatarCardTabsView';
 
 const DEFAULT_MALE_FIGURE: string = 'hr-100.hd-180-7.ch-215-66.lg-270-79.sh-305-62.ha-1002-70.wa-2007';
 const DEFAULT_FEMALE_FIGURE: string = 'hr-515-33.hd-600-1.ch-635-70.lg-716-66-62.sh-735-68';
@@ -275,7 +274,7 @@ export const AvatarEditorView: FC<{}> = props =>
         return () =>
         {
             setupFigures();
-            setIsWardrobeVisible(false);
+            setIsWardrobeVisible(true);
             setNeedsReset(true);
         }
     }, [ isVisible, genderFootballGate, setupFigures ]);

@@ -6,9 +6,8 @@
     height: $toolbar-height;
     z-index: $toolbar-zindex;
     pointer-events: all;
-    background: #2e2d2cc2;
-    box-shadow: inset 0px 5px 0px -3px #53524Ec2, inset 0px -4px 0px -3px #494845c2;
-    border-top: 1px solid #0000004d;
+    background: url(@/assets/flash/toolbar/toolbar_bg.png);
+    background-repeat: repeat-x;
 
     .toolbar-left-side {
         padding-left: 10px;

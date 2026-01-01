@@ -351,6 +351,7 @@
     border-image-source: url(@/assets/flash/toolbar/notification-bg.png);
     border-image-slice:6 6 6 6 fill;
     border-image-width:6px 6px 6px 6px;
+    display: flex;
     top: 2px;
     right: 2px;
     font-size: 9.5px;
@@ -359,6 +360,11 @@
     padding-right: 5px;
     padding-left: 5px;
     color: #fff;
+    min-width: 17px;
+    min-height: 18px;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 3px;
 }
 
 .nitro-catalog .layout-catalog-grid-item .nitro-item-count, .nitro-catalog .layout-grid-item .nitro-item-count {
