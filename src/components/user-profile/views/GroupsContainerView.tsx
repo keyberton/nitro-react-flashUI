@@ -1,7 +1,7 @@
 import { GroupInformationComposer, GroupInformationEvent, GroupInformationParser, HabboGroupEntryData } from '@nitrots/nitro-renderer';
 import { FC, useEffect, useState } from 'react';
 import { LocalizeText, SendMessageComposer, ToggleFavoriteGroup } from '../../../api';
-import { AutoGrid, Base, Column, Flex, Grid, GridProps, LayoutBadgeImageView, LayoutGridItem, Text } from '../../../common';
+import { AutoGrid, Base, Column, Flex, GridProps, LayoutBadgeImageView, LayoutGridItem, Text } from '../../../common';
 import { useMessageEvent } from '../../../hooks';
 import { GroupInformationView } from '../../groups/views/GroupInformationView';
 
@@ -70,25 +70,31 @@ export const GroupsContainerView: FC<GroupsContainerViewProps> = props =>
     }
     
     return (
-        <Grid overflow={ overflow } gap={ 2 } { ...rest }>
-            <Column alignItems="center" size={ 2 } overflow="auto">
-                <AutoGrid overflow={ null } columnCount={ 1 } columnMinHeight={ 50 } className="user-groups-container">
+        <Flex fullHeight fullWidth overflow={ overflow } className='groups-container' { ...rest }>
+            <Column className='groups-grid' overflow="auto">
+                <Flex gap={1}>
+                    <Text bold fontSize={7} small>{ LocalizeText('avatar.profile.groups') }:</Text>
+                    <Text fontSize={7}>{ groups.length }</Text>
+                </Flex>
+                <AutoGrid overflow={ null } gap={ 0 } columnCount={ 1 } columnMinHeight={ 50 } className="user-groups-container">
                     { groups.map((group, index) =>
                     {
                         return (
                             <LayoutGridItem key={ index } overflow="unset" itemActive={ (selectedGroupId === group.groupId) } onClick={ () => setSelectedGroupId(group.groupId) } className="p-1">
                                 { itsMe &&
-                                <i className={ 'position-absolute end-0 top-0 z-index-1 icon icon-group-' + (group.favourite ? 'favorite' : 'not-favorite') } onClick={ () => ToggleFavoriteGroup(group) } /> }
-                                <LayoutBadgeImageView badgeCode={ group.badgeCode } isGroup={ true } />
+                                <i className={ 'position-absolute start-0 top-0 z-index-1 icon icon-group-' + (group.favourite ? 'favorite' : 'not-favorite') } onClick={ () => ToggleFavoriteGroup(group) } /> }
+                                <Flex className='group-badge-container'>
+                                    <LayoutBadgeImageView badgeCode={ group.badgeCode } isGroup={ true } />
+                                </Flex>
                             </LayoutGridItem>
                         )
                     }) }
                 </AutoGrid>
             </Column>
-            <Column size={ 10 } overflow="hidden">
+            <Column overflow="hidden">
                 { groupInformation &&
                     <GroupInformationView groupInformation={ groupInformation } onClose={ onLeaveGroup } /> }
             </Column>
-        </Grid>
+        </Flex>
     );
 }

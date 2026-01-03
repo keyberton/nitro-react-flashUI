@@ -96,25 +96,23 @@ export const UserProfileView: FC<{}> = props =>
     return (
         <NitroCardView uniqueKey="nitro-user-profile" theme="primary" className="user-profile">
             <NitroCardHeaderView headerText={ LocalizeText('extendedprofile.caption') } onCloseClick={ onClose } />
-            <NitroCardContentView overflow="hidden">
-                <Grid fullHeight={ false } gap={ 2 }>
-                    <Column size={ 7 } gap={ 1 } className="user-container pe-2">
+            <NitroCardContentView className='groups-content' gap={0} overflow="hidden">
+                <Flex className="pb-1" fullHeight={ false } gap={ 2 }>
+                    <Column gap={ 1 } className="user-container pe-2">
                         <UserContainerView userProfile={ userProfile } />
-                        { userProfile.id === GetSessionDataManager().userId &&
-                        <Flex className="p-0">
-                            <Text small underline className="cursor-pointer" onClick={ event => CreateLinkEvent('avatar-editor/toggle') }>Change Clothes</Text>
-                            <Text className="cursor-pointer badge-text" small underline onClick={ event => CreateLinkEvent('inventory/toggle') }>Change Badges</Text>
+                        <Flex className={`p-0 ${ userProfile.id !== GetSessionDataManager().userId && 'invisible'}`}>
+                            <Text small fontSize={ 7 } underline className="cursor-pointer" onClick={ event => CreateLinkEvent('avatar-editor/toggle') }>{LocalizeText('extended.profile.change.looks')}</Text>
+                            <Text fontSize={ 7 } className="cursor-pointer badge-text" small underline onClick={ event => CreateLinkEvent('inventory/toggle') }>{LocalizeText('extended.profile.change.badges')}</Text>
                         </Flex>
-                        }
-                        <Grid columnCount={ 5 } fullHeight className="profile-grey-bg p-1">
+                        <Grid columnCount={ 5 } fullHeight className="profile-grey-bg p-1 py-2">
                             <BadgesContainerView fullWidth center badges={ userBadges } />
                         </Grid>
                     </Column>
-                    <Column size={ 5 }>
+                    <Column fullWidth>
                         { userRelationships &&
                             <FriendsContainerView relationships={ userRelationships } friendsCount={ userProfile.friendsCount } /> }
                     </Column>
-                </Grid>
+                </Flex>
                 <Flex alignItems="center" className="rooms-button-container px-2 py-1">
                     <Flex alignItems="center" gap={ 1 } onClick={ event => CreateLinkEvent(`navigator/search/hotel_view/owner:${ userProfile.username }`) }>
                         <i className="icon icon-rooms" />

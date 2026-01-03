@@ -1,8 +1,8 @@
 import { BadgeImageReadyEvent, NitroSprite, TextureUtils } from '@nitrots/nitro-renderer';
 import { CSSProperties, FC, useEffect, useMemo, useState } from 'react';
 import { GetConfiguration, GetSessionDataManager, LocalizeBadgeDescription, LocalizeBadgeName, LocalizeText } from '../../api';
-import { Base, BaseProps } from '../Base';
 import { Text } from '../../common';
+import { Base, BaseProps } from '../Base';
 
 export interface LayoutBadgeImageViewProps extends BaseProps<HTMLDivElement>
 {

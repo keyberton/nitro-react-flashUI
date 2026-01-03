@@ -28,11 +28,97 @@
         margin-right: 0;
     }
 
+    .groups-content {
+        padding-left: 9px !important;
+        padding-right: 12px !important;
+        padding-top: 12px !important;
+        padding-bottom: 14px !important;
+
+        .groups-grid {
+            width: 74px;
+            height: 195px;
+            flex-shrink: 0;
+            overflow: auto;
+
+            .layout-grid-item {
+                background: url(@/assets/flash/profile/bg-group-item.png) no-repeat;
+                width: 62px;
+                height: 60px;
+                border: none !important;
+                background-position: center;
+
+                .group-badge-container {
+                    background: url(@/assets/flash/profile/bg-group-item.png) no-repeat;
+                    border: none!important;
+                }
+
+                &.active {
+                    background: url(@/assets/flash/profile/bg-group-item-active-back.png) no-repeat;
+                    border: none !important;
+                    position: relative;
+                    align-items: center;
+                    justify-content: center;
+
+                    .group-badge-container {
+                        background: url(@/assets/flash/profile/bg-group-item-active.png) no-repeat;
+                        border: none !important;
+                        width: 52px;
+                        position: relative;
+                        height: 50px;
+                        align-items: center;
+                        justify-content: center;
+                    }
+                }
+            }
+        }
+
+        .groups-container {
+            margin-top: 11px;
+            gap: 12px!important;
+
+            .group-information {
+                padding: 5px 33px!important;
+                border-image-source: url(@/assets/flash/profile/bg-group-content.png);
+                border-image-slice: 7 fill;
+                border-image-width: 7px;
+                border-image-outset: 0px;
+                border-image-repeat: repeat repeat;
+                height: 224px;
+                width: 410px;
+
+                .badge-container {
+                    width: 100px;
+                    margin-top: 4px;
+                }
+
+                .group-information-content {
+                    border-image-source: url(@/assets/flash/profile/bg-information-content.png);
+                    border-image-slice: 7 fill;
+                    border-image-width: 7px;
+                    border-image-outset: 0px;
+                    border-image-repeat: repeat repeat;
+                    padding: 10px 6px !important;
+                    width: 100%;
+
+                    .role-icon {
+                        left: 20px
+                    }
+
+                    .group-button {
+                        font-size: 12.5px !important;
+                        min-width: 160px;
+                    }
+                }
+            }
+        }
+    }
+
     .user-container {
-        border-right: 1px solid gray;
+        min-width: 264px;
+        border-right: 1px solid #AFAFAF;
 
         .avatar-container {
-            width: 75px;
+            width: 63px;
             height: 120px;
         }
     }

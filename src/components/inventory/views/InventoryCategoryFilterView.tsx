@@ -84,7 +84,7 @@ export const InventoryCategoryFilterView: FC<InventoryCategoryFilterViewProps> =
     }, [ currentTab ]);
     
     return (
-        <Flex gap={ 2 } className="nitro-inventory-category-filter p-1 rounded" style={ { width: currentTab === TAB_BADGES ? '320px' : '100%' } }>
+        <Flex gap={ 2 } className="nitro-inventory-category-filter p-1 rounded" style={ { width: currentTab === TAB_BADGES ? '335px' : '100%' } }>
             <Flex className="position-relative">
                 <Flex fullWidth alignItems="center" position="relative">
                     <input type="text" className="form-control form-control-sm" value={ searchValue } onChange={ event => setSearchValue(event.target.value) } />

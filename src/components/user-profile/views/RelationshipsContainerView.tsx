@@ -40,7 +40,7 @@ export const RelationshipsContainerView: FC<RelationshipsContainerViewProps> = p
                                 <LayoutAvatarImageView figure={ relationshipInfo.randomFriendFigure } headOnly={ true } direction={ 4 } />
                             </Flex> }
                     </Flex>
-                    <Text small italics className="user-relationship-count">
+                    <Text fontSize={ 7 } small italics className="user-relationship-count">
                         { (!relationshipInfo || (relationshipInfo.friendCount === 0)) &&
                             LocalizeText('extendedprofile.no.friends.in.this.category') }
                         { (relationshipInfo && (relationshipInfo.friendCount > 1)) &&

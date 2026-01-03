@@ -75,12 +75,12 @@
 
 .btn-bold {
   border-image-source: url("@/assets/flash/buttons/button_bold.png");
-  color: #000000;
+  color: black;
   font-family: Ubuntu;
   font-weight: bold;
   border-image-slice: 6 6 6 6 fill;
   border-image-width: 6px 6px 6px 6px;
-  padding: 5px 0 !important;
+  padding: 6px 12px !important;
 
   &:hover {
     border-image-source: url("@/assets/flash/buttons/button_bold_hover.png");
@@ -88,6 +88,13 @@
 
   &:active {
     border-image-source: url("@/assets/flash/buttons/button_bold_active.png");
+  }
+
+  &.disabled {
+    border-image-source: url("@/assets/flash/buttons/button_bold_disabled.png");
+    opacity: .4;
+    cursor: default;
+    color: black;
   }
 }
 

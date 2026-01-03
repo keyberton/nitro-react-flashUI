@@ -34,21 +34,20 @@ export const UserContainerView: FC<UserContainerViewProps> = props =>
             </Column>
             <Column>
                 <Column gap={ 0 }>
-                    <Text bold small>{ userProfile.username }</Text>
-                    <Text italics textBreak small>{ userProfile.motto }&nbsp;</Text>
+                    <Text fontSize={ 7 } bold small>{ userProfile.username }</Text>
+                    <Text fontSize={ 7 } italics textBreak small>{ userProfile.motto }&nbsp;</Text>
                 </Column>
-                <Column gap={ 1 }>
-                    <Text small>
+                <Column gap={ 0 }>
+                    <Text fontSize={ 7 } small>
                         <b>{ LocalizeText('extendedprofile.created') }</b> { userProfile.registration }
                     </Text>
-                    <Text small>
+                    <Text fontSize={ 7 } small>
                         <b>{ LocalizeText('extendedprofile.last.login') }</b> { FriendlyTime.format(userProfile.secondsSinceLastVisit, '.ago', 2) }
                     </Text>
-                    <Text small>
+                    <Text fontSize={ 7 } small>
                         <b>{ LocalizeText('extendedprofile.achievementscore') }</b> { userProfile.achievementPoints }
                     </Text>
-                </Column>
-                <Flex gap={ 1 }>
+                    <Flex gap={ 1 }>
                     { userProfile.isOnline &&
                         <i className="icon icon-pf-online" /> }
                     { !userProfile.isOnline &&
@@ -68,6 +67,7 @@ export const UserContainerView: FC<UserContainerViewProps> = props =>
                             </> }
                     </Flex>
                 </Flex>
+                </Column>
             </Column>
         </Flex>
     )
