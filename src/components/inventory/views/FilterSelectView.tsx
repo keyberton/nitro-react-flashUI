@@ -85,6 +85,7 @@ export const FilterSelectView: FC<FilterSelectViewProps> = props =>
                         left: anchorRect.left + extraLeft,
                         zIndex: (typeof (dropdownStyle as any)?.zIndex === 'number') ? (dropdownStyle as any).zIndex : 2000,
                         minWidth: 'max-content',
+                        width: anchorRect.width,
                         ...(fullWidth ? { width: anchorRect.width } : {}),
                         ...rest
                     } as CSSProperties;
