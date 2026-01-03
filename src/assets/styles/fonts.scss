@@ -54,9 +54,6 @@
     src: url('@/assets/webfonts/UbuntuSemi.woff');
     font-weight: 500;
     font-style: normal;
-    image-rendering: -moz-crisp-edges;
-    --tw-text-opacity: 1;
-    image-rendering: pixelated;
 }
 
 @font-face {
@@ -67,19 +64,4 @@
 @font-face {
     font-family: Goldfish-Bold;
     src: url('@/assets/webfonts/VolterBold.woff');
-}
-
-.goldfish,
-.goldfish-bold,
-.volter-button,
-.notification-bubble-text,
-.badge-desc,
-.nitro-item-count,
-.form-select-sm,
-.pixelated,
-[class*="goldfish"] {
-    -webkit-font-smoothing: none !important;
-    -moz-osx-font-smoothing: none !important;
-    font-smooth: never !important;
-    text-rendering: optimizeSpeed;
 }

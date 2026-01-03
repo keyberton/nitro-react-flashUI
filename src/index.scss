@@ -16,9 +16,9 @@ body {
 
     * {
         -webkit-font-smoothing: none !important;
-        -moz-osx-font-smoothing: none !important;
+        -moz-osx-font-smoothing: grayscale !important;
         font-smooth: never !important;
-        text-rendering: optimizeSpeed;
+        text-rendering: optimizeSpeed !important;
     }
 }
 
