@@ -18,6 +18,7 @@
   border-image-slice: 6 6 6 6 fill;
   border-image-width: 6px 6px 6px 6px;
   image-rendering: pixelated;
+  transition: none;
 
   .popover-arrow {
     position: absolute;

@@ -1,32 +1,32 @@
-import {
-    AddFavouriteRoomMessageComposer,
-    DeleteFavouriteRoomMessageComposer,
-    RoomDataParser,
-    RoomSettingsComposer,
-    UpdateHomeRoomMessageComposer
-} from '@nitrots/nitro-renderer';
+import
+    {
+        RoomDataParser,
+        RoomSettingsComposer,
+        UpdateHomeRoomMessageComposer
+    } from '@nitrots/nitro-renderer';
 import React, { FC, useEffect, useRef, useState } from 'react';
 import { Overlay, Popover } from 'react-bootstrap';
-import { FaUser } from 'react-icons/fa';
-import {
-    GetSessionDataManager,
-    GetUserProfile,
-    LocalizeText,
-    ReportType,
-    SendMessageComposer,
-    ToggleFavoriteGroup, ToggleFavoriteRoom
-} from '../../../../api';
-import {
-    Base,
-    classNames,
-    Column,
-    Flex,
-    LayoutBadgeImageView,
-    LayoutRoomThumbnailView,
-    NitroCardContentView,
-    Text,
-    UserProfileIconView
-} from '../../../../common';
+import
+    {
+        GetSessionDataManager,
+        GetUserProfile,
+        LocalizeText,
+        ReportType,
+        SendMessageComposer,
+        ToggleFavoriteRoom
+    } from '../../../../api';
+import
+    {
+        Base,
+        classNames,
+        Column,
+        Flex,
+        LayoutBadgeImageView,
+        LayoutRoomThumbnailView,
+        NitroCardContentView,
+        Text,
+        UserProfileIconView
+    } from '../../../../common';
 import { useHelp, useNavigator } from '../../../../hooks';
 
 interface NavigatorSearchResultItemInfoViewProps
@@ -134,7 +134,7 @@ export const NavigatorSearchResultItemInfoView: FC<NavigatorSearchResultItemInfo
             <Base pointer innerRef={ elementRef } className="icon icon-navigator-info" onClick={ onToggle } />
             <Overlay show={ isVisible } target={ elementRef.current } placement="right">
                 <Popover>
-                    <NitroCardContentView overflow="hidden" className="room-info bg-transparent" onClick={ handlePopoverClick }>
+                    <NitroCardContentView gap={ 1 } overflow="hidden" className="room-info bg-transparent" onClick={ handlePopoverClick }>
                         <Flex gap={ 2 } overflow="hidden" className="room-info-bg p-2">
                             <LayoutRoomThumbnailView roomId={ roomData.roomId } customUrl={ roomData.officialRoomPicRef } className="d-flex flex-column align-items-center justify-content-end mb-1">
                                 { roomData.habboGroupId > 0 && (
@@ -152,7 +152,7 @@ export const NavigatorSearchResultItemInfoView: FC<NavigatorSearchResultItemInfo
                             </Column>
                         </Flex>
                         <Column gap={ 0 } justifyContent="around">
-                            <Flex className="mb-0">
+                            <Flex className="mb-3">
                                 { roomData.ownerName && roomData.ownerName.length > 0 &&
                                     <Flex onClick={ handleOwnerClick } gap={ 1 } className="w-50 align-items-center">
                                         <UserProfileIconView userId={ roomData.ownerId }/>
@@ -160,7 +160,7 @@ export const NavigatorSearchResultItemInfoView: FC<NavigatorSearchResultItemInfo
                                     </Flex>
                                 }
                                 { roomData.habboGroupId === 0 ? '' :
-                                    <Flex onClick={ handleCloseClick } gap={ 1 } className="w-50 align-items-center" justifyContent="center" fullWidth>
+                                    <Flex onClick={ handleCloseClick } gap={ 1 } className="w-50 ms-4 align-items-center">
                                         <i className="icon icon-navigator-room-group"/>
                                         <Text style={ { maxWidth: 150 } } wrap bold underline>{ roomData.groupName }</Text>
                                     </Flex>
@@ -201,9 +201,9 @@ export const NavigatorSearchResultItemInfoView: FC<NavigatorSearchResultItemInfo
                                 </Column>
                             </Flex>
                             { roomData.tags && roomData.tags.length > 0 &&
-                                <Flex gap={ 1 }>
-                                    <Text variant="white" className="bg-flash-orange p-1">#{ roomData.tags && roomData.tags.length > 1 ? roomData.tags[1] : '' }</Text>
-                                    <Text variant="white" className="bg-flash-orange p-1">#{ roomData.tags }</Text>
+                                <Flex style={ { height: 20 } }  gap={ 1 }>
+                                    <Text variant="white" className="bg-flash-orange px-1">#{ roomData.tags && roomData.tags.length > 1 ? roomData.tags[1] : '' }</Text>
+                                    <Text variant="white" className="bg-flash-orange px-1">#{ roomData.tags }</Text>
                                 </Flex>
                             }
                         </Column>

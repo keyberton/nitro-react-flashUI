@@ -1,6 +1,5 @@
 import { NavigatorSearchComposer, NavigatorSearchResultList, NavigatorSearchSaveComposer } from '@nitrots/nitro-renderer';
 import { FC, useEffect, useState } from 'react';
-import { FaMinus, FaPlus } from 'react-icons/fa';
 import { LocalizeText, NavigatorSearchResultViewDisplayMode, SendMessageComposer } from '../../../../api';
 import { AutoGrid, AutoGridProps, Base, Column, Flex, Grid, LayoutSearchSavesView } from '../../../../common';
 import { useNavigator } from '../../../../hooks';
@@ -65,8 +64,8 @@ export const NavigatorSearchResultView: FC<NavigatorSearchResultViewProps> = pro
             <Column className="bg-white" gap={ 0 }>
                 <Flex fullWidth alignItems="center" justifyContent="between" className="px-2 py-1">
                     <Flex grow pointer alignItems="center" gap={ 1 } onClick={ event => setIsExtended(prevValue => !prevValue) }>
-                        { isExtended && <FaMinus style={{ color: '#7BD4F1' }} className="fa-icon cursor-pointer" /> }
-                        { !isExtended && <FaPlus style={{ color: '#7BD4F1' }} className="fa-icon cursor-pointer" /> }
+                        { isExtended && <Base className="icon icon-nav-minus" /> }
+                        { !isExtended && <Base className="icon icon-nav-plus" /> }
                         <div className="nav-category"> { LocalizeText(getResultTitle()) }</div>
                     </Flex>
                     <Flex alignItems="center" gap={ 2 }>
