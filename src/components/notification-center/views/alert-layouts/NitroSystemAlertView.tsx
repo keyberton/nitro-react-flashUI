@@ -27,8 +27,8 @@ export const NitroSystemAlertView: FC<NotificationDefaultAlertViewProps> = props
                         <Column fullWidth gap={ 1 }>
                             <Button fullWidth variant="success" onClick={ event => window.open('https://discord.nitrodev.co') }>Discord</Button>
                             <Flex gap={ 1 }>
-                                <Button fullWidth onClick={ event => window.open('https://git.krews.org/nitro/nitro-react') }>Git</Button>
-                                <Button fullWidth onClick={ event => window.open('https://git.krews.org/nitro/nitro-react/-/issues') }>Bug Report</Button>
+                                <Button fullWidth onClick={ event => window.open('https://github.com/billsonnn/nitro-react') }>Git</Button>
+                                <Button fullWidth onClick={ event => window.open('https://github.com/billsonnn/nitro-react/-/issues') }>Bug Report</Button>
                             </Flex>
                         </Column>
                     </Column>
@@ -39,13 +39,13 @@ export const NitroSystemAlertView: FC<NotificationDefaultAlertViewProps> = props
                 <Column size={ 7 }>
                     <Column alignItems="center" gap={ 0 }>
                         <Text bold fontSize={ 4 }>Flash UI-edit</Text>
-                        <Text small>is created by Robbis</Text>
+                        <Text small>by Robbis edited by Key</Text>
                     </Column>
                     <Column fullWidth gap={ 1 }>
-                        <Button fullWidth variant="success" onClick={ event => window.open('https://discord.gg/j3bqtZKAF3') }>Flash-UI Discord</Button>
+                        <Button fullWidth variant="success" onClick={ event => window.open('https://discord.gg/6fhUCGyjJ7') }>Flash-UI Discord</Button>
                         <Flex gap={ 1 }>
-                            <Button fullWidth onClick={ event => window.open('https://git.krews.org/robbis1111/nitro-react-flashUI') }>Git</Button>
-                            <Button fullWidth onClick={ event => window.open('https://git.krews.org/robbis1111/nitro-react-flashUI/-/issues') }>Bug Report</Button>
+                            <Button fullWidth onClick={ event => window.open('https://github.com/keyberton/nitro-react-flashUI') }>GitHub</Button>
+                            <Button fullWidth onClick={ event => window.open('https://github.com/keyberton/nitro-react-flashUI/-/issues') }>Bug Report</Button>
                         </Flex>
                     </Column>
                 </Column>

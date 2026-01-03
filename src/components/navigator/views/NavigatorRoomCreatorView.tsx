@@ -5,7 +5,7 @@ import { CreateLinkEvent, GetClubMemberLevel, GetConfiguration, IRoomModel, Loca
 import { AutoGrid, Base, Button, Column, Flex, Grid, LayoutInputErrorView, NitroCardContentView, NitroCardHeaderView, NitroCardView, Text } from '../../../common';
 import { RoomCreatorGridItem } from '../../../common/layout/RoomCreatorGridItem';
 import { useNavigator } from '../../../hooks';
-
+import { FilterSelectView } from '../../inventory/views/FilterSelectView';
 export const NavigatorRoomCreatorView: FC<{}> = props =>
 {
     const [ maxVisitorsList, setMaxVisitorsList ] = useState<number[]>(null);
@@ -75,34 +75,32 @@ export const NavigatorRoomCreatorView: FC<{}> = props =>
                     <Grid overflow="hidden">
                         <Column size={ 5 } gap={ 1 } overflow="auto" className="px-2 py-1">
                             <Column gap={ 1 }>
-                                <Text gfbold>{ LocalizeText('navigator.createroom.roomnameinfo') }</Text>
+                                <Text className='ms-1' gfbold>{ LocalizeText('navigator.createroom.roomnameinfo') }</Text>
                                 <input type="text" className={ `room-creator-form ${ (!name || (name.length < 3)) ? 'input-error' : '' }` } maxLength={ 60 } onChange={ event => setName(event.target.value) } placeholder={ LocalizeText('navigator.createroom.roomnameinfo') } />
                                 { (!name || (name.length < 3)) && <LayoutInputErrorView text={ LocalizeText('navigator.createroom.nameerr') } /> }
                             </Column>
                             <Column grow gap={ 1 }>
-                                <Text gfbold>{ LocalizeText('navigator.createroom.roomdescinfo') }</Text>
+                                <Text className='ms-1' gfbold>{ LocalizeText('navigator.createroom.roomdescinfo') }</Text>
                                 <textarea className="flex-grow-1 room-creator-form" maxLength={ 255 } onChange={ event => setDescription(event.target.value) } placeholder={ LocalizeText('navigator.createroom.roomdescinfo') } />
                             </Column>
                             <Column gap={ 1 }>
-                                <Text gfbold>{ LocalizeText('navigator.category') }</Text>
-                                <select className="form-select form-select-sm" onChange={ event => setCategory(Number(event.target.value)) }>
-                                    { categories && (categories.length > 0) && categories.map(category =>
-                                    {
-                                        return <option key={ category.id } value={ category.id }>{ LocalizeText(category.name) }</option>
-                                    }) }
-                                </select>
+                                <Text className='ms-1' gfbold>{ LocalizeText('navigator.category') }</Text>
+                                <FilterSelectView
+                                    options={ categories && (categories.length > 0) ? categories.map(category => ({ value: category.id, label: LocalizeText(category.name) })) : [] }
+                                    value={ category }
+                                    setValue={ (val) => setCategory(Number(val)) }
+                                    fullWidth={ true } />
                             </Column>
                             <Column gap={ 1 }>
-                                <Text gfbold>{ LocalizeText('navigator.maxvisitors') }</Text>
-                                <select className="form-select form-select-sm" onChange={ event => setVisitorsCount(Number(event.target.value)) }>
-                                    { maxVisitorsList && maxVisitorsList.map(value =>
-                                    {
-                                        return <option key={ value } value={ value }>{ value }</option>
-                                    }) }
-                                </select>
+                                <Text className='ms-1' gfbold>{ LocalizeText('navigator.maxvisitors') }</Text>
+                                <FilterSelectView
+                                    options={ (maxVisitorsList && maxVisitorsList.map(value => ({ value, label: value.toString() }))) || [] }
+                                    value={ visitorsCount }
+                                    setValue={ (val) => setVisitorsCount(Number(val)) }
+                                    fullWidth={ true } />
                             </Column>
                             <Column gap={ 1 }>
-                                <Text gfbold>{ LocalizeText('navigator.tradesettings') }</Text>
+                                <Text className='ms-1' gfbold>{ LocalizeText('navigator.tradesettings') }</Text>
                                 <select className="form-select form-select-sm" onChange={ event => setTradesSetting(Number(event.target.value)) }>
                                     <option value="0">{ LocalizeText('navigator.roomsettings.trade_not_allowed') }</option>
                                     <option value="1">{ LocalizeText('navigator.roomsettings.trade_not_with_Controller') }</option>

@@ -9,6 +9,14 @@
     background-repeat: no-repeat;
     background-position: center;
 
+    &.icon-dropdown {
+        background-image: url('@/assets/flash/buttons/select-end.png');
+        width: 20px;
+        height: 15px;
+        margin-bottom: 1px;
+        margin-left: 18px!important;
+    }
+
     &.icon-nitro-light {
         background-image: url('@/assets/images/nitro/nitro-n-light.svg');
     }

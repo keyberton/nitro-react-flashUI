@@ -2,6 +2,7 @@ import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import { GroupItem, LocalizeBadgeName, LocalizeText } from '../../../api';
 import { Flex } from '../../../common';
 import { InventoryFilterType, TAB_BADGES, TAB_FURNITURE } from '../constants';
+import { FilterSelectView } from './FilterSelectView';
 
 export interface InventoryCategoryFilterViewProps
 {
@@ -18,6 +19,8 @@ export const InventoryCategoryFilterView: FC<InventoryCategoryFilterViewProps> =
     const [ filterType, setFilterType ] = useState<string>(InventoryFilterType.EVERYTHING);
     const [ filterPlace, setFilterPlace ] = useState<string>(InventoryFilterType.IN_INVENTORY);
     const [ searchValue, setSearchValue ] = useState('');
+    const [ isTypeOpen, setIsTypeOpen ] = useState(false);
+    const [ isPlaceOpen, setIsPlaceOpen ] = useState(false);
 
     useEffect(() =>
     {
@@ -81,7 +84,7 @@ export const InventoryCategoryFilterView: FC<InventoryCategoryFilterViewProps> =
     }, [ currentTab ]);
     
     return (
-        <Flex className="nitro-inventory-category-filter rounded p-1 mt-n1" style={ { width: currentTab === TAB_BADGES ? '320px' : '100%' } }>
+        <Flex gap={ 2 } className="nitro-inventory-category-filter p-1 rounded" style={ { width: currentTab === TAB_BADGES ? '320px' : '100%' } }>
             <Flex className="position-relative">
                 <Flex fullWidth alignItems="center" position="relative">
                     <input type="text" className="form-control form-control-sm" value={ searchValue } onChange={ event => setSearchValue(event.target.value) } />
@@ -89,18 +92,21 @@ export const InventoryCategoryFilterView: FC<InventoryCategoryFilterViewProps> =
                 { (searchValue && !!searchValue.length) && <i className="icon icon-clear position-absolute cursor-pointer end-1 top-1" onClick={ event => setSearchValue('') } /> }
             </Flex>
             { (currentTab !== TAB_BADGES) &&
-                <>
-                    <Flex alignItems="center" position="relative" className="ms-2">
-                        <select className="form-select form-select-sm" value={ filterType } onChange={ event => setFilterType(event.target.value) }>
-                            { [ InventoryFilterType.EVERYTHING, InventoryFilterType.FLOOR, InventoryFilterType.WALL ].map((type, index) => <option key={ index } value={ type }>{ LocalizeText(type) }</option>) }
-                        </select>
-                    </Flex>
-                    <Flex alignItems="center" position="relative" className="ms-2">
-                        <select className="form-select form-select-sm" value={ filterPlace } onChange={ event => setFilterPlace(event.target.value) } disabled={ currentTab === TAB_FURNITURE }>
-                            { [ InventoryFilterType.ANYWHERE, InventoryFilterType.IN_ROOM, InventoryFilterType.IN_INVENTORY ].map((type, index) => <option key={ index } value={ type }>{ LocalizeText(type) }</option>) }
-                        </select>
-                    </Flex>
-                </>
+                <Flex gap={1}>
+                    <FilterSelectView options={ [
+                            { value: InventoryFilterType.EVERYTHING, label: LocalizeText(InventoryFilterType.EVERYTHING) },
+                            { value: InventoryFilterType.FLOOR, label: LocalizeText(InventoryFilterType.FLOOR) },
+                            { value: InventoryFilterType.WALL, label: LocalizeText(InventoryFilterType.WALL) } ] }
+                        value={ filterType }
+                        setValue={ (val) => setFilterType(String(val)) } />
+                    <FilterSelectView options={ [
+                            { value: InventoryFilterType.ANYWHERE, label: LocalizeText(InventoryFilterType.ANYWHERE) },
+                            { value: InventoryFilterType.IN_ROOM, label: LocalizeText(InventoryFilterType.IN_ROOM) },
+                            { value: InventoryFilterType.IN_INVENTORY, label: LocalizeText(InventoryFilterType.IN_INVENTORY) }] }
+                        value={ filterPlace }
+                        setValue={ (val) => setFilterPlace(String(val)) }
+                        disabled={ currentTab === TAB_FURNITURE } />
+                </Flex>
             }
         </Flex>
     );
