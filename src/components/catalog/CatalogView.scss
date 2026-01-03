@@ -224,6 +224,7 @@
 }
 
 .nitro-catalog-navigation-grid-container {
+    gap: 1px !important;
 
     .nitro-catalog-item {
         font-family: Ubuntu;
@@ -250,10 +251,10 @@
 
     .layout-grid-item {
         font-size: $font-size-sm;
-        height: 24px !important;
         border-color: unset !important;
         border: 0 !important;
         padding: 1px 3px;
+        height: 21px!important;
 
         .svg-inline--fa {
             color: $black;
@@ -267,8 +268,7 @@
 
         &.layout-grid-item.active:not(.clear-bg) {
             background-color: #63c5e9 !important;
-            border-top: 2px solid #82d1ed !important;
-            border-bottom: 2px solid #82d1ed !important;
+            box-shadow: inset 0px 2px 0px #82d1ed, inset 0px -2px 0px #82d1ed, 0 1px #B4B4AE;
             font-family: Ubuntu;
             font-weight: bold;
             color: #fff;
@@ -276,8 +276,7 @@
 
         &:hover {
             background-color: #63c5e9 !important;
-            border-top: 2px solid #82d1ed !important;
-            border-bottom: 2px solid #82d1ed !important;
+            box-shadow: inset 0px 2px 0px #82d1ed, inset 0px -2px 0px #82d1ed, 0 1px #B4B4AE;
             font-family: Ubuntu;
             font-weight: bold;
             color: #fff;

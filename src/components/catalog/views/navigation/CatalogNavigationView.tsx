@@ -20,7 +20,7 @@ export const CatalogNavigationView: FC<CatalogNavigationViewProps> = props =>
         <>
             <CatalogSearchView />
             <Column fullHeight className="nitro-catalog-navigation-grid-container grid-bg w-100 p-1" overflow="hidden">
-                <AutoGrid gap={ 1 } columnCount={ 1 }>
+                <AutoGrid className='gap-01' gap={ 0 } columnCount={ 1 }>
                     { searchResult && (searchResult.filteredNodes.length > 0) && searchResult.filteredNodes.map((n, index) =>
                     {
                         return <CatalogNavigationItemView className='nitro-catalog-item' key={ index } node={ n } />;

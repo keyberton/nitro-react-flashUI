@@ -19,8 +19,8 @@ export const CatalogNavigationItemView: FC<CatalogNavigationItemViewProps> = pro
     
     return (
         <>
-            <LayoutGridItem className={ className } rounded={ false } style={ { paddingLeft: `${ (node.depth -2) * 10 }px` } } gap={ 1 } column={ false } itemActive={ node.isActive } onClick={ event => activateNode(node) }> <CatalogIconView icon={ node.iconId } />
-                <Text grow truncate>{ node.localization }</Text>
+            <LayoutGridItem className={ className } rounded={ false } style={ { paddingLeft: `${ (node.depth -2) * 10 }px` } } gap={ 0 } column={ false } itemActive={ node.isActive } onClick={ event => activateNode(node) }> <CatalogIconView icon={ node.iconId } />
+                <Text className='ms-1' grow truncate>{ node.localization }</Text>
                 { node.isBranch &&
                     <>
                         { node.isOpen && <Base className="icon icon-catalogue-arrows" /> }

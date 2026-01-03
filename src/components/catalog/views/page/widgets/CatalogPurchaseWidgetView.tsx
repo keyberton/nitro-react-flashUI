@@ -1,6 +1,5 @@
-import { PurchaseFromCatalogComposer } from '@nitrots/nitro-renderer';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
-import { CatalogPurchaseState, CreateLinkEvent, DispatchUiEvent, GetClubMemberLevel, LocalStorageKeys, LocalizeText, Offer, SendMessageComposer } from '../../../../../api';
+import { CatalogPurchaseState, CreateLinkEvent, DispatchUiEvent, GetClubMemberLevel, LocalStorageKeys, LocalizeText, Offer } from '../../../../../api';
 import { Button, LayoutLoadingSpinnerView } from '../../../../../common';
 import { CatalogEvent, CatalogInitGiftEvent, CatalogNotEnoughBalanceEvent, CatalogPurchaseConfirmationEvent, CatalogPurchaseFailureEvent, CatalogPurchaseNotAllowedEvent, CatalogPurchaseSoldOutEvent, CatalogPurchasedEvent } from '../../../../../events';
 import { useCatalog, useLocalStorage, usePurse, useUiEvent } from '../../../../../hooks';
@@ -67,6 +66,13 @@ export const CatalogPurchaseWidgetView: FC<CatalogPurchaseWidgetViewProps> = pro
         if(GetClubMemberLevel() < currentOffer.clubLevel)
         {
             CreateLinkEvent('habboUI/open/hccenter');
+
+            return;
+        }
+
+        if(purchaseCallback)
+        {
+            purchaseCallback();
 
             return;
         }
