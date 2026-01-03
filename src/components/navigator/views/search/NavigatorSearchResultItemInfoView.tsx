@@ -8,6 +8,7 @@ import React, { FC, useEffect, useRef, useState } from 'react';
 import { Overlay, Popover } from 'react-bootstrap';
 import
     {
+        GetGroupInformation,
         GetSessionDataManager,
         GetUserProfile,
         LocalizeText,
@@ -107,6 +108,13 @@ export const NavigatorSearchResultItemInfoView: FC<NavigatorSearchResultItemInfo
         if(onToggle) onToggle(e);
     };
 
+    const handleGroupClick = (e: React.MouseEvent<HTMLDivElement>) =>
+    {
+        e.stopPropagation();
+        GetGroupInformation(roomData.habboGroupId);
+        if(onToggle) onToggle(e);
+    }
+
     const handleCloseClick = (e: React.MouseEvent<HTMLDivElement>) =>
     {
         e.preventDefault();
@@ -160,7 +168,7 @@ export const NavigatorSearchResultItemInfoView: FC<NavigatorSearchResultItemInfo
                                     </Flex>
                                 }
                                 { roomData.habboGroupId === 0 ? '' :
-                                    <Flex onClick={ handleCloseClick } gap={ 1 } className="w-50 ms-4 align-items-center">
+                                    <Flex onClick={ handleGroupClick } gap={ 1 } className="w-50 ms-4 align-items-center cursor-pointer">
                                         <i className="icon icon-navigator-room-group"/>
                                         <Text style={ { maxWidth: 150 } } wrap bold underline>{ roomData.groupName }</Text>
                                     </Flex>
