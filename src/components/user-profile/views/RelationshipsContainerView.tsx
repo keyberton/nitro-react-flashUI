@@ -29,7 +29,7 @@ export const RelationshipsContainerView: FC<RelationshipsContainerViewProps> = p
                 </Flex>
                 <Column grow gap={ 0 }>
                     <Flex alignItems="center" justifyContent="between" className="profile-white-bg px-2 py-1 user-relationship">
-                        <Text small underline pointer onClick={ event => (relationshipInfo && (relationshipInfo.randomFriendId >= 1) && GetUserProfile(relationshipInfo.randomFriendId)) }>
+                        <Text fontSize={7} bold={ (!relationshipInfo || (relationshipInfo.friendCount === 0)) } small underline pointer onClick={ event => (relationshipInfo && (relationshipInfo.randomFriendId >= 1) && GetUserProfile(relationshipInfo.randomFriendId)) }>
                             { (!relationshipInfo || (relationshipInfo.friendCount === 0)) &&
                                 LocalizeText('extendedprofile.add.friends') }
                             { (relationshipInfo && (relationshipInfo.friendCount >= 1)) &&
