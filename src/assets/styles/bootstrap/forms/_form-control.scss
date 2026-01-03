@@ -11,6 +11,10 @@
   border-image-source: url("@/assets/flash/boxes/card/input.png");
   background: transparent;
 
+  &.border-black {
+    border-image-source: url("@/assets/flash/boxes/card/input-bblack.png");
+  }
+
   &[type="file"] {
     overflow: hidden; // prevent pseudo element button overlap
 

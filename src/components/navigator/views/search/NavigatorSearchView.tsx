@@ -2,6 +2,7 @@ import { FC, KeyboardEvent, useEffect, useState } from 'react';
 import { INavigatorSearchFilter, LocalizeText, SearchFilterOptions } from '../../../../api';
 import { Flex } from '../../../../common';
 import { useNavigator } from '../../../../hooks';
+import { FilterSelectView } from '../../../inventory/views/FilterSelectView';
 
 export interface NavigatorSearchViewProps
 {
@@ -63,17 +64,18 @@ export const NavigatorSearchView: FC<NavigatorSearchViewProps> = props =>
     }, [ searchResult ]);
 
     return (
-        <Flex fullWidth gap={ 1 } className="mb-2">
-            <Flex shrink>
-                <select className="form-select form-select-sm" value={ searchFilterIndex } onChange={ event => setSearchFilterIndex(parseInt(event.target.value)) }>
-                    { SearchFilterOptions.map((filter, index) =>
-                    {
-                        return <option key={ index } value={ index }>{ LocalizeText('navigator.filter.' + filter.name) }</option>
-                    }) }
-                </select>
+        <Flex fullWidth style={ { gap: 13 } } className="mb-2 ps-1">
+            <Flex className='search-input' shrink>
+                <FilterSelectView
+                    style={ { height: 23 } }
+                    dropdownStyle={ { top: -4 } }
+                    fullWidth
+                    options={ SearchFilterOptions.map((filter, index) => ({ value: index, label: LocalizeText('navigator.filter.' + filter.name) })) }
+                    value={ searchFilterIndex }
+                    setValue={ (val) => setSearchFilterIndex(Number(val)) } />
             </Flex>
-            <Flex fullWidth gap={ 2 }>
-                <input type="text" className="form-control form-control-sm" placeholder={ LocalizeText('navigator.filter.input.placeholder') } value={ searchValue } onChange={ event => setSearchValue(event.target.value) } onKeyDown={ event => handleKeyDown(event) } />
+            <Flex className='pe-5' fullWidth gap={ 2 }>
+                <input type="text" style={ { width: 235 } } className="form-control border-black form-control-sm" placeholder={ LocalizeText('navigator.filter.input.placeholder') } value={ searchValue } onChange={ event => setSearchValue(event.target.value) } onKeyDown={ event => handleKeyDown(event) } />
                 <i className="icon icon-pen navigator-search-button position-absolute" onClick={ processSearch } />
             </Flex>
         </Flex>

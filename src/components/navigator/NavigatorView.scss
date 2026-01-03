@@ -4,6 +4,10 @@
     max-width: $navigator-width;
     min-height: $navigator-min-height;
 
+    .search-input {
+        min-width: 116px;
+    }
+
     &.expanded {
         max-width: $navigator-width + 153px;
         min-width: $navigator-width + 153px;
@@ -291,8 +295,8 @@
 }
 
 .navigator-search-button {
-    right: 10px;
-    top: 11px;
+    right: 51px;
+    top: 13px;
 }
 
 .nitro-navigator-search-saves-result {

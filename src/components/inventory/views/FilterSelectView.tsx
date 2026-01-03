@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from 'react';
+import { CSSProperties, FC, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Base, Flex, Text } from '../../../common';
 
@@ -10,11 +10,13 @@ export interface FilterSelectViewProps
     disabled?: boolean;
     className?: string;
     fullWidth?: boolean;
+    style?: CSSProperties;
+    dropdownStyle?: CSSProperties;
 }
 
 export const FilterSelectView: FC<FilterSelectViewProps> = props =>
 {
-    const { options = [], value = null, setValue = null, disabled = false, className = '', fullWidth = false } = props;
+    const { options = [], value = null, setValue = null, disabled = false, className = '', fullWidth = false, style = {}, dropdownStyle = {} } = props;
     const [ isOpen, setIsOpen ] = useState(false);
     const elementRef = useRef<HTMLDivElement>(null);
     const menuRef = useRef<HTMLUListElement>(null);
@@ -54,8 +56,8 @@ export const FilterSelectView: FC<FilterSelectViewProps> = props =>
     }, [ isOpen ]);
 
     return (
-        <Flex alignItems="center" position="relative" className={ `flash-form-select ${ fullWidth ? 'full-width' : '' } ${ className }` } innerRef={ elementRef } style={ { zIndex: 2000 } }>
-            <Flex className={ `form-select form-select-sm w-full ${ disabled ? 'disabled' : 'cursor-pointer' }` } onClick={ () =>
+        <Flex alignItems="center" position="relative" className={ `flash-form-select ${ fullWidth ? 'w-100' : '' } ${ className }` } innerRef={ elementRef } style={ { zIndex: 2000 } }>
+            <Flex style={ { ...style } } className={ `form-select form-select-sm ${ disabled ? 'disabled' : 'cursor-pointer' }` } onClick={ () =>
             {
                 if(disabled) return;
                 const rect = elementRef.current?.getBoundingClientRect();
@@ -63,20 +65,30 @@ export const FilterSelectView: FC<FilterSelectViewProps> = props =>
                 setIsOpen(prev => !prev);
             } }>
                 <Flex alignItems='center' justifyContent='between' fullWidth>
-                    <Flex className='w-full align-items-center'>
+                    <Flex className='align-items-center'>
                         <Text style={ { maxWidth: 160 } } variant={ disabled ? 'muted' : 'black' } truncate>{ getOptionLabel(value) }</Text>
                     </Flex>
                     <Base className="icon icon-dropdown" />
                 </Flex>
             </Flex>
             { isOpen && anchorRect && createPortal(
-                <ul ref={ menuRef } className="flash-form-select dropdown-menu show" style={ {
-                    position: 'fixed',
-                    top: (anchorRect.top + anchorRect.height - 20),
-                    left: anchorRect.left,
-                    zIndex: 2000,
-                    minWidth: anchorRect.width,
-                } }>
+                <ul ref={ menuRef } className="flash-form-select dropdown-menu show" style={ (() =>
+                {
+                    const parseNum = (v: any) => (typeof v === 'number') ? v : ((typeof v === 'string') ? (parseFloat(v) || 0) : 0);
+                    const extraTop = parseNum((dropdownStyle as any)?.top);
+                    const extraLeft = parseNum((dropdownStyle as any)?.left);
+                    const { top, left, ...rest } = (dropdownStyle as any) || {};
+
+                    return {
+                        position: 'fixed',
+                        top: (anchorRect.top + anchorRect.height - 20) + extraTop,
+                        left: anchorRect.left + extraLeft,
+                        zIndex: (typeof (dropdownStyle as any)?.zIndex === 'number') ? (dropdownStyle as any).zIndex : 2000,
+                        minWidth: 'max-content',
+                        ...(fullWidth ? { width: anchorRect.width } : {}),
+                        ...rest
+                    } as CSSProperties;
+                })() }>
                     { safeOptions.map((option, index) =>
                         <li key={ index } className={ `dropdown-item cursor-pointer ${ value === option.value ? 'active' : '' }` } onClick={ () => { setValue(option.value); setIsOpen(false); } }>
                             { option.label }

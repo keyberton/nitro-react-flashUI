@@ -98,12 +98,14 @@ export const InventoryCategoryFilterView: FC<InventoryCategoryFilterViewProps> =
                             { value: InventoryFilterType.FLOOR, label: LocalizeText(InventoryFilterType.FLOOR) },
                             { value: InventoryFilterType.WALL, label: LocalizeText(InventoryFilterType.WALL) } ] }
                         value={ filterType }
+                        dropdownStyle={ { top: 2 } }
                         setValue={ (val) => setFilterType(String(val)) } />
                     <FilterSelectView options={ [
                             { value: InventoryFilterType.ANYWHERE, label: LocalizeText(InventoryFilterType.ANYWHERE) },
                             { value: InventoryFilterType.IN_ROOM, label: LocalizeText(InventoryFilterType.IN_ROOM) },
                             { value: InventoryFilterType.IN_INVENTORY, label: LocalizeText(InventoryFilterType.IN_INVENTORY) }] }
                         value={ filterPlace }
+                        dropdownStyle={ { top: 2 } }
                         setValue={ (val) => setFilterPlace(String(val)) }
                         disabled={ currentTab === TAB_FURNITURE } />
                 </Flex>
