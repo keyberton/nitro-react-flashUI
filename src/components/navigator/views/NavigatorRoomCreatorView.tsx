@@ -101,11 +101,15 @@ export const NavigatorRoomCreatorView: FC<{}> = props =>
                             </Column>
                             <Column gap={ 1 }>
                                 <Text className='ms-1' gfbold>{ LocalizeText('navigator.tradesettings') }</Text>
-                                <select className="form-select form-select-sm" onChange={ event => setTradesSetting(Number(event.target.value)) }>
-                                    <option value="0">{ LocalizeText('navigator.roomsettings.trade_not_allowed') }</option>
-                                    <option value="1">{ LocalizeText('navigator.roomsettings.trade_not_with_Controller') }</option>
-                                    <option value="2">{ LocalizeText('navigator.roomsettings.trade_allowed') }</option>
-                                </select>
+                                <FilterSelectView
+                                    options={ [
+                                        { value: 0, label: LocalizeText('navigator.roomsettings.trade_not_allowed') },
+                                        { value: 1, label: LocalizeText('navigator.roomsettings.trade_not_with_Controller') },
+                                        { value: 2, label: LocalizeText('navigator.roomsettings.trade_allowed') }
+                                    ] }
+                                    value={ tradesSetting }
+                                    setValue={ (val) => setTradesSetting(Number(val)) }
+                                    fullWidth={ true } />
                             </Column>
                             <Flex gap={ 2 }>
                                 <Button fullWidth className="volter-bold-button" onClick={ createRoom }>{ LocalizeText('navigator.createroom.create') }</Button>

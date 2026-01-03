@@ -55,7 +55,7 @@ export const FilterSelectView: FC<FilterSelectViewProps> = props =>
 
     return (
         <Flex alignItems="center" position="relative" className={ `flash-form-select ${ fullWidth ? 'full-width' : '' } ${ className }` } innerRef={ elementRef } style={ { zIndex: 2000 } }>
-            <Flex className={ `form-select form-select-sm cursor-pointer w-full ${ disabled ? 'disabled' : '' }` } onClick={ () =>
+            <Flex className={ `form-select form-select-sm w-full ${ disabled ? 'disabled' : 'cursor-pointer' }` } onClick={ () =>
             {
                 if(disabled) return;
                 const rect = elementRef.current?.getBoundingClientRect();
@@ -64,7 +64,7 @@ export const FilterSelectView: FC<FilterSelectViewProps> = props =>
             } }>
                 <Flex alignItems='center' justifyContent='between' fullWidth>
                     <Flex className='w-full align-items-center'>
-                        <Text variant={ disabled ? 'muted' : 'black' } noWrap>{ getOptionLabel(value) }</Text>
+                        <Text style={ { maxWidth: 160 } } variant={ disabled ? 'muted' : 'black' } truncate>{ getOptionLabel(value) }</Text>
                     </Flex>
                     <Base className="icon icon-dropdown" />
                 </Flex>
@@ -75,7 +75,7 @@ export const FilterSelectView: FC<FilterSelectViewProps> = props =>
                     top: (anchorRect.top + anchorRect.height - 20),
                     left: anchorRect.left,
                     zIndex: 2000,
-                    width: fullWidth ? anchorRect.width : undefined
+                    minWidth: anchorRect.width,
                 } }>
                     { safeOptions.map((option, index) =>
                         <li key={ index } className={ `dropdown-item cursor-pointer ${ value === option.value ? 'active' : '' }` } onClick={ () => { setValue(option.value); setIsOpen(false); } }>
