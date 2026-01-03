@@ -1,8 +1,8 @@
-import { NavigatorSearchComposer, NavigatorSearchResultList } from '@nitrots/nitro-renderer';
+import { NavigatorSearchComposer, NavigatorSearchResultList, NavigatorSearchSaveComposer } from '@nitrots/nitro-renderer';
 import { FC, useEffect, useState } from 'react';
-import { FaBars, FaMinus, FaPlus, FaTh, FaWindowMaximize, FaWindowRestore } from 'react-icons/fa';
+import { FaMinus, FaPlus } from 'react-icons/fa';
 import { LocalizeText, NavigatorSearchResultViewDisplayMode, SendMessageComposer } from '../../../../api';
-import { AutoGrid, AutoGridProps, Column, Flex, Grid, Text, Base } from '../../../../common';
+import { AutoGrid, AutoGridProps, Base, Column, Flex, Grid, LayoutSearchSavesView } from '../../../../common';
 import { useNavigator } from '../../../../hooks';
 import { NavigatorSearchResultItemView } from './NavigatorSearchResultItemView';
 
@@ -65,15 +65,16 @@ export const NavigatorSearchResultView: FC<NavigatorSearchResultViewProps> = pro
             <Column className="bg-white" gap={ 0 }>
                 <Flex fullWidth alignItems="center" justifyContent="between" className="px-2 py-1">
                     <Flex grow pointer alignItems="center" gap={ 1 } onClick={ event => setIsExtended(prevValue => !prevValue) }>
-                        { isExtended && <FaMinus className="text-secondary fa-icon" /> }
-                        { !isExtended && <FaPlus className="text-secondary fa-icon" /> }
+                        { isExtended && <FaMinus style={{ color: '#7BD4F1' }} className="fa-icon cursor-pointer" /> }
+                        { !isExtended && <FaPlus style={{ color: '#7BD4F1' }} className="fa-icon cursor-pointer" /> }
                         <div className="nav-category"> { LocalizeText(getResultTitle()) }</div>
                     </Flex>
-                    <Flex gap={ 2 }>
-                        { (displayMode === NavigatorSearchResultViewDisplayMode.LIST) && <Base className="icon icon-thumbnail-view" onClick={ toggleDisplayMode } /> }
-                        { (displayMode >= NavigatorSearchResultViewDisplayMode.THUMBNAILS) && <Base className="icon icon-inline-view" onClick={ toggleDisplayMode } /> }
-                        { (searchResult.action > 0) && (searchResult.action === 1) && <Base className="icon icon-show-more" onClick={ showMore } /> }
-                        { (searchResult.action > 0) && (searchResult.action !== 1) && <Base className="icon icon-show-more active" onClick={ showMore } /> }
+                    <Flex alignItems="center" gap={ 2 }>
+                        { (displayMode === NavigatorSearchResultViewDisplayMode.LIST) && <Base className="icon icon-thumbnail-view cursor-pointer" onClick={ toggleDisplayMode } /> }
+                        { (displayMode >= NavigatorSearchResultViewDisplayMode.THUMBNAILS) && <Base className="icon icon-inline-view cursor-pointer" onClick={ toggleDisplayMode } /> }
+                        { (searchResult.action > 0) && (searchResult.action === 1) && <Base className="icon icon-show-more cursor-pointer" onClick={ showMore } /> }
+                        { (searchResult.action > 0) && (searchResult.action !== 1) && <Base className="icon icon-show-more active cursor-pointer" onClick={ showMore } /> }
+                        { (topLevelContext.code !== 'official_view') && <LayoutSearchSavesView title={ LocalizeText('navigator.tooltip.add.saved.search') } onClick={ () => SendMessageComposer(new NavigatorSearchSaveComposer(getResultTitle(), searchResult.data)) } /> }
                     </Flex>
                 </Flex> { isExtended &&
                     <>
