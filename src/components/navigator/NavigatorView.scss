@@ -285,6 +285,22 @@
     width: 360px;
     color: #000;
     image-rendering: pixelated;
+    
+    .event-information {
+        margin-top: 0.5em;
+        background: #EDBA44;
+        color: white;
+        border-radius: 3px;
+        max-height: 60px;
+
+        .text-desc-title {
+            min-width: 130px;
+            max-width: 275px;
+        }
+        .text-desc-desc {
+            max-width: 140px;
+        }
+    }
 
     .room-info-bg {
         border-image-source: url('@/assets/flash/navigator/white_bg.png');

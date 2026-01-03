@@ -9,6 +9,12 @@
     background-repeat: no-repeat;
     background-position: center;
 
+    &.icon-event-promote {
+        background: url('@/assets/flash/navigator/icon-room-promote.png');
+        min-width: 38px;
+        min-height: 38px;
+    }
+
     &.icon-rooms-profile {
         background: url(@/assets/images/profile/icons/rooms.png) no-repeat;
         width: 32px;

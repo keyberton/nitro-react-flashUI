@@ -7,7 +7,7 @@
   max-width: $popover-max-width;
   max-height: $popover-max-height;
   width: $popover-width;
-  height: $popover-height;
+  min-height: $popover-height;
   // Our parent element can be arbitrary since tooltips are by default inserted as a sibling of their target element.
   // So reset our font and text properties to avoid inheriting weird values.
   @include reset-text();
@@ -26,8 +26,7 @@
     width: 12px!important;
     height: 20px!important;
     background-image: url(@/assets/flash/navigator/info_pointer.png);
-
-
+    
     &::before,
     &::after {
       position: absolute;

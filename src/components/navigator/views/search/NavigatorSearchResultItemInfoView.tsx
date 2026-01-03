@@ -28,7 +28,7 @@ import
         Text,
         UserProfileIconView
     } from '../../../../common';
-import { useHelp, useNavigator } from '../../../../hooks';
+import { useHelp, useNavigator, useRoomPromote } from '../../../../hooks';
 
 interface NavigatorSearchResultItemInfoViewProps
 {
@@ -46,6 +46,7 @@ export const NavigatorSearchResultItemInfoView: FC<NavigatorSearchResultItemInfo
     const [ isHovered, setIsHovered ] = useState(false);
     const { navigatorData = null, favouriteRoomIds = [] } = useNavigator();
     const { report = null } = useHelp();
+    const { promoteInformation } = useRoomPromote();
 
     const processAction = (action: string, value?: string) => 
     {
@@ -115,18 +116,27 @@ export const NavigatorSearchResultItemInfoView: FC<NavigatorSearchResultItemInfo
         if(onToggle) onToggle(e);
     }
 
-    const handleCloseClick = (e: React.MouseEvent<HTMLDivElement>) =>
-    {
-        e.preventDefault();
-        e.stopPropagation();
-        if(onToggle) onToggle(e);
-    };
-
     const getTradeModeText = (): string =>
     {
         if(roomData.tradeMode === 0) return LocalizeText('trading.mode.not.allowed');
         if(roomData.tradeMode === 1) return LocalizeText('trading.mode.free');
         return LocalizeText('trading.mode.not.allowed');
+    };
+
+    const getExpirationMinutes = (): number =>
+    {
+        const exp = promoteInformation && promoteInformation.data && promoteInformation.data.expirationDate;
+        if(!exp) return 0;
+
+        let expMs = 0;
+
+        if(exp instanceof Date) expMs = exp.getTime();
+        else if(typeof exp === 'number') expMs = (exp > 1000000000000 ? exp : (exp * 1000));
+        else expMs = new Date(exp as any).getTime();
+
+        const diff = expMs - Date.now();
+        const mins = Math.ceil(diff / 60000);
+        return Math.max(0, mins);
     };
 
     useEffect(() =>
@@ -214,6 +224,22 @@ export const NavigatorSearchResultItemInfoView: FC<NavigatorSearchResultItemInfo
                                     <Text variant="white" className="bg-flash-orange px-1">#{ roomData.tags }</Text>
                                 </Flex>
                             }
+                            { (promoteInformation && promoteInformation.data && (promoteInformation.data.adId !== -1) && (promoteInformation.data.flatId === roomData.roomId)) && (
+                                <Flex alignItems='center' className="event-information p-1 px-2 mx-1" gap={ 2 }>
+                                    <Base className="icon icon-event-promote" />
+                                    <Column gap={0}>
+                                        <Text truncate className='text-desc-title' bold>{LocalizeText('navigator.eventsettings.name')}: { promoteInformation.data.eventName }</Text>
+                                        <Flex fullWidth gap={ 1 }>
+                                            <Text className='text-desc-title' fontSize={ 7 }>{LocalizeText('roomevent.event_description')}:</Text>
+                                            <Text truncate className='text-desc-desc' fontSize={ 7 } dangerouslySetInnerHTML={ { __html: promoteInformation.data.eventDescription.replace(/\n/g, '<br />') } } />
+                                        </Flex>
+                                        <Flex gap={ 1 }>
+                                            <Text fontSize={ 7 }>{LocalizeText('roomad.event.expiration_time')}</Text>
+                                            <Text fontSize={ 7 }>{ getExpirationMinutes() } { LocalizeText('catalog.marketplace.offer.minutes') }</Text>
+                                        </Flex>
+                                    </Column>
+                                </Flex>
+                            ) }
                         </Column>
                     </NitroCardContentView>
                 </Popover>
