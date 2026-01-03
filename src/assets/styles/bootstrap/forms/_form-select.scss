@@ -88,10 +88,8 @@
       }
   }
 
-  .dropdown-menu {
+  &.dropdown-menu {
       z-index: 2;
-      top: -2px !important;
-      width: 100%;
       min-width: 120px;
       font-family: Goldfish;
       border: 1px solid black;
