@@ -9,6 +9,12 @@
     background-repeat: no-repeat;
     background-position: center;
 
+    &.icon-rooms-profile {
+        background: url(@/assets/images/profile/icons/rooms.png) no-repeat;
+        width: 32px;
+        height: 24px;
+    }
+
     &.icon-dropdown {
         background-image: url('@/assets/flash/buttons/select-end.png');
         width: 20px;

@@ -115,7 +115,7 @@ export const UserProfileView: FC<{}> = props =>
                 </Flex>
                 <Flex alignItems="center" className="rooms-button-container px-2 py-1">
                     <Flex alignItems="center" gap={ 1 } onClick={ event => CreateLinkEvent(`navigator/search/hotel_view/owner:${ userProfile.username }`) }>
-                        <i className="icon icon-rooms" />
+                        <i className="icon icon-rooms-profile" />
                         <Text bold small underline pointer>{ LocalizeText('extendedprofile.rooms') }</Text>
                     </Flex>
                 </Flex>
