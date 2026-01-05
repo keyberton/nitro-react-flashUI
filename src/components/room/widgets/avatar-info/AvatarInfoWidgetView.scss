@@ -36,11 +36,15 @@
         max-width: 190px;
         z-index: $infostand-zindex;
 	    pointer-events: auto;
-        border-image-source: url(@/assets/flash/buttons/toggle_bg.png);
+        border-image-source: url(@/assets/flash/infostand/info_bg.png);
         border-image-slice: 6 6 6 6 fill;
         border-image-width: 6px 6px 6px 6px;
         font-family: Goldfish;
         font-size: 9px;
+
+        .size-avatar {
+            min-height: 303px;
+        }
 
         .size-pets {
             font-size: 10px;
