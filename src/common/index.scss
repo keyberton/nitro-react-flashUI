@@ -48,6 +48,8 @@
     border-image-slice:6 6 6 6 fill;
     border-image-width:6px 6px 6px 6px;
     overflow: hidden;
+    width: 135px !important;
+    height: 96px !important;
 
     &.active {
         border-image-source: url(@/assets/flash/navigator/room-creator/room-bg-active.png) !important;

@@ -32,6 +32,9 @@ input[type=number] {
 
 .goldfish-bold {
   font-family: Goldfish-Bold;
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
 }
 
 .font-italic {
