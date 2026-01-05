@@ -233,8 +233,8 @@ export const InventoryFurnitureView: FC<InventoryFurnitureViewProps> = props =>
     
     return (
         <Grid className="mt-n1">
-            <Column size={ 7 } overflow="hidden" style={ { height: `calc(100% - ${ !isTrading ? '34px' : '5px' })` } }>
-                <AutoGrid gap={ 1 } columnCount={ 5 } className={ isTrading ? 'trading-inventory' : '' }>
+            <Column  size={ 7 } overflow="hidden" style={ { height: `calc(100% - ${ !isTrading ? '15px' : '5px' })` } }>
+                <AutoGrid  gap={ 1 } columnCount={ 5 } className={ `overflow-x-hidden ${ isTrading ? 'trading-inventory' : '' }` }>
                     { filteredGroupItems && (filteredGroupItems.length > 0) && filteredGroupItems.map((item, index) => <InventoryFurnitureItemView key={ index } groupItem={ item } isTrading={ isTrading } attemptItemOffer={ (e) => attemptItemOffer(e) } setGroupItem={ (e) => setGroupItem(e) } />) }
                 </AutoGrid>
             </Column>

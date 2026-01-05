@@ -170,7 +170,7 @@ export const NavigatorSearchResultItemInfoView: FC<NavigatorSearchResultItemInfo
                             </Column>
                         </Flex>
                         <Column gap={ 0 } justifyContent="around">
-                            <Flex className="mb-3">
+                            <Flex alignItems='center' className="mb-3">
                                 { roomData.ownerName && roomData.ownerName.length > 0 &&
                                     <Flex onClick={ handleOwnerClick } gap={ 1 } className="w-50 align-items-center">
                                         <UserProfileIconView userId={ roomData.ownerId }/>
