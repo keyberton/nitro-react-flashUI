@@ -35,7 +35,7 @@ export const InventoryBotItemView: FC<PropsWithChildren<{ botItem: IBotItem }>> 
     }
 
     return (
-        <LayoutGridItem itemActive={ (selectedBot === botItem) } itemUnseen={ unseen } onMouseDown={ onMouseEvent } onMouseUp={ onMouseEvent } onMouseOut={ onMouseEvent } onDoubleClick={ onMouseEvent } { ...rest }>
+        <LayoutGridItem className='inventory-items' itemActive={ (selectedBot === botItem) } itemUnseen={ unseen } onMouseDown={ onMouseEvent } onMouseUp={ onMouseEvent } onMouseOut={ onMouseEvent } onDoubleClick={ onMouseEvent } { ...rest }>
             <LayoutAvatarImageView figure={ botItem.botData.figure } direction={ 3 } headOnly={ true } />
             { children }
         </LayoutGridItem>

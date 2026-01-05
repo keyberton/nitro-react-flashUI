@@ -70,7 +70,7 @@ export const InventoryBotView: FC<InventoryBotViewProps> = props =>
     return (
         <Grid>
             <Column size={ 7 } overflow="hidden">
-                <AutoGrid columnCount={ 5 }>
+                <AutoGrid gap={1} columnMinHeight={ 40 } columnMinWidth={40} columnCount={ 5 }>
                     { botItems && (botItems.length > 0) && botItems.map(item => <InventoryBotItemView key={ item.botData.id } botItem={ item } />) }
                 </AutoGrid>
             </Column>
@@ -82,7 +82,7 @@ export const InventoryBotView: FC<InventoryBotViewProps> = props =>
                     <Column grow justifyContent="between" gap={ 2 }>
                         <Text grow truncate>{ selectedBot.botData.name }</Text>
                         { !!roomSession &&
-                            <Button onClick={ event => attemptBotPlacement(selectedBot) }>
+                            <Button className='p-0 me-5' onClick={ event => attemptBotPlacement(selectedBot) }>
                                 { LocalizeText('inventory.furni.placetoroom') }
                             </Button> }
                     </Column> }

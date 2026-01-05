@@ -120,17 +120,17 @@ export const InventoryView: FC<{}> = props =>
         <NitroCardView uniqueKey={ 'inventory' } className={ `${ isTrading ? 'nitro-inventory trading no-resize' : 'nitro-inventory' }` } theme={ isTrading ? 'primary' : '' }>
             <NitroCardHeaderView headerText={ LocalizeText('inventory.title') } onCloseClick={ onClose } />
             <>
-                <NitroCardTabsView>
-                    { TABS.map((name, index) =>
-                    {
-                        return (
-                            <NitroCardTabsItemView key={ index } isActive={ (currentTab === name) } onClick={ event => setCurrentTab(name) } count={ getCount(UNSEEN_CATEGORIES[index]) }>
-                                { LocalizeText(name) }
-                            </NitroCardTabsItemView>
-                        );
-                    }) }
-                </NitroCardTabsView>
-                <NitroCardContentView overflow="hidden">
+                <NitroCardContentView className='pt-0' overflow="hidden">    
+                    <NitroCardTabsView special>
+                        { TABS.map((name, index) =>
+                        {
+                            return (
+                                <NitroCardTabsItemView key={ index } isActive={ (currentTab === name) } onClick={ event => setCurrentTab(name) } count={ getCount(UNSEEN_CATEGORIES[index]) }>
+                                    { LocalizeText(name) }
+                                </NitroCardTabsItemView>
+                            );
+                        }) }
+                    </NitroCardTabsView>
                     { (currentTab !== TAB_PETS && currentTab !== TAB_BOTS) && <InventoryCategoryFilterView currentTab={ currentTab } groupItems={ groupItems } setGroupItems={ setFilteredGroupItems } badgeCodes={ badgeCodes } setBadgeCodes={ setFilteredBadgeCodes } /> }
                     { (currentTab === TAB_FURNITURE ) &&
                             <InventoryFurnitureView roomSession={ roomSession } roomPreviewer={ roomPreviewer } isTrading={ isTrading } filteredGroupItems={ filteredGroupItems } /> }

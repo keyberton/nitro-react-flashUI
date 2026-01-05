@@ -671,6 +671,11 @@ $nitro-card-tabs-height: 35px;
     border-bottom: $nav-tabs-border-width solid #000;
     border-left: 1px solid #000;
     border-right: 1px solid #000;
+
+    &.special {
+        border-left: 0;
+        border-right: 0;
+    }
 }
 
 .nav-tabs {

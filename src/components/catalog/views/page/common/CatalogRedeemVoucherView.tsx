@@ -1,6 +1,5 @@
 import { RedeemVoucherMessageComposer, VoucherRedeemErrorMessageEvent, VoucherRedeemOkMessageEvent } from '@nitrots/nitro-renderer';
 import { FC, useState } from 'react';
-import { FaTag } from 'react-icons/fa';
 import { LocalizeText, SendMessageComposer } from '../../../../../api';
 import { Button, Column, Flex, Text } from '../../../../../common';
 import { useMessageEvent, useNotification } from '../../../../../hooks';
@@ -50,8 +49,8 @@ export const CatalogRedeemVoucherView: FC<CatalogRedeemVoucherViewProps> = props
     });
 
     return (
-        <Column className="voucher-box p-2" gap={ 1 }>
-            <Text className="px-1">{ text }</Text>
+        <Column className="voucher-box p-2 pt-1" gap={ 1 }>
+            <Text className="px-1">{ text === '' ? LocalizeText('shop.redeem.button') : text }</Text>
             <Flex className="voucher-form" gap={ 5 }>
                 <input type="text" className="form-control form-control-sm" value={ voucher } onChange={ event => setVoucher(event.target.value) } />
                 <Button variant="primary" onClick={ redeemVoucher } disabled={ isWaiting }>
