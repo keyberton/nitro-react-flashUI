@@ -279,6 +279,66 @@
         width: 275px;
     }
 
+    ::-webkit-scrollbar {
+        width: 17px;
+
+        &:horizontal {
+            height: 17px;
+        }
+
+        &:not(:horizontal) {
+            width: 17px;
+        }
+    }
+
+    ::-webkit-scrollbar-track {
+        background-image: url("@/assets/flash/scrollbar/secondary_track.png");
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-image: url("@/assets/flash/scrollbar/secondary_track_thumb1.png"), url("@/assets/flash/scrollbar/secondary_track_thumb2.png"), url("@/assets/flash/scrollbar/secondary_track_thumb3.png");
+        background-repeat: no-repeat, no-repeat, repeat-y;
+        background-position: 0 0, bottom, 0 7px;
+
+        &:hover {
+            background-image: url("@/assets/flash/scrollbar/secondary_track_thumb1.png"), url("@/assets/flash/scrollbar/secondary_track_thumb2.png"), url("@/assets/flash/scrollbar/secondary_track_thumb3.png");
+        }
+
+        &:active {
+            background-image: url("@/assets/flash/scrollbar/secondary_track_thumb1_active.png"), url("@/assets/flash/scrollbar/secondary_track_thumb2_active.png"), url("@/assets/flash/scrollbar/secondary_track_thumb3_active.png");
+        }
+    }
+
+
+    ::-webkit-scrollbar-button {
+        &:vertical {
+            &:start {
+                &:decrement {
+                    height: 16px;
+                    display: block;
+                    background-image: url(@/assets/flash/scrollbar/secondary_tracker.png);
+
+                    &:active {
+                        background-image: url(@/assets/flash/scrollbar/secondary_tracker_active.png);
+                    }
+                }
+            }
+
+            &:end {
+                &:increment {
+                    background-image: url(@/assets/flash/scrollbar/secondary_tracker.png);
+                    background-position-y: 16px;
+                    height: 16px;
+                    display: block;
+
+                    &:active {
+                        background-image: url(@/assets/flash/scrollbar/secondary_tracker_active.png);
+                    }
+                }
+            }
+        }
+    }
+
 }
 
 .room-info {
