@@ -73,7 +73,7 @@ export const NavigatorRoomCreatorView: FC<{}> = props =>
             <NitroCardContentView>
                 <Column overflow="hidden">
                     <Flex overflow="hidden">
-                        <Column gap={ 3 } overflow="hidden" className="p-2 w-50 pt-0 pe-3">
+                        <Column gap={ 3 } overflow="hidden" className="p-2 navigator-selects pt-0 pe-3">
                             <Column gap={ 1 }>
                                 <Text className='ms-1' gfbold>{ LocalizeText('navigator.createroom.roomnameinfo') }</Text>
                                 <input type="text" className={ `room-creator-form ${ (!name || (name.length < 3)) ? 'input-error' : '' }` } maxLength={ 60 } onChange={ event => setName(event.target.value) } placeholder={ LocalizeText('navigator.createroom.roomnameinfo') } />
