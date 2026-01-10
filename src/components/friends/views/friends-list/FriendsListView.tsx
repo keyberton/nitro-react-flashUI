@@ -165,7 +165,7 @@ export const FriendsListView: FC<{}> = props =>
                                 <Column className="position-absolute bottom-0 w-100">
                                     <Flex gap={ 1 } className="friend-active-tab p-1">
                                         <div className={ `friend-follow-icon ${ selectedFriendsIds && selectedFriendsIds.length === 0 ? '' : 'active' }` } onClick={ selectedFriendsIds && selectedFriendsIds.length === 0 ? null : () => setShowRoomInvite(true) } onMouseEnter={ selectedFriendsIds && selectedFriendsIds.length === 0 ? null : () => setShowHoverText(LocalizeText('friendlist.tip.invite')) } onMouseLeave={ selectedFriendsIds && selectedFriendsIds.length === 0 ? null : () => setShowHoverText('') } />
-                                        <div className={ `friend-profile-icon ${ selectedFriendsIds && selectedFriendsIds.length === 0 ? '' : 'active' }` } onMouseEnter={ selectedFriendsIds && selectedFriendsIds.length === 0 ? null : () => setShowHoverText(LocalizeText('friendlist.tip.home')) } onMouseLeave={ selectedFriendsIds && selectedFriendsIds.length === 0 ? null : () => setShowHoverText('') } />
+                                        <div className={ `friend-profile-icon d-none d-sm-block ${ selectedFriendsIds && selectedFriendsIds.length === 0 ? '' : 'active' }` } onMouseEnter={ selectedFriendsIds && selectedFriendsIds.length === 0 ? null : () => setShowHoverText(LocalizeText('friendlist.tip.home')) } onMouseLeave={ selectedFriendsIds && selectedFriendsIds.length === 0 ? null : () => setShowHoverText('') } />
                                         { !showSearchInput && <div className={ 'friends-search-icon active' } onClick={ () => setShowSearchInput(true) } /> }
                                         { showSearchInput && 
                                             <div className="friends-input-container align-items-center rounded h-full ">
@@ -175,7 +175,7 @@ export const FriendsListView: FC<{}> = props =>
                                                 <i className="close-saarch" onClick={ () => setShowSearchInput(false) } />
                                             </div>
                                         }
-                                        <div className={ `friend-delete-icon ${ selectedFriendsIds && selectedFriendsIds.length === 0 ? '' : 'active' }` } onClick={ selectedFriendsIds && selectedFriendsIds.length === 0 ? null : () => setShowRemoveFriendsConfirmation(true) } onMouseEnter={ selectedFriendsIds && selectedFriendsIds.length === 0 ? null : () => setShowHoverText(LocalizeText('friendlist.tip.remove')) } onMouseLeave={ selectedFriendsIds && selectedFriendsIds.length === 0 ? null : () => setShowHoverText('') } />
+                                        <div className={ `friend-delete-icon d-none d-md-block ${ selectedFriendsIds && selectedFriendsIds.length === 0 ? '' : 'active' }` } onClick={ selectedFriendsIds && selectedFriendsIds.length === 0 ? null : () => setShowRemoveFriendsConfirmation(true) } onMouseEnter={ selectedFriendsIds && selectedFriendsIds.length === 0 ? null : () => setShowHoverText(LocalizeText('friendlist.tip.remove')) } onMouseLeave={ selectedFriendsIds && selectedFriendsIds.length === 0 ? null : () => setShowHoverText('') } />
                                     </Flex>
                                 </Column>
                             </Column>

@@ -120,7 +120,7 @@ export const InfoStandWidgetUserView: FC<InfoStandWidgetUserViewProps> = props =
     if(!avatarInfo) return null;
 
     return (
-        <Column className="nitro-infostand  rounded">
+        <Column className="nitro-infostand avatar-stand rounded">
             <Column overflow="visible" className="container-fluid size-avatar content-area" gap={ 1 }>
                 <Column gap={ 1 }>
                     <Flex alignItems="center" justifyContent="between">
@@ -137,8 +137,8 @@ export const InfoStandWidgetUserView: FC<InfoStandWidgetUserViewProps> = props =
                         <Column fullWidth className="body-image infostand-thumb-bg" onClick={ event => GetUserProfile(avatarInfo.webID) }>
                             <LayoutAvatarImageView figure={ avatarInfo.figure } direction={ 4 } />
                         </Column>
-                        <Column grow alignItems="center" gap={ 0 }>
-                            <Flex gap={ 1 }>
+                        <Column grow alignItems="start" gap={ 0 }>
+                            <Flex>
                                 <Base className="badge-image">
                                     { avatarInfo.badges[0] && <LayoutBadgeImageView badgeCode={ avatarInfo.badges[0] } showInfo={ true } /> }
                                 </Base>
@@ -147,7 +147,7 @@ export const InfoStandWidgetUserView: FC<InfoStandWidgetUserViewProps> = props =
                                         <LayoutBadgeImageView badgeCode={ avatarInfo.groupBadgeId } isGroup={ true } showInfo={ true } customTitle={ avatarInfo.groupName } /> }
                                 </Base>
                             </Flex>
-                            <Flex gap={ 1 }>
+                            <Flex>
                                 <Base className="badge-image">
                                     { avatarInfo.badges[1] && <LayoutBadgeImageView badgeCode={ avatarInfo.badges[1] } showInfo={ true } /> }
                                 </Base>
@@ -155,7 +155,7 @@ export const InfoStandWidgetUserView: FC<InfoStandWidgetUserViewProps> = props =
                                     { avatarInfo.badges[2] && <LayoutBadgeImageView badgeCode={ avatarInfo.badges[2] } showInfo={ true } /> }
                                 </Base>
                             </Flex>
-                            <Flex gap={ 1 }>
+                            <Flex>
                                 <Base className="badge-image">
                                     { avatarInfo.badges[3] && <LayoutBadgeImageView badgeCode={ avatarInfo.badges[3] } showInfo={ true } /> }
                                 </Base>

@@ -30,6 +30,10 @@
     z-index: $infostand-zindex;
     color: $white;
 
+    hr {
+        background-color: #333333;
+    }
+
     .nitro-infostand {
         position: relative;
         min-width: 190px;
@@ -41,6 +45,10 @@
         border-image-width: 6px 6px 6px 6px;
         font-family: Goldfish;
         font-size: 9px;
+
+        .avatar-stand {
+            min-height: 303px!important;
+        }
 
         .size-avatar {
             min-height: 303px;

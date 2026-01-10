@@ -162,6 +162,14 @@
     }
 
     #toolbar-chat-input-container {
+        position: relative;
+        bottom: 0px;
+        right: 10px;
+
+        @media (max-width: 1470px) {
+            bottom: 55px;
+            right: 0px;
+        }
 
         @include media-breakpoint-down(sm) {
             width: 0px;

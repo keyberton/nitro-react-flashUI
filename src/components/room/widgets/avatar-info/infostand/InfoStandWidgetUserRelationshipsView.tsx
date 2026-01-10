@@ -20,10 +20,21 @@ export const InfoStandWidgetUserRelationshipsView: FC<InfoStandWidgetUserRelatio
     const RelationshipComponent = ({ type }: InfoStandWidgetUserRelationshipsRelationshipViewProps) =>
     {
         const relationshipInfo = (relationships && relationships.relationshipStatusMap.hasKey(type)) ? relationships.relationshipStatusMap.getValue(type) : null;
-
-        if(!relationshipInfo || !relationshipInfo.friendCount) return null;
-
         const relationshipName = RelationshipStatusEnum.RELATIONSHIP_NAMES[type].toLocaleLowerCase();
+
+        if(!relationshipInfo || !relationshipInfo.friendCount)
+        {
+            return (
+                <Flex alignItems="center" gap={ 1 } style={{ visibility: 'hidden' }}>
+                    <i className={ `nitro-friends-spritesheet icon-${ relationshipName }` } />
+                    <Flex alignItems="center" gap={ 0 }>
+                        <Text gfbold variant="white">
+                            <u>Placeholder</u>
+                        </Text>
+                    </Flex>
+                </Flex>
+            );
+        }
 
         return (
             <Flex alignItems="center" gap={ 1 }>
