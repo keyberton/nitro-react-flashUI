@@ -30,14 +30,15 @@ export const InfoStandWidgetUserView: FC<InfoStandWidgetUserViewProps> = props =
         setIsEditingMotto(false);
     }
 
-    const onMottoKeyDown = (event: KeyboardEvent<HTMLInputElement>) =>
+    const onMottoKeyDown = (event: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     {
         event.stopPropagation();
 
         switch(event.key)
         {
             case 'Enter':
-                saveMotto((event.target as HTMLInputElement).value);
+                event.preventDefault();
+                saveMotto((event.currentTarget as (HTMLInputElement | HTMLTextAreaElement)).value);
                 return;
         }
     }
@@ -124,7 +125,7 @@ export const InfoStandWidgetUserView: FC<InfoStandWidgetUserViewProps> = props =
             <Column overflow="visible" className="container-fluid size-avatar content-area" gap={ 1 }>
                 <Column gap={ 1 }>
                     <Flex alignItems="center" justifyContent="between">
-                        <Flex alignItems="center" gap={ 1 }>
+                        <Flex alignItems="start" gap={ 1 }>
                             <i className="icon icon-profile-house cursor-pointer" onClick={ event => GetUserProfile(avatarInfo.webID) }/>
                             <Text gfbold variant="white" className="infostand-name" title={ LocalizeText('guide.help.common.profile.tooltip') } onClick={ event => GetUserProfile(avatarInfo.webID) }>{ avatarInfo.name }</Text>
                         </Flex>
@@ -168,19 +169,19 @@ export const InfoStandWidgetUserView: FC<InfoStandWidgetUserViewProps> = props =
                     <hr className="m-0" />
                 </Column>
                 <Column gap={ 1 }>
-                    <Flex alignItems="center" className="infostand-thumb-bg py-1 px-2">
+                    <Flex alignItems="center" className="infostand-thumb-bg motto-container px-2">
                         { (avatarInfo.type !== AvatarInfoUser.OWN_USER) &&
-                            <Flex grow alignItems="center" className="motto-content">
-                                <Text fullWidth pointer wrap textBreak variant="white">{ motto }</Text>
+                            <Flex grow alignItems="start" className="motto-content">
+                                <Text fullWidth pointer wrap textBreak align="start" variant="white">{ motto }</Text>
                             </Flex> }
                         { avatarInfo.type === AvatarInfoUser.OWN_USER &&
                             <Flex grow alignItems="center" gap={ 2 }>
                                 <Base className="icon pencil-icon" />
-                                <Flex grow alignItems="center" className="motto-content">
+                                <Flex grow alignItems="start" className="motto-content">
                                     { !isEditingMotto &&
-                                        <Text fullWidth wrap textBreak className={ motto?.length === 0 ? 'color-motto' : 'text-white' } onClick={ event => setIsEditingMotto(true) }>{ motto?.length === 0 ? LocalizeText('infostand.motto.change') : motto }&nbsp;</Text> }
+                                        <Text fullWidth wrap textBreak align="start" className={ motto?.length === 0 ? 'color-motto' : 'text-white' } onClick={ event => setIsEditingMotto(true) }>{ motto?.length === 0 ? LocalizeText('infostand.motto.change') : motto }&nbsp;</Text> }
                                     { isEditingMotto &&
-                                        <input type="text" className="motto-input" maxLength={ GetConfiguration<number>('motto.max.length', 38) } value={ motto } onChange={ event => setMotto(event.target.value) } onKeyDown={ onMottoKeyDown } autoFocus={ true } /> }
+                                        <textarea className="motto-input" rows={ 1 } maxLength={ GetConfiguration<number>('motto.max.length', 38) } value={ motto } onChange={ event => setMotto(event.target.value) } onKeyDown={ onMottoKeyDown } autoFocus={ true } /> }
                                 </Flex>
                             </Flex> }
                     </Flex>
@@ -200,7 +201,7 @@ export const InfoStandWidgetUserView: FC<InfoStandWidgetUserViewProps> = props =
                 <Column gap={ 1 } className="mt-1">
                     <InfoStandWidgetUserRelationshipsView relationships={ relationships } />
                 </Column>
-                { GetConfiguration('user.tags.enabled') &&
+                { GetConfiguration('user.tags.enabled') && GetSessionDataManager().tags.length > 1 &&
                     <Column gap={ 1 } className="mt-1">
                         <InfoStandWidgetUserTagsView tags={ GetSessionDataManager().tags } />
                     </Column>

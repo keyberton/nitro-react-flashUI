@@ -65,6 +65,11 @@
             font-size: 9px;
         }
 
+        .motto-container {
+            min-height: 27px;
+            max-height: 28px;
+        }
+
         .infostand-thumb-bg {
             border-image-source: url(@/assets/flash/infostand/thumb_bg.png);
             border-image-slice: 6 6 6 6 fill;
@@ -176,6 +181,11 @@
             min-height: 18px;
             font-family: Goldfish;
             cursor: text;
+            align-items: flex-start;
+            justify-content: flex-start;
+            text-align: left;
+            direction: ltr;
+            width: 100%;
         }
 
         .color-motto {
@@ -184,7 +194,8 @@
 
         .motto-input {
             width: 100%;
-            height: 100%;
+            min-height: 26px;
+            height: auto;
             font-size: 12px;
             padding: 0;
             outline: 0;
@@ -194,6 +205,11 @@
             background: transparent;
             resize: none;
             font-size: 9px;
+            overflow: hidden;
+            text-align: left;
+            direction: ltr;
+            white-space: pre-wrap;
+            word-break: break-word;
 
             &:focus {
                 font-style: italic;
@@ -229,6 +245,7 @@
 
 .infostand-name {
     cursor: pointer;
+    margin-left: 8px;
 
     &:hover {
         color: #91c2ff !important;
