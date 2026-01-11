@@ -193,12 +193,12 @@ export const InfoStandWidgetUserView: FC<InfoStandWidgetUserViewProps> = props =
                     { (avatarInfo.carryItem > 0) &&
                         <>
                             <hr className="m-0" />
-                            <Text gfbold variant="white" wrap>
+                            <Text variant="white" wrap>
                                 { LocalizeText('infostand.text.handitem', [ 'item' ], [ LocalizeText('handitem' + avatarInfo.carryItem) ]) }
                             </Text>
                         </> }
                 </Column>
-                <Column gap={ 1 } className="mt-1">
+                <Column gap={ 1 }>
                     <InfoStandWidgetUserRelationshipsView relationships={ relationships } />
                 </Column>
                 { GetConfiguration('user.tags.enabled') && GetSessionDataManager().tags.length > 1 &&

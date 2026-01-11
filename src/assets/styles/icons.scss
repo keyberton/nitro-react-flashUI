@@ -733,11 +733,14 @@
     &.icon-context-menu-arrow-down {
         background: url(@/assets/flash/room/context_menu_arrow.png);
         background-repeat: no-repeat;
-        width: 10px;
-        height: 5px;
+        background-position: center;
+        width: 100px;
+        height: 15px;
 
         &:hover {
             background: url(@/assets/flash/room/context_menu_arrow_hover.png);
+            background-repeat: no-repeat;
+            background-position: center;
         }
     }
 

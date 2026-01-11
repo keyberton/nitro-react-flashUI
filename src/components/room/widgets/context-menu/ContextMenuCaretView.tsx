@@ -1,5 +1,4 @@
 import { FC, useMemo } from 'react';
-import { FaCaretDown, FaCaretUp } from 'react-icons/fa';
 import { Flex, FlexProps } from '../../../../common';
 
 interface CaretViewProps extends FlexProps
@@ -20,6 +19,6 @@ export const ContextMenuCaretView: FC<CaretViewProps> = props =>
     }, [ classNames ]);
 
     return <Flex justifyContent={ justifyContent } alignItems={ alignItems } classNames={ getClassNames } { ...rest }>
-        <i className={!collapsed ? 'icon icon-context-menu-arrow-down' : 'icon icon-context-menu-arrow-up' } />
+        <i className={!collapsed ? 'cursor-pointer icon icon-context-menu-arrow-down' : 'cursor-pointer icon icon-context-menu-arrow-up' } />
     </Flex>
 }

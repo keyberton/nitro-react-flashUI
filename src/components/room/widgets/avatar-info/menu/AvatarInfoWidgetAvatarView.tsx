@@ -201,8 +201,8 @@ export const AvatarInfoWidgetAvatarView: FC<AvatarInfoWidgetAvatarViewProps> = p
     }, [ avatarInfo ]);
 
     return (
-        <ContextMenuView objectId={ avatarInfo.roomIndex } category={ RoomObjectCategory.UNIT } userType={ avatarInfo.userType } onClose={ onClose } collapsable={ true }>
-            <ContextMenuHeaderView className="cursor-pointer" title={ LocalizeText('guide.help.common.profile.tooltip') } onClick={ event => GetUserProfile(avatarInfo.webID) }>
+        <ContextMenuView className='other-player' objectId={ avatarInfo.roomIndex } category={ RoomObjectCategory.UNIT } userType={ avatarInfo.userType } onClose={ onClose } collapsable={ true }>
+            <ContextMenuHeaderView className="not-own-menu cursor-pointer" title={ LocalizeText('guide.help.common.profile.tooltip') } onClick={ event => GetUserProfile(avatarInfo.webID) }>
                 { avatarInfo.name }
             </ContextMenuHeaderView>
             { (mode === MODE_NORMAL) &&

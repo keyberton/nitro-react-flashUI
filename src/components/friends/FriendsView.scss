@@ -204,6 +204,10 @@
             margin-bottom: 26px;
         }
 
+        &.new-friend {
+            border-image-source: url(@/assets/flash/toolbar/newfriend-bg.png)!important;
+        }
+
         &.find-friends {
             border-image-source: url(@/assets/flash/toolbar/findfriend-bg.png);
             border-image-slice:17 17 17 17 fill;
@@ -228,7 +232,7 @@
             }
 
             .friend-bar-text {
-                padding-top: 4px;
+                padding-top: 5px;
             }
         }
 
@@ -237,7 +241,7 @@
         }
 
         .friend-bar-text {
-            padding-top: 4px;
+            padding-top: 5px;
             overflow: hidden;
             text-overflow: ellipsis;
         //    white-space: nowrap;

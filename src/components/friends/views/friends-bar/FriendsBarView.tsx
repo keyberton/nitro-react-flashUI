@@ -1,4 +1,4 @@
-import { FC, useEffect, useMemo, useState } from 'react';
+import { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { MessengerFriend } from '../../../../api';
 import { Flex } from '../../../../common';
 import { FriendBarItemView } from './FriendBarItemView';
@@ -14,9 +14,13 @@ const getMaxDisplayCount = (viewportWidth: number) =>
 
 export const FriendBarView: FC<{ onlineFriends: MessengerFriend[] }> = props =>
 {
-    const { onlineFriends = null } = props;
+    const { onlineFriends = [] } = props;
     const [ indexOffset, setIndexOffset ] = useState(0);
     const [ maxDisplayCount, setMaxDisplayCount ] = useState(() => getMaxDisplayCount(window.innerWidth));
+    const [ newFriendIds, setNewFriendIds ] = useState<Set<number>>(() => new Set());
+    const lastFriendIds = useRef<Set<number>>(null);
+
+    const onlineFriendsKey = onlineFriends.map(friend => friend?.id).join(',');
 
     useEffect(() =>
     {
@@ -25,6 +29,48 @@ export const FriendBarView: FC<{ onlineFriends: MessengerFriend[] }> = props =>
         window.addEventListener('resize', onResize);
 
         return () => window.removeEventListener('resize', onResize);
+    }, []);
+
+    useEffect(() =>
+    {
+        const currentIds = new Set<number>(onlineFriends.filter(friend => (friend?.id > 0)).map(friend => friend.id));
+        const previousIds = lastFriendIds.current;
+
+        setNewFriendIds(prevValue =>
+        {
+            const nextValue = new Set<number>();
+
+            for(const friendId of prevValue)
+            {
+                if(currentIds.has(friendId)) nextValue.add(friendId);
+            }
+
+            if(previousIds)
+            {
+                for(const friendId of currentIds)
+                {
+                    if(!previousIds.has(friendId)) nextValue.add(friendId);
+                }
+            }
+
+            return nextValue;
+        });
+
+        lastFriendIds.current = currentIds;
+    }, [ onlineFriendsKey ]);
+
+    const clearNewFriend = useCallback((friendId: number) =>
+    {
+        setNewFriendIds(prevValue =>
+        {
+            if(!prevValue.has(friendId)) return prevValue;
+
+            const nextValue = new Set(prevValue);
+
+            nextValue.delete(friendId);
+
+            return nextValue;
+        });
     }, []);
 
     useEffect(() =>
@@ -53,7 +99,7 @@ export const FriendBarView: FC<{ onlineFriends: MessengerFriend[] }> = props =>
     return (
         <Flex alignItems="center" className="friend-bar">
             <button className="friend-bar-button left" disabled={ (indexOffset <= 0) } onClick={ event => setIndexOffset(indexOffset - 1) } />
-            { friendsToRender.map((friend, i) => <FriendBarItemView key={ i } friend={ friend } />) }
+            { friendsToRender.map((friend, i) => <FriendBarItemView key={ friend ? friend.id : i } friend={ friend } isNewFriend={ friend ? newFriendIds.has(friend.id) : false } clearNewFriend={ clearNewFriend } />) }
             <button className="friend-bar-button right" disabled={ !((onlineFriends.length > maxDisplayCount) && ((indexOffset + maxDisplayCount) <= (onlineFriends.length - 1))) } onClick={ event => setIndexOffset(indexOffset + 1) } />
         </Flex>
     );

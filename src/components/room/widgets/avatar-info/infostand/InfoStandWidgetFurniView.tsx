@@ -352,15 +352,15 @@ export const InfoStandWidgetFurniView: FC<InfoStandWidgetFurniViewProps> = props
                         </Flex>
                         <hr className="m-0" />
                     </Column>
-                    <Column gap={ 1 }>
+                    {/*<Column gap={ 1 }>
                         <Text fullWidth wrap textBreak variant="white">{ avatarInfo.description }</Text>
                         <hr className="m-0" />
-                    </Column>
+                    </Column>*/}
                     <Column gap={ 1 }>
-                        <Flex alignItems="center" gap={ 1 }>
+                        <Flex alignItems="start" gap={ 2 }>
                             <UserProfileIconView userId={ avatarInfo.ownerId } />
                             <Text variant="white" wrap>
-                                { LocalizeText('furni.owner', [ 'name' ], [ avatarInfo.ownerName ]) }
+                                { avatarInfo.ownerName }
                             </Text>
                         </Flex>
                         { (avatarInfo.purchaseOfferId > 0) &&

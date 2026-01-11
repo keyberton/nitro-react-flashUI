@@ -4,6 +4,21 @@
     z-index: $context-menu-zindex;
     pointer-events: all;
 
+    &.other-player {
+        .list-item {
+            &:not(.disabled):hover {
+                background: repeating-linear-gradient(#2C2926, #2C2926 50%, #292623 50%, #292623 100%)!important;
+
+                &:focus,
+                &:active {
+                    background: repeating-linear-gradient(#272422, #272422 50%, #1C1A18 50%, #1C1A18 100%)!important;
+                    border-left-color: #1C1A18!important;
+                    border-right-color: #1C1A18!important;
+                }
+            }
+        }
+    }
+
     &.bot-chat {
         max-width: 250px;
         width: 250px;
@@ -92,9 +107,13 @@
         font-weight: bold;
 
         &:hover {
-            color: #47a3cc;
+            color: #90C1FE;
         }
+        
+        &.not-own-menu {
+            min-width: 140px;
         }
+    }
 
     &.menu-hidden {
         .menu-footer {
@@ -154,7 +173,14 @@
             font-size: 11px;
 
             &:not(.disabled):hover {
-                background: repeating-linear-gradient(#60a1c8, #60a1c8 50%, #5994b8 50%, #5994b8 100%);
+                background: repeating-linear-gradient(#47A3CC, #47A3CC 50%, #4296BC 50%, #4296BC 100%);
+
+                &:focus,
+                &:active {
+                    background: repeating-linear-gradient(#3F90B4, #3F90B4 50%, #2D6882 50%, #2D6882 100%);
+                    border-right: 1px solid #2D6882;
+                    border-left: 1px solid #2D6882;
+                }
             }
 
             .fa-icon,

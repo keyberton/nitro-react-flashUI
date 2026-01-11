@@ -4,9 +4,16 @@ import { GetUserProfile, LocalizeText, MessengerFriend, OpenMessengerChat, SendM
 import { Base, Button, LayoutAvatarImageView, LayoutBadgeImageView } from '../../../../common';
 import { useFriends } from '../../../../hooks';
 
-export const FriendBarItemView: FC<{ friend: MessengerFriend }> = props =>
+interface FriendBarItemViewProps
 {
-    const { friend = null } = props;
+    friend: MessengerFriend;
+    isNewFriend?: boolean;
+    clearNewFriend?: (friendId: number) => void;
+}
+
+export const FriendBarItemView: FC<FriendBarItemViewProps> = props =>
+{
+    const { friend = null, isNewFriend = false, clearNewFriend = null } = props;
     const [ isVisible, setVisible ] = useState(false);
     const { followFriend = null } = useFriends();
     const elementRef = useRef<HTMLDivElement>();
@@ -47,7 +54,7 @@ export const FriendBarItemView: FC<{ friend: MessengerFriend }> = props =>
     }
 
     return (
-        <div ref={ elementRef } className={ 'btn find-friends-active friend-bar-item ' + (isVisible ? 'friend-bar-item-active' : '') } onClick={ event => setVisible(prevValue => !prevValue) }>
+        <div ref={ elementRef } className={ 'btn find-friends-active friend-bar-item ' + (isNewFriend ? 'new-friend ' : '') + (isVisible ? 'friend-bar-item-active' : '') } onClick={ event => setVisible(prevValue => !prevValue) } onMouseEnter={ isNewFriend ? () => (clearNewFriend && clearNewFriend(friend.id)) : null }>
             <div className={ `friend-bar-item-head position-absolute ${ friend.id > 0 ? 'avatar': 'group' }` }>
                 { (friend.id > 0) && <LayoutAvatarImageView headOnly={ true } figure={ friend.figure } direction={ 2 } /> }
                 { (friend.id <= 0) && <LayoutBadgeImageView isGroup={ true } badgeCode={ friend.figure } /> } 
