@@ -187,12 +187,12 @@ export const InfoStandWidgetUserView: FC<InfoStandWidgetUserViewProps> = props =
                     </Flex>
                     <hr className="m-0" />
                 </Column>
-                <Column gap={ 1 }>
+                <Column className='ps-1' gap={ 1 }>
                     <Text gfbold variant="white" wrap>{ LocalizeText('infostand.text.achievement_score') }</Text>
                     <Text gfbold variant="white" wrap className="mt-1">{ avatarInfo.achievementScore }</Text>
+                    <hr className="m-0" />
                     { (avatarInfo.carryItem > 0) &&
                         <>
-                            <hr className="m-0" />
                             <Text variant="white" wrap>
                                 { LocalizeText('infostand.text.handitem', [ 'item' ], [ LocalizeText('handitem' + avatarInfo.carryItem) ]) }
                             </Text>

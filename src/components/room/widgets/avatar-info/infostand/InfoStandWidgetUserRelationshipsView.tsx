@@ -1,7 +1,7 @@
 import { RelationshipStatusEnum, RelationshipStatusInfoMessageParser } from '@nitrots/nitro-renderer';
 import { FC } from 'react';
 import { GetUserProfile, LocalizeText } from '../../../../../api';
-import { Flex, Text } from '../../../../../common';
+import { Column, Flex, Text } from '../../../../../common';
 
 interface InfoStandWidgetUserRelationshipsViewProps
 {
@@ -50,10 +50,10 @@ export const InfoStandWidgetUserRelationshipsView: FC<InfoStandWidgetUserRelatio
     }
 
     return (
-        <>
+        <Column style={ { marginLeft: 1 } } gap={ 1 } className='p-0'>
             <RelationshipComponent type={ RelationshipStatusEnum.HEART } />
             <RelationshipComponent type={ RelationshipStatusEnum.SMILE } />
             <RelationshipComponent type={ RelationshipStatusEnum.BOBBA } />
-        </>
+        </Column>
     );
 }
