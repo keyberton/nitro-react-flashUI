@@ -22,6 +22,14 @@ body {
     }
 }
 
+
+::selection {
+    background-color: #B5D5FF;
+    color: #000000;
+    padding: 0;
+}
+
+
 img {
     object-fit: none;
 }

@@ -28,7 +28,7 @@ export const RoomPromotesWidgetView: FC<{}> = props =>
                             <Flex className="icon-style">
                                 <Base className="icon icon-room-promote" />
                             </Flex>
-                            <Text bold underline className="text-no-promote">{ LocalizeText('roomad.get.event') }</Text>
+                            <Text underline className="text-no-promote">{ LocalizeText('roomad.get.event') }</Text>
                             <Flex className="arrow-right-style">
                                 <Base className="icon icon-notification_arrow_left" />
                             </Flex>

@@ -63,6 +63,15 @@
   font-family: Goldfish;
 }
 
+.chat-input-form {
+    font-size: 12px;
+    border-image-source: url('@/assets/flash/messenger/chatform.png');
+    border-image-slice:10 10 10 10 fill;
+    border-image-width:10px 10px 10px 10px;
+    border-image-repeat:repeat repeat;
+    background: transparent;
+}
+
 .form-select-lg {
   padding-top: $form-select-padding-y-lg;
   padding-bottom: $form-select-padding-y-lg;

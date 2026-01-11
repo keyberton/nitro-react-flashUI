@@ -80,7 +80,7 @@ export const CatalogSearchView: FC<{}> = props =>
     return (
         <Flex gap={ 1 } className="position-relative">
             <Flex fullWidth alignItems="center" position="relative">
-                <input type="text" className="form-control form-control-sm" placeholder={ LocalizeText('catalog.search') } value={ searchValue } onChange={ event => setSearchValue(event.target.value) } />
+                <input type="text" className="form-control chat-input-form form-control-sm" placeholder={ LocalizeText('catalog.search') } value={ searchValue } onChange={ event => setSearchValue(event.target.value) } />
             </Flex>
             { (!searchValue || !searchValue.length) &&
                 <i className="icon icon-pen position-absolute catalog-search-button"/> }
