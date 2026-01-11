@@ -510,45 +510,45 @@
     }
 
     &.icon-chat-history {
-        background: url('@/assets/images/icons/chat-history.png');
-        width: 17px;
+        background: url('@/assets/images/icons/chat-history.png') no-repeat center;
+        width: 21px;
         height: 21px;
     }
 
     &.icon-room-link {
-        background: url('@/assets/images/icons/room-link.png');
-        width: 17px;
+        background: url('@/assets/images/icons/room-link.png') no-repeat center;
+        width: 21px;
         height: 15px;
     }
 
     &.icon-zoom-more {
-        background: url('@/assets/images/icons/zoom-more.png');
-        width: 12px;
+        background: url('@/assets/images/icons/zoom-more.png') no-repeat center;
+        width: 21px;
         height: 22px;
     }
 
     &.icon-zoom-less {
-        background: url('@/assets/images/icons/zoom-less.png');
-        width: 12px;
+        background: url('@/assets/images/icons/zoom-less.png') no-repeat center;
+        width: 21px;
         height: 22px;
     }
 
     &.icon-like-room {
-        background: url('@/assets/images/icons/like-room.png');
-        width: 20px;
+        background: url('@/assets/images/icons/like-room.png') no-repeat center;
+        width: 21px;
         height: 22px;
     }
 
     &.icon-link-room {
-        background: url('@/assets/flash/room-info/link_icon.png');
+        background: url('@/assets/flash/room-info/link_icon.png') center;
         background-repeat: no-repeat;
-        min-width: 16px;
+        min-width: 21px;
         height: 14px;
     }
 
     &.icon-arrows {
-        background: url('@/assets/images/icons/arrows.png');
-        width: 17px;
+        background: url('@/assets/images/icons/arrows.png') no-repeat center;
+        width: 21px;
         height: 15px;
     }
 

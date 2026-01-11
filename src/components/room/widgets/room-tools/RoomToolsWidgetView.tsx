@@ -127,29 +127,27 @@ export const RoomToolsWidgetView: FC<{}> = props =>
                 <>
                     <Column gap={ 0 } center className="nitro-room-tools p-3 px-3">
                         <Flex>
-                            <Column center className="margin-icons p-2">
-                                <Base pointer title={ LocalizeText('room.settings.button.text') } className="icon icon-cog" onClick={ () => handleToolClick('settings') } />
-                                <Base pointer title={ LocalizeText('room.zoom.button.text') } onClick={ () => handleToolClick('zoom') } className={ classNames('icon', (!isZoomedIn && 'icon-zoom-less'), (isZoomedIn && 'icon-zoom-more')) } />
-                                <Base pointer title={ LocalizeText('room.chathistory.button.text') } onClick={ () => handleToolClick('chat_history') } className="icon icon-chat-history" />
-                                { navigatorData.canRate &&
-                                    <Base pointer title={ LocalizeText('room.like.button.text') } onClick={ () => handleToolClick('like_room') } className="icon icon-like-room" /> }
-                                <Base pointer onClick={ () => handleToolClick('toggle_room_link') } className="icon icon-room-link" />
-                            </Column>
-                            <Column>
-                                <Flex className="w-100 room-tool-item">
-                                    <Text variant="muted" underline small onClick={ () => handleToolClick('settings') }>{ LocalizeText('room.settings.button.text') }</Text>
+                            <Column className="margin-icons p-2">
+                                <Flex className='nitro-item-room-tool' alignItems='center' gap={ 2 } pointer onClick={ () => handleToolClick('settings') }>
+                                    <Base pointer className="icon icon-cog"/>
+                                    <Text fontSize={7} underline>{ LocalizeText('room.settings.button.text') }</Text>
                                 </Flex>
-                                <Flex className="w-100 room-tool-item">
-                                    <Text variant="muted" underline small onClick={ () => handleToolClick('zoom') }>{ LocalizeText('room.zoom.button.text') }</Text>
+                                <Flex className='nitro-item-room-tool' alignItems='center' gap={ 2 } pointer onClick={ () => handleToolClick('zoom') }>
+                                    <Base pointer className={ classNames('icon', (!isZoomedIn && 'icon-zoom-less'), (isZoomedIn && 'icon-zoom-more')) } />
+                                    <Text fontSize={7} underline>{ LocalizeText('room.zoom.button.text') }</Text>
                                 </Flex>
-                                <Flex className="w-100 room-tool-item">
-                                    <Text variant="muted" underline small onClick={ () => handleToolClick('chat_history') }>{ LocalizeText('room.chathistory.button.text') }</Text></Flex>
+                                <Flex className='nitro-item-room-tool' alignItems='center' gap={ 2 } pointer onClick={ () => handleToolClick('chat_history') }>
+                                    <Base pointer className="icon icon-chat-history"/>
+                                    <Text fontSize={7} underline>{ LocalizeText('room.chathistory.button.text') }</Text>
+                                </Flex>
                                 { navigatorData.canRate &&
-                                    <Flex className="w-100 room-tool-item">
-                                        <Text variant="muted" underline small onClick={ () => handleToolClick('like_room') }>{ LocalizeText('room.like.button.text') }</Text>
-                                    </Flex> }
-                                <Flex className="w-100 room-tool-item">
-                                    <Text variant="muted" underline small onClick={ () => handleToolClick('toggle_room_link') }>{ LocalizeText('navigator.embed.caption') }</Text>
+                                <Flex className='nitro-item-room-tool' alignItems='center' gap={ 2 } pointer onClick={ () => handleToolClick('like_room') }>
+                                    <Base pointer className="icon icon-like-room" />
+                                    <Text fontSize={7} underline>{ LocalizeText('room.like.button.text') }</Text>
+                                </Flex> }
+                                <Flex className='nitro-item-room-tool' alignItems='center' gap={ 2 } pointer onClick={ () => handleToolClick('toggle_room_link') }>
+                                    <Base pointer className="icon icon-room-link" />
+                                    <Text fontSize={7} underline>{ LocalizeText('navigator.embed.caption') }</Text>
                                 </Flex>
                             </Column>
                         </Flex>
@@ -159,7 +157,7 @@ export const RoomToolsWidgetView: FC<{}> = props =>
                             <Base pointer={ roomHistory.length > 1 && roomHistory[roomHistory.length - 1]?.roomId !== navigatorData.currentRoomId } title={ LocalizeText('room.history.button.forward.tooltip') } className={ `icon ${ (roomHistory?.length === 0 || roomHistory[roomHistory.length - 1]?.roomId === navigatorData.currentRoomId) ? 'icon-room-history-next-disabled' : 'icon-room-history-next-enabled' }` } onClick={ () => (roomHistory?.length === 0 || roomHistory[roomHistory.length - 1]?.roomId === navigatorData.currentRoomId) ? null : handleToolClick('room_history_next') } />
                         </Flex>
                     </Column>
-                    <Flex className="nitro-room-tools-history" style={ { bottom: !navigatorData.canRate ? '180px' : '210px' } }>
+                    <Flex className="nitro-room-tools-history" style={ { bottom: !navigatorData.canRate ? '180px' : '177px' } }>
                         <TransitionAnimation type={ TransitionAnimationTypes.SLIDE_LEFT } inProp={ isOpenHistory }>
                             <Column center>
                                 <Column className="nitro-room-history rounded py-2 px-3">
