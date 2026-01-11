@@ -770,20 +770,22 @@
     height: 21px;
     background: white;
     text-align: center;
-    border-radius: 4px;
-    border: 1px solid black;
+    border-radius: 6px;
+    border: 1px solid #5d5d5a;
     margin-left: 20px;
     margin-top: -10px;
 
     &:before {
-        border: 10px solid white;
-        content: '';
-        border-left-color: transparent;
-        border-bottom-color: transparent;
-        border-right-color: transparent;
+        border-left: 1px solid black;
+        border-bottom: 1px solid black;
+        transform: rotate(315deg);
+        content: "";
+        width: 10px;
+        height: 10px;
+        background: white;
         position: absolute;
-        bottom: -20px;
-        left: calc(50% - 15px);
+        bottom: -6px;
+        left: calc(50% - 5px);
     }
 }
 

@@ -3,6 +3,7 @@ import { FC, useMemo, useState } from 'react';
 import { ISelectedUser, LocalizeText, ModActionDefinition, NotificationAlertType, SendMessageComposer } from '../../../../api';
 import { Button, Column, DraggableWindowPosition, Flex, NitroCardContentView, NitroCardHeaderView, NitroCardView, Text } from '../../../../common';
 import { useModTools, useNotification } from '../../../../hooks';
+import { FilterSelectView } from '../../../inventory/views/FilterSelectView';
 
 interface ModToolsUserModActionViewProps
 {
@@ -154,14 +155,32 @@ export const ModToolsUserModActionView: FC<ModToolsUserModActionViewProps> = pro
         <NitroCardView className="nitro-mod-tools-user-action" theme="modtool-windows" windowPosition={ DraggableWindowPosition.TOP_CENTER }>
             <NitroCardHeaderView headerText={ 'Mod Action: ' + (user ? user.username : '') } onCloseClick={ () => onCloseClick() } />
             <NitroCardContentView className="text-black">
-                <select className="form-select form-select-sm" value={ selectedTopic } onChange={ event => setSelectedTopic(parseInt(event.target.value)) }>
-                    <option value={ -1 } disabled>CFH Topic</option>
-                    { topics.map((topic, index) => <option key={ index } value={ index }>{ LocalizeText('help.cfh.topic.' + topic.id) }</option>) }
-                </select>
-                <select className="form-select form-select-sm" value={ selectedAction } onChange={ event => setSelectedAction(parseInt(event.target.value)) }>
-                    <option value={ -1 } disabled>Sanction Type</option>
-                    { MOD_ACTION_DEFINITIONS.map((action, index) => <option key={ index } value={ index }>{ action.name }</option>) }
-                </select>
+                <FilterSelectView
+                    fullWidth
+                    options={ [
+                        { value: -1, label: 'CFH Topic' },
+                        ...topics.map((topic, index) => ({ value: index, label: LocalizeText('help.cfh.topic.' + topic.id) }))
+                    ] }
+                    value={ selectedTopic }
+                    setValue={ value =>
+                    {
+                        const nextValue = Number(value);
+                        if(nextValue === -1) return;
+                        setSelectedTopic(nextValue);
+                    } } />
+                <FilterSelectView
+                    fullWidth
+                    options={ [
+                        { value: -1, label: 'Sanction Type' },
+                        ...MOD_ACTION_DEFINITIONS.map((action, index) => ({ value: index, label: action.name }))
+                    ] }
+                    value={ selectedAction }
+                    setValue={ value =>
+                    {
+                        const nextValue = Number(value);
+                        if(nextValue === -1) return;
+                        setSelectedAction(nextValue);
+                    } } />
                 <Column gap={ 1 }>
                     <Text small>Optional message type, overrides default</Text>
                     <textarea className="form-control" value={ message } onChange={ event => setMessage(event.target.value) }/>

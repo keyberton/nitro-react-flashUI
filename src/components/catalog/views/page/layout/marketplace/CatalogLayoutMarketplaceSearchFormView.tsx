@@ -1,6 +1,7 @@
 import { FC, useCallback, useEffect, useState } from 'react';
 import { IMarketplaceSearchOptions, LocalizeText, MarketplaceSearchType } from '../../../../../../api';
 import { Button, Column, Flex, Text } from '../../../../../../common';
+import { FilterSelectView } from '../../../../../inventory/views/FilterSelectView';
 
 export interface SearchFormViewProps
 {
@@ -49,9 +50,11 @@ export const SearchFormView: FC<SearchFormViewProps> = props =>
             { searchType !== MarketplaceSearchType.ADVANCED &&
                 <Column className="mt-4" justifyContent="center" alignItems="center">
                     <Text variant="muted" className="font-size-marketplace">{ LocalizeText('catalog.marketplace.sort_order') }</Text>
-                    <select className="form-select form-select-sm w-50" value={ sortType } onChange={ event => onSortTypeChange(parseInt(event.target.value)) }>
-                        { sortTypes.map(type => <option key={ type } value={ type }>{ LocalizeText(`catalog.marketplace.sort.${ type }`) }</option>) }
-                    </select>
+                    <FilterSelectView
+                        className="w-50"
+                        options={ sortTypes.map(type => ({ value: type, label: LocalizeText(`catalog.marketplace.sort.${ type }`) })) }
+                        value={ sortType }
+                        setValue={ value => onSortTypeChange(Number(value)) } />
                 </Column>
             }
             { searchType === MarketplaceSearchType.ADVANCED &&
@@ -74,9 +77,11 @@ export const SearchFormView: FC<SearchFormViewProps> = props =>
                         </Flex>
                         <Flex alignItems="center">
                             <Text variant="muted" className="col-4 font-size-marketplace">{ LocalizeText('catalog.marketplace.sort_order') }</Text>
-                            <select className="form-select form-select-sm w-100" value={ sortType } onChange={ event => onSortTypeChange(parseInt(event.target.value)) }>
-                                { sortTypes.map(type => <option key={ type } value={ type }>{ LocalizeText(`catalog.marketplace.sort.${ type }`) }</option>) }
-                            </select>
+                            <FilterSelectView
+                                fullWidth
+                                options={ sortTypes.map(type => ({ value: type, label: LocalizeText(`catalog.marketplace.sort.${ type }`) })) }
+                                value={ sortType }
+                                setValue={ value => onSortTypeChange(Number(value)) } />
                         </Flex>
                         <Flex justifyContent="end">
                             <Button variant="secondary" className="w-25 h-25" onClick={ onClickSearch }>{ LocalizeText('generic.search') }</Button>

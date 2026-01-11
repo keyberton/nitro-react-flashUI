@@ -4,6 +4,7 @@ import ReactSlider from 'react-slider';
 import { LocalizeText, WiredFurniType } from '../../../../api';
 import { Button, Column, Flex, Text } from '../../../../common';
 import { useWired } from '../../../../hooks';
+import { FilterSelectView } from '../../../inventory/views/FilterSelectView';
 import { WiredActionBaseView } from './WiredActionBaseView';
 
 export const WiredActionGiveRewardView: FC<{}> = props =>
@@ -112,12 +113,16 @@ export const WiredActionGiveRewardView: FC<{}> = props =>
             <Column gap={ 1 }>
                 <Text gfbold>How often can a user be rewarded?</Text>
                 <Flex gap={ 1 }>
-                    <select className="form-select form-select-sm w-100" value={ rewardTime } onChange={ (e) => setRewardTime(Number(e.target.value)) }>
-                        <option value="0">Once</option>
-                        <option value="3">Once every { limitationInterval } minutes</option>
-                        <option value="2">Once every { limitationInterval } hours</option>
-                        <option value="1">Once every { limitationInterval } days</option>
-                    </select>
+                    <FilterSelectView
+                        fullWidth
+                        options={ [
+                            { value: 0, label: 'Once' },
+                            { value: 3, label: `Once every ${ limitationInterval } minutes` },
+                            { value: 2, label: `Once every ${ limitationInterval } hours` },
+                            { value: 1, label: `Once every ${ limitationInterval } days` }
+                        ] }
+                        value={ rewardTime }
+                        setValue={ value => setRewardTime(Number(value)) } />
                     { (rewardTime > 0) && <input type="number" className="form-control form-control-sm" value={ limitationInterval } onChange={ event => setLimitationInterval(Number(event.target.value)) } /> }
                 </Flex>
             </Column>

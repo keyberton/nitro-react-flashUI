@@ -1,8 +1,9 @@
 import { GetRoomAdPurchaseInfoComposer, GetUserEventCatsMessageComposer, PurchaseRoomAdMessageComposer, RoomAdPurchaseInfoEvent, RoomEntryData } from '@nitrots/nitro-renderer';
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import { LocalizeText, SendMessageComposer } from '../../../../../api';
 import { Base, Button, Column, Text } from '../../../../../common';
 import { useCatalog, useMessageEvent, useNavigator, useNotification, useRoomPromote } from '../../../../../hooks';
+import { FilterSelectView } from '../../../../inventory/views/FilterSelectView';
 import { CatalogLayoutProps } from './CatalogLayout.types';
 
 export const CatalogLayoutRoomAdsView: FC<CatalogLayoutProps> = props =>
@@ -18,6 +19,22 @@ export const CatalogLayoutRoomAdsView: FC<CatalogLayoutProps> = props =>
     const { setIsVisible = null } = useCatalog();
     const { simpleAlert = null } = useNotification();
     const { promoteInformation, isExtended, setIsExtended } = useRoomPromote();
+
+    const roomSelectOptions = useMemo(() =>
+    {
+        const seenRoomIds = new Set<number>();
+        const uniqueRooms = (availableRooms ?? []).filter(room =>
+        {
+            if(seenRoomIds.has(room.roomId)) return false;
+            seenRoomIds.add(room.roomId);
+            return true;
+        });
+
+        return [
+            { value: -1, label: LocalizeText('roomad.catalog_roomname') },
+            ...uniqueRooms.map(room => ({ value: room.roomId, label: room.roomName }))
+        ];
+    }, [ availableRooms ]);
 
     useEffect(() =>
     {
@@ -82,9 +99,12 @@ export const CatalogLayoutRoomAdsView: FC<CatalogLayoutProps> = props =>
                 <Text bold noWrap>{ LocalizeText('roomad.catalog_text', [ 'duration' ], [ '120' ]) }</Text>
                 <Base className="rounded p-1">
                     <Column gap={ 2 }>
-                        <select className="form-select form-select-sm w-100" value={ categoryId } onChange={ event => setCategoryId(Number(event.target.value)) } disabled={ extended }>
-                            { categories && categories.map((cat, index) => <option key={ index } value={ cat.id }>{ LocalizeText(cat.name) }</option>) }
-                        </select>
+                        <FilterSelectView
+                            fullWidth
+                            options={ categories?.map(cat => ({ value: cat.id, label: LocalizeText(cat.name) })) ?? [] }
+                            value={ categoryId }
+                            setValue={ value => setCategoryId(Number(value)) }
+                            disabled={ extended } />
                     </Column>
                     <Column gap={ 0 } className="mt-2">
                         <Text small>{ LocalizeText('roomad.catalog_name') }</Text>
@@ -96,10 +116,17 @@ export const CatalogLayoutRoomAdsView: FC<CatalogLayoutProps> = props =>
                     </Column>
                     <Column gap={ 0 } className="mt-2">
                         <Text small>{ LocalizeText('roomad.catalog_roomname') }</Text>
-                        <select className="form-select form-select-sm w-100" value={ roomId } onChange={ event => setRoomId(Number(event.target.value)) } disabled={ extended }>
-                            <option value={ -1 } disabled>{ LocalizeText('roomad.catalog_roomname') }</option>
-                            { availableRooms && availableRooms.map((room, index) => <option key={ index } value={ room.roomId }>{ room.roomName }</option>) }
-                        </select>
+                        <FilterSelectView
+                            fullWidth
+                            options={ roomSelectOptions }
+                            value={ roomId }
+                            setValue={ value =>
+                            {
+                                const nextValue = Number(value);
+                                if(nextValue === -1) return;
+                                setRoomId(nextValue);
+                            } }
+                            disabled={ extended } />
                     </Column>
                     <Column className="mt-5" alignItems="end">
                         <Button className="btn btn-success w-50" onClick={ purchaseAd }>{ extended ? LocalizeText('roomad.extend.event') : LocalizeText('buy') }</Button>

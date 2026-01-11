@@ -3,6 +3,7 @@ import { FC, useEffect, useState } from 'react';
 import { IRoomData, LocalizeText, SendMessageComposer } from '../../../../api';
 import { Button, Column, Flex, Grid, Text, UserProfileIconView } from '../../../../common';
 import { useMessageEvent } from '../../../../hooks';
+import { FilterSelectView } from '../../../inventory/views/FilterSelectView';
 
 interface NavigatorRoomSettingsTabViewProps
 {
@@ -55,43 +56,41 @@ export const NavigatorRoomSettingsModTabView: FC<NavigatorRoomSettingsTabViewPro
                 <Column gap={ 1 }>
                     <Text bold>{ LocalizeText('navigator.roomsettings.moderation.mute.header') }</Text>
                     <Flex className="pe-5" alignItems="center" gap={ 1 }>
-                        <select className="w-100 form-select form-select-sm" value={ roomData.moderationSettings.allowMute } onChange={ event => handleChange('moderation_mute', event.target.value) }>
-                            <option value={ RoomModerationSettings.MODERATION_LEVEL_NONE }>
-                                { LocalizeText('navigator.roomsettings.moderation.none') }
-                            </option>
-                            <option value={ RoomModerationSettings.MODERATION_LEVEL_USER_WITH_RIGHTS }>
-                                { LocalizeText('navigator.roomsettings.moderation.rights') }
-                            </option>
-                        </select>
+                        <FilterSelectView
+                            fullWidth
+                            options={ [
+                                { value: RoomModerationSettings.MODERATION_LEVEL_NONE, label: LocalizeText('navigator.roomsettings.moderation.none') },
+                                { value: RoomModerationSettings.MODERATION_LEVEL_USER_WITH_RIGHTS, label: LocalizeText('navigator.roomsettings.moderation.rights') }
+                            ] }
+                            value={ roomData.moderationSettings.allowMute }
+                            setValue={ value => handleChange('moderation_mute', Number(value)) } />
                     </Flex>
                 </Column>
                 <Column gap={ 1 }>
                     <Text bold>{ LocalizeText('navigator.roomsettings.moderation.kick.header') }</Text>
                     <Flex className="pe-5" alignItems="center" gap={ 1 }>
-                        <select className="w-100 form-select form-select-sm" value={ roomData.moderationSettings.allowKick } onChange={ event => handleChange('moderation_kick', event.target.value) }>
-                            <option value={ RoomModerationSettings.MODERATION_LEVEL_NONE }>
-                                { LocalizeText('navigator.roomsettings.moderation.none') }
-                            </option>
-                            <option value={ RoomModerationSettings.MODERATION_LEVEL_USER_WITH_RIGHTS }>
-                                { LocalizeText('navigator.roomsettings.moderation.rights') }
-                            </option>
-                            <option value={ RoomModerationSettings.MODERATION_LEVEL_ALL }>
-                                { LocalizeText('navigator.roomsettings.moderation.all') }
-                            </option>
-                        </select>
+                        <FilterSelectView
+                            fullWidth
+                            options={ [
+                                { value: RoomModerationSettings.MODERATION_LEVEL_NONE, label: LocalizeText('navigator.roomsettings.moderation.none') },
+                                { value: RoomModerationSettings.MODERATION_LEVEL_USER_WITH_RIGHTS, label: LocalizeText('navigator.roomsettings.moderation.rights') },
+                                { value: RoomModerationSettings.MODERATION_LEVEL_ALL, label: LocalizeText('navigator.roomsettings.moderation.all') }
+                            ] }
+                            value={ roomData.moderationSettings.allowKick }
+                            setValue={ value => handleChange('moderation_kick', Number(value)) } />
                     </Flex>
                 </Column>
                 <Column gap={ 1 }>
                     <Text bold>{ LocalizeText('navigator.roomsettings.moderation.ban.header') }</Text>
                     <Flex className="pe-5" alignItems="center" gap={ 1 }>
-                        <select className="w-100 form-select form-select-sm" value={ roomData.moderationSettings.allowBan } onChange={ event => handleChange('moderation_ban', event.target.value) }>
-                            <option value={ RoomModerationSettings.MODERATION_LEVEL_NONE }>
-                                { LocalizeText('navigator.roomsettings.moderation.none') }
-                            </option>
-                            <option value={ RoomModerationSettings.MODERATION_LEVEL_USER_WITH_RIGHTS }>
-                                { LocalizeText('navigator.roomsettings.moderation.rights') }
-                            </option>
-                        </select>
+                        <FilterSelectView
+                            fullWidth
+                            options={ [
+                                { value: RoomModerationSettings.MODERATION_LEVEL_NONE, label: LocalizeText('navigator.roomsettings.moderation.none') },
+                                { value: RoomModerationSettings.MODERATION_LEVEL_USER_WITH_RIGHTS, label: LocalizeText('navigator.roomsettings.moderation.rights') }
+                            ] }
+                            value={ roomData.moderationSettings.allowBan }
+                            setValue={ value => handleChange('moderation_ban', Number(value)) } />
                     </Flex>
                 </Column>
             </Column>

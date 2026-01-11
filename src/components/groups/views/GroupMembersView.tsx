@@ -4,11 +4,12 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { AddEventLinkTracker, CreateLinkEvent, GetSessionDataManager, GetUserProfile, LocalizeText, RemoveLinkEventTracker, SendMessageComposer } from '../../../api';
 import { Base, Button, Column, Flex, Grid, LayoutAvatarImageView, LayoutBadgeImageView, NitroCardContentView, NitroCardHeaderView, NitroCardView, Text } from '../../../common';
 import { useMessageEvent, useNotification } from '../../../hooks';
+import { FilterSelectView } from '../../inventory/views/FilterSelectView';
 
 export const GroupMembersView: FC<{}> = props =>
 {
     const [ groupId, setGroupId ] = useState<number>(-1);
-    const [ levelId, setLevelId ] = useState<number>(-1);
+    const [ levelId, setLevelId ] = useState<number>(0);
     const [ membersData, setMembersData ] = useState<GroupMembersParser>(null);
     const [ pageId, setPageId ] = useState<number>(-1);
     const [ totalPages, setTotalPages ] = useState<number>(0);
@@ -77,8 +78,11 @@ export const GroupMembersView: FC<{}> = props =>
     {
         const parser = event.getParser();
 
+        const allowedLevelIds = [ 0, 1, 2 ];
+        const nextLevelId = allowedLevelIds.includes(parser.level) ? parser.level : 0;
+
         setMembersData(parser);
-        setLevelId(parser.level);
+        setLevelId(nextLevelId);
         setTotalPages(Math.ceil(parser.totalMembersCount / parser.pageSize));
     });
 
@@ -128,7 +132,7 @@ export const GroupMembersView: FC<{}> = props =>
                 if(parts.length < 2) return;
         
                 const groupId = (parseInt(parts[1]) || -1);
-                const levelId = (parseInt(parts[2]) || 3);
+                const levelId = (parseInt(parts[2]) || 0);
                 
                 setGroupId(groupId);
                 setLevelId(levelId);
@@ -158,7 +162,7 @@ export const GroupMembersView: FC<{}> = props =>
     {
         if(groupId === -1) return;
 
-        setLevelId(-1);
+        setLevelId(0);
         setMembersData(null);
         setTotalPages(0);
         setSearchQuery('');
@@ -177,11 +181,15 @@ export const GroupMembersView: FC<{}> = props =>
                     </Flex>
                     <Column fullWidth gap={ 1 }>
                         <input type="text" className="form-control form-control-sm w-100" placeholder={ LocalizeText('group.members.searchinfo') } value={ searchQuery } onChange={ event => setSearchQuery(event.target.value) } />
-                        <select className="form-select form-select-sm w-100" value={ levelId } onChange={ event => setLevelId(parseInt(event.target.value)) }>
-                            <option value="0">{ LocalizeText('group.members.search.all') }</option>
-                            <option value="1">{ LocalizeText('group.members.search.admins') }</option>
-                            <option value="2">{ LocalizeText('group.members.search.pending') }</option>
-                        </select>
+                        <FilterSelectView
+                            fullWidth
+                            options={ [
+                                { value: 0, label: LocalizeText('group.members.search.all') },
+                                { value: 1, label: LocalizeText('group.members.search.admins') },
+                                { value: 2, label: LocalizeText('group.members.search.pending') }
+                            ] }
+                            value={ levelId }
+                            setValue={ value => setLevelId(Number(value)) } />
                     </Column>
                 </Flex>
                 <Grid columnCount={ 2 } overflow="auto" className="nitro-group-members-list-grid">

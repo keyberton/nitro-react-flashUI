@@ -3,6 +3,7 @@ import { FC, useEffect, useMemo, useState } from 'react';
 import { LocalizeText, SendMessageComposer } from '../../../../../api';
 import { Base, Button, Flex } from '../../../../../common';
 import { useCatalog } from '../../../../../hooks';
+import { FilterSelectView } from '../../../../inventory/views/FilterSelectView';
 
 export const CatalogGuildSelectorWidgetView: FC<{}> = props =>
 {
@@ -67,9 +68,10 @@ export const CatalogGuildSelectorWidgetView: FC<{}> = props =>
                     <Base fullHeight style={ { width: '20px', backgroundColor: '#' + selectedGroup.colorA } } />
                     <Base fullHeight style={ { width: '20px', backgroundColor: '#' + selectedGroup.colorB } } />
                 </Flex> }
-            <select className="form-select form-select-sm" value={ selectedGroupIndex } onChange={ event => setSelectedGroupIndex(parseInt(event.target.value)) }>
-                { groups.map((group, index) => <option key={ index } value={ index }>{ group.groupName }</option>) }
-            </select>
+            <FilterSelectView
+                options={ groups.map((group, index) => ({ value: index, label: group.groupName })) }
+                value={ selectedGroupIndex }
+                setValue={ value => setSelectedGroupIndex(Number(value)) } />
         </Flex>
     );
 }

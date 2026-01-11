@@ -3,6 +3,7 @@ import { Dispatch, FC, SetStateAction, useCallback, useEffect, useState } from '
 import { CreateLinkEvent, IGroupData, LocalizeText, SendMessageComposer } from '../../../../api';
 import { Base, Button, Column, Flex, Text } from '../../../../common';
 import { useNotification } from '../../../../hooks';
+import { FilterSelectView } from '../../../inventory/views/FilterSelectView';
 
 interface GroupTabIdentityViewProps
 {
@@ -95,10 +96,19 @@ export const GroupTabIdentityView: FC<GroupTabIdentityViewProps> = props =>
                         <Flex alignItems="center" gap={ 1 }>
                             <Text center className="col-3">{ LocalizeText('group.edit.base') }</Text>
                             <Column fullWidth gap={ 1 }>
-                                <select className="form-select form-select-sm" value={ groupHomeroomId } onChange={ event => setGroupHomeroomId(parseInt(event.target.value)) }>
-                                    <option value={ -1 } disabled>{ LocalizeText('group.edit.base.select.room') }</option>
-                                    { availableRooms && availableRooms.map((room, index) => <option key={ index } value={ room.id }>{ room.name }</option>) }
-                                </select>
+                                <FilterSelectView
+                                    fullWidth
+                                    options={ [
+                                        { value: -1, label: LocalizeText('group.edit.base.select.room') },
+                                        ...(availableRooms?.map(room => ({ value: room.id, label: room.name })) ?? [])
+                                    ] }
+                                    value={ groupHomeroomId }
+                                    setValue={ value =>
+                                    {
+                                        const nextValue = Number(value);
+                                        if(nextValue === -1) return;
+                                        setGroupHomeroomId(nextValue);
+                                    } } />
                             </Column>
                         </Flex>
                         <Flex gap={ 1 }>

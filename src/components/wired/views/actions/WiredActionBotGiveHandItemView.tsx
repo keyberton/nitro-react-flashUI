@@ -2,6 +2,7 @@ import { FC, useEffect, useState } from 'react';
 import { LocalizeText, WiredFurniType } from '../../../../api';
 import { Column, Text } from '../../../../common';
 import { useWired } from '../../../../hooks';
+import { FilterSelectView } from '../../../inventory/views/FilterSelectView';
 import { WiredActionBaseView } from './WiredActionBaseView';
 
 const ALLOWED_HAND_ITEM_IDS: number[] = [ 2, 5, 7, 8, 9, 10, 27 ];
@@ -32,10 +33,14 @@ export const WiredActionBotGiveHandItemView: FC<{}> = props =>
             </Column>
             <Column gap={ 1 }>
                 <Text gfbold>{ LocalizeText('wiredfurni.params.handitem') }</Text>
-                <select className="form-select form-select-sm" value={ handItemId } onChange={ event => setHandItemId(parseInt(event.target.value)) }>
-                    <option value="0">------</option>
-                    { ALLOWED_HAND_ITEM_IDS.map(value => <option key={ value } value={ value }>{ LocalizeText(`handitem${ value }`) }</option>) }
-                </select>
+                <FilterSelectView
+                    fullWidth
+                    options={ [
+                        { value: 0, label: '------' },
+                        ...ALLOWED_HAND_ITEM_IDS.map(value => ({ value, label: LocalizeText(`handitem${ value }`) }))
+                    ] }
+                    value={ handItemId }
+                    setValue={ value => setHandItemId(Number(value)) } />
             </Column>
         </WiredActionBaseView>
     );

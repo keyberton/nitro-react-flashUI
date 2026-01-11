@@ -4,6 +4,7 @@ import { FaTimes } from 'react-icons/fa';
 import { CreateLinkEvent, GetMaxVisitorsList, IRoomData, LocalizeText, SendMessageComposer } from '../../../../api';
 import { Base, Column, Flex, Text } from '../../../../common';
 import { useMessageEvent, useNavigator, useNotification } from '../../../../hooks';
+import { FilterSelectView } from '../../../inventory/views/FilterSelectView';
 
 const ROOM_NAME_MIN_LENGTH = 3;
 const ROOM_NAME_MAX_LENGTH = 60;
@@ -114,23 +115,31 @@ export const NavigatorRoomSettingsBasicTabView: FC<NavigatorRoomSettingsTabViewP
             </Column>
             <Column className="pb-1" alignItems="start" gap={ 0 }>
                 <Text bold className="ps-1">{ LocalizeText('navigator.category') }</Text>
-                <select className="w-100 form-select form-select-sm" value={ roomData.categoryId } onChange={ event => handleChange('category', event.target.value) }>
-                    { categories && categories.map(category => <option key={ category.id } value={ category.id }>{ LocalizeText(category.name) }</option>) }
-                </select>
+                <FilterSelectView
+                    fullWidth
+                    options={ categories && categories.map(category => ({ value: category.id, label: LocalizeText(category.name) })) }
+                    value={ roomData.categoryId }
+                    setValue={ value => handleChange('category', value) } />
             </Column>
             <Column className="pb-1" alignItems="start" gap={ 0 }>
                 <Text bold className="ps-1">{ LocalizeText('navigator.maxvisitors') }</Text>
-                <select className="w-100 form-select form-select-sm" value={ roomData.userCount } onChange={ event => handleChange('max_visitors', event.target.value) }>
-                    { GetMaxVisitorsList && GetMaxVisitorsList.map(value => <option key={ value } value={ value }>{ value }</option>) }
-                </select>
+                <FilterSelectView
+                    fullWidth
+                    options={ GetMaxVisitorsList && GetMaxVisitorsList.map(value => ({ value, label: value.toString() })) }
+                    value={ roomData.userCount }
+                    setValue={ value => handleChange('max_visitors', value) } />
             </Column>
             <Column className="pb-2" alignItems="start" gap={ 0 }>
                 <Text bold className="ps-1">{ LocalizeText('navigator.tradesettings') }</Text>
-                <select className="w-100 form-select form-select-sm" value={ roomData.tradeState } onChange={ event => handleChange('trade_state', event.target.value) }>
-                    <option value="0">{ LocalizeText('navigator.roomsettings.trade_not_allowed') }</option>
-                    <option value="1">{ LocalizeText('navigator.roomsettings.trade_not_with_Controller') }</option>
-                    <option value="2">{ LocalizeText('navigator.roomsettings.trade_allowed') }</option>
-                </select>
+                <FilterSelectView
+                    fullWidth
+                    options={ [
+                        { value: 0, label: LocalizeText('navigator.roomsettings.trade_not_allowed') },
+                        { value: 1, label: LocalizeText('navigator.roomsettings.trade_not_with_Controller') },
+                        { value: 2, label: LocalizeText('navigator.roomsettings.trade_allowed') }
+                    ] }
+                    value={ roomData.tradeState }
+                    setValue={ value => handleChange('trade_state', Number(value)) } />
             </Column>
             <Column className="pb-3" alignItems="start" gap={ 0 }>
                 <Text bold className="ps-1">{ LocalizeText('navigator.tags') }</Text>
