@@ -20,16 +20,18 @@ export const InfoStandWidgetBotView: FC<InfoStandWidgetBotViewProps> = props =>
             <Column overflow="visible" className="container-fluid content-area" gap={ 1 }>
                 <Column gap={ 1 }>
                     <Flex alignItems="center" justifyContent="between" gap={ 1 }>
-                        <Text variant="white" small wrap>{ avatarInfo.name }</Text>
+                        <Text gfbold variant="white" small wrap>{ avatarInfo.name }</Text>
                         <FaTimes className="cursor-pointer fa-icon" onClick={ onClose } />
                     </Flex>
                     <hr className="m-0" />
                 </Column>
                 <Column gap={ 1 }>
                     <Flex gap={ 1 }>
-                        <Column fullWidth className="body-image bot">
-                            <LayoutAvatarImageView figure={ avatarInfo.figure } direction={ 4 } />
-                        </Column>
+                        <Flex className="infostand-thumb-bg">
+                            <Column fullWidth className="body-image bot">
+                                <LayoutAvatarImageView figure={ avatarInfo.figure } direction={ 4 } />
+                            </Column>
+                        </Flex>
                         <Column grow center gap={ 0 }>
                             { (avatarInfo.badges.length > 0) && avatarInfo.badges.map(result =>
                             {

@@ -132,7 +132,7 @@ export const AvatarInfoWidgetRentableBotView: FC<AvatarInfoWidgetRentableBotView
 
     return (
         <ContextMenuView objectId={ avatarInfo.roomIndex } category={ RoomObjectCategory.UNIT } userType={ RoomObjectType.RENTABLE_BOT } onClose={ onClose } collapsable={ true }>
-            <ContextMenuHeaderView>
+            <ContextMenuHeaderView className='not-own-menu'>
                 { avatarInfo.name }
             </ContextMenuHeaderView>
             { (mode === MODE_NORMAL) && canControl &&
