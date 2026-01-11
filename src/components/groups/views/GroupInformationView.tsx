@@ -104,10 +104,12 @@ export const GroupInformationView: FC<GroupInformationViewProps> = props =>
             <Column className='group-information-content'>
                 <Flex>
                     <Column gap={2} className='badge-container' alignItems='center' overflow="hidden">
-                        <Flex alignItems="center" overflow="hidden" className="group-badge">
-                            <LayoutBadgeImageView style={ { transform: 'scale(1)' } } badgeCode={ groupInformation.badge } isGroup={ true } scale={ 2 } />
+                        <Flex className="p-2 pe-3">
+                            <Flex alignItems="center" overflow="hidden" className="group-badge">
+                                <LayoutBadgeImageView style={ { transform: 'scale(1)' } } badgeCode={ groupInformation.badge } isGroup={ true } scale={ 2 } />
+                            </Flex>
                         </Flex>
-                        <Column alignItems="center" gap={ 0 }>
+                        <Column className='me-1' alignItems="center" gap={ 0 }>
                             <Text fontSize={7} small bold underline pointer onClick={ () => handleAction('members') }>{ LocalizeText('group.membercount', [ 'totalMembers' ], [ groupInformation.membersCount.toString() ]) }</Text>
                             { (groupInformation.pendingRequestsCount > 0) &&
                                 <Text fontSize={7} small underline pointer onClick={ () => handleAction('members_pending') }>{ LocalizeText('group.pendingmembercount', [ 'amount' ], [ groupInformation.pendingRequestsCount.toString() ]) }</Text> }
@@ -140,9 +142,9 @@ export const GroupInformationView: FC<GroupInformationViewProps> = props =>
                     </Column>
                 </Flex>
                 <Flex fullWidth center position='relative'>
-                    <Flex position='absolute' className='role-icon'>{ getRoleIcon() }</Flex>
+                    <Flex style={ { left: 35, bottom: 5 } } position='absolute' className='role-icon'>{ getRoleIcon() }</Flex>
                     { (groupInformation.type !== GroupType.PRIVATE || groupInformation.type === GroupType.PRIVATE && groupInformation.membershipType === GroupMembershipType.MEMBER) &&
-                        <Button variant='bold' className='group-button' disabled={ (groupInformation.membershipType === GroupMembershipType.REQUEST_PENDING) || isRealOwner } onClick={ handleButtonClick }>
+                        <Button style={ { minWidth: 160 } } variant={(groupInformation.membershipType === GroupMembershipType.REQUEST_PENDING) ? 'transparent' : 'bold'} className='group-button mt-3' disabled={ isRealOwner } onClick={ handleButtonClick }>
                             { LocalizeText(getButtonText()) }
                         </Button> }
                 </Flex>

@@ -73,6 +73,13 @@
   }
 }
 
+.btn-transparent {
+  border: none;
+  color: black;
+  font-family: Ubuntu;
+  font-weight: bold;
+}
+
 .btn-bold {
   border-image-source: url("@/assets/flash/buttons/button_bold.png");
   color: black;
