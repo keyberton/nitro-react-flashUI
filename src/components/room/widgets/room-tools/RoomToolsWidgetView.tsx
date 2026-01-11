@@ -157,7 +157,7 @@ export const RoomToolsWidgetView: FC<{}> = props =>
                             <Base pointer={ roomHistory.length > 1 && roomHistory[roomHistory.length - 1]?.roomId !== navigatorData.currentRoomId } title={ LocalizeText('room.history.button.forward.tooltip') } className={ `icon ${ (roomHistory?.length === 0 || roomHistory[roomHistory.length - 1]?.roomId === navigatorData.currentRoomId) ? 'icon-room-history-next-disabled' : 'icon-room-history-next-enabled' }` } onClick={ () => (roomHistory?.length === 0 || roomHistory[roomHistory.length - 1]?.roomId === navigatorData.currentRoomId) ? null : handleToolClick('room_history_next') } />
                         </Flex>
                     </Column>
-                    <Flex className="nitro-room-tools-history" style={ { bottom: !navigatorData.canRate ? '180px' : '177px' } }>
+                    <Flex className="nitro-room-tools-history" style={ { bottom: !navigatorData.canRate ? '177px' : '207px' } }>
                         <TransitionAnimation type={ TransitionAnimationTypes.SLIDE_LEFT } inProp={ isOpenHistory }>
                             <Column center>
                                 <Column className="nitro-room-history rounded py-2 px-3">

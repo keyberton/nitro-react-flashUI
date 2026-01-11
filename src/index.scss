@@ -22,6 +22,42 @@ body {
     }
 }
 
+input {
+    cursor: pointer;    
+
+    &[type="checkbox"] {  
+        appearance: none;
+        background-color: transparent!important;
+        border: 0!important;
+        width: 15px;
+        height: 15px;
+        background-image: url(@/assets/flash/buttons/checkbox.png);
+    }
+
+    &[type="radio"] {
+        appearance: none;
+        background-color: transparent!important;
+        border: 0!important;
+        background-image: url(@/assets/flash/buttons/radio.png);
+        width: 14px;
+        height: 14px
+    }
+
+    &:checked {
+        appearance: none;
+        background-color: transparent!important;
+        border: 0!important;
+        background-image: url(@/assets/flash/buttons/checkbox_checked.png);
+
+      &[type="radio"] {
+        appearance: none;
+        background-color: transparent!important;
+        border: 0!important;
+        background-image: url(@/assets/flash/buttons/radio_marked.png);
+      }
+    }
+}
+
 
 ::selection {
     background-color: #B5D5FF;

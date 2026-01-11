@@ -48,6 +48,26 @@
             right: 0;
             margin: auto;
         }
+
+        &.is-friend {
+            border-image-source: url(@/assets/flash/room/friend_name_bg.png);
+            border-image-slice: 6 6 6 6 fill;
+            border-image-width: 6px 6px 6px 6px;
+            padding: 6px 22px;
+
+            &:after {
+                content: "";
+                background-image: url(@/assets/flash/room/friend_pointer_after.png);
+                background-repeat: no-repeat;
+                width: 11px;
+                height: 9px;
+                position: absolute;
+                bottom: -5px;
+                left: 0;
+                right: 0;
+                margin: auto;
+            }
+        }
     }
 
     &:not(.name-only):not(.menu-hidden) {

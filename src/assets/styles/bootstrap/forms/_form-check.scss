@@ -19,7 +19,7 @@
     height: 15px;
     cursor: pointer;
     background-image: url(@/assets/flash/buttons/checkbox.png);
-    -webkit-appearance: none;
+    appearance: none;
 
     &[type="radio"] {
       background-image: url(@/assets/flash/buttons/radio.png);
