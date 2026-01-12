@@ -94,13 +94,18 @@
         background-color: transparent;
     }
 
+    .group-button {
+        padding: 4px !important;
+        padding-bottom: 6px !important;
+    }
+
     .bubble-image-container {
         width: 50px;
         height: 50px;
     }
 
     .grouproom-header {
-        background: #6a7069;
+        background: #737373;
         border-radius: 10px 10px 0px 0px;
         position: relative;
         padding-top: 2px;
@@ -145,7 +150,7 @@
     }
 
     .grouproom-header {
-        background: #6a7069;
+        background: #737373;
         border-radius: 10px 10px 0px 0px;
         position: relative;
         padding-top: 2px;

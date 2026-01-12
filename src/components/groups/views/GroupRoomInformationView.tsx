@@ -118,15 +118,15 @@ export const GroupRoomInformationView: FC<{}> = props =>
                 </Flex>
                 { isOpen &&
                     <>
-                        <Column style={ { minHeight: 90 } } className="px-2 pb-2">
+                        <Column gap={ 1 } style={ { minHeight: 85 } } className="px-2 pb-2">
                             <Flex pointer alignItems="center" gap={ 2 } onClick={ event => GetGroupInformation(groupInformation.id) }>
                                 <Base className="group-badge p-1">
                                     <LayoutBadgeImageView badgeCode={ groupInformation.badge } isGroup={ true } />
                                 </Base>
                                 <Text className="mb-4" bold variant="white">{ groupInformation.title }</Text>
                             </Flex>
-                            { (groupInformation.type !== GroupType.PRIVATE || isRealOwner) || (groupInformation.membershipType === GroupMembershipType.REQUEST_PENDING) &&
-                            <Button fullWidth className="btn-flash fw-bold p-0 py-1" disabled={ (groupInformation.membershipType === GroupMembershipType.REQUEST_PENDING) } onClick={ handleButtonClick }>
+                            { (groupInformation.type !== GroupType.PRIVATE || isRealOwner) && (groupInformation.membershipType !== GroupMembershipType.REQUEST_PENDING) && (groupInformation.membershipType !== GroupMembershipType.MEMBER) &&
+                            <Button fullWidth className="btn-flash fw-bold group-button" disabled={ (groupInformation.membershipType === GroupMembershipType.REQUEST_PENDING) } onClick={ handleButtonClick }>
                                 { LocalizeText(getButtonText()) }
                             </Button>
                             }

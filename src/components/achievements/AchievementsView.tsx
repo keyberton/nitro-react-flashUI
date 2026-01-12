@@ -59,9 +59,9 @@ export const AchievementsView: FC<{}> = props =>
                 { !selectedCategory &&
                     <>
                         <AchievementsCategoryListView categories={ achievementCategories } selectedCategoryCode={ selectedCategoryCode } setSelectedCategoryCode={ setSelectedCategoryCode } />
-                        <Column grow justifyContent="end" gap={ 1 }>
-                            <Text small center>{ LocalizeText('achievements.categories.score', [ 'score' ], [ achievementScore.toString() ]) }</Text>
+                        <Column grow justifyContent="center" alignItems='center' gap={ 1 }>
                             <LayoutProgressBar text={ LocalizeText('achievements.categories.totalprogress', [ 'progress', 'limit' ], [ getProgress.toString(), getMaxProgress.toString() ]) } progress={ getProgress } maxProgress={ getMaxProgress } />
+                            <Text className='earned-text' bold small center>{ LocalizeText('achievements.categories.score', [ 'score' ], [ achievementScore.toString() ]) }</Text>
                         </Column>
                     </> }
                 { selectedCategory &&

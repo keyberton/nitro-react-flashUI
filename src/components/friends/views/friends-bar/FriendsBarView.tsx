@@ -12,9 +12,9 @@ const getMaxDisplayCount = (viewportWidth: number) =>
     return 0;
 }
 
-export const FriendBarView: FC<{ onlineFriends: MessengerFriend[] }> = props =>
+export const FriendBarView: FC<{ onlineFriends: MessengerFriend[], isFriendsListReady: boolean }> = props =>
 {
-    const { onlineFriends = [] } = props;
+    const { onlineFriends = [], isFriendsListReady = false } = props;
     const [ indexOffset, setIndexOffset ] = useState(0);
     const [ maxDisplayCount, setMaxDisplayCount ] = useState(() => getMaxDisplayCount(window.innerWidth));
     const [ newFriendIds, setNewFriendIds ] = useState<Set<number>>(() => new Set());
@@ -45,7 +45,7 @@ export const FriendBarView: FC<{ onlineFriends: MessengerFriend[] }> = props =>
                 if(currentIds.has(friendId)) nextValue.add(friendId);
             }
 
-            if(previousIds)
+            if(previousIds && isFriendsListReady)
             {
                 for(const friendId of currentIds)
                 {
@@ -57,7 +57,7 @@ export const FriendBarView: FC<{ onlineFriends: MessengerFriend[] }> = props =>
         });
 
         lastFriendIds.current = currentIds;
-    }, [ onlineFriendsKey ]);
+    }, [ onlineFriendsKey, isFriendsListReady ]);
 
     const clearNewFriend = useCallback((friendId: number) =>
     {

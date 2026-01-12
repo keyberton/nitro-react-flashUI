@@ -7,13 +7,13 @@ import { FriendsMessengerView } from './views/messenger/FriendsMessengerView';
 
 export const FriendsView: FC<{}> = props =>
 {
-    const { settings = null, onlineFriends = [] } = useFriends();
+    const { settings = null, onlineFriends = [], isFriendsListReady = false } = useFriends();
 
     if(!settings) return null;
 
     return (
         <>
-            { createPortal(<FriendBarView onlineFriends={ onlineFriends } />, document.getElementById('toolbar-friend-bar-container')) }
+            { createPortal(<FriendBarView onlineFriends={ onlineFriends } isFriendsListReady={ isFriendsListReady } />, document.getElementById('toolbar-friend-bar-container')) }
             <FriendsListView />
             <FriendsMessengerView />
         </>

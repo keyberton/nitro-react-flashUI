@@ -78,7 +78,7 @@ export const NitroCardAccordionSetView: FC<NitroCardAccordionSetViewProps> = pro
                 { !isOpen && <Base className={ `icon icon-friendlist_${ (friendlistTab === FriendListTabs.YOUR_FRIENDS) ? 'arrow_black' : 'arrow_white' }_right` } /> }
             </Flex>
             { isOpen &&
-                <Column fullHeight overflow="auto" gap={ 0 } className={ `nitro-card-accordion-set-content${ (friendlistTab === FriendListTabs.SEARCH_HABBOS) ? '-gray' : '' } p-1` }>
+                <Column fullHeight style={ { borderTop: friendlistTab === FriendListTabs.YOUR_FRIENDS ? '1px solid #295f82' : friendlistTab === FriendListTabs.SEARCH_HABBOS ? '1px solid #292929' : friendlistTab === FriendListTabs.REQUESTS ? '1px solid #914c00' : '' } } overflow="auto" gap={ 0 } className={ `nitro-card-accordion-set-content${ (friendlistTab === FriendListTabs.SEARCH_HABBOS) ? '-gray' : '' } p-1` }>
                     { children }
                 </Column> }
         </Column>

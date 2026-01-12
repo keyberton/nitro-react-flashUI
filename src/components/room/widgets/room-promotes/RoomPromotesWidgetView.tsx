@@ -24,12 +24,12 @@ export const RoomPromotesWidgetView: FC<{}> = props =>
             { (promoteInformation?.data.adId === -1 && navigatorData?.enteredGuestRoom?.ownerId === GetSessionDataManager().userId) &&
                 <Base className="nitro-notification-bubble not-notification">
                     <Column>
-                        <Flex className="grouproom-header" alignItems="center" justifyContent="between" pointer onClick={ event => CreateLinkEvent('catalog/open/room_event') }>
+                        <Flex className="grouproom-header gap-3" alignItems="center" pointer onClick={ event => CreateLinkEvent('catalog/open/room_event') }>
                             <Flex className="icon-style">
                                 <Base className="icon icon-room-promote" />
                             </Flex>
                             <Text underline className="text-no-promote">{ LocalizeText('roomad.get.event') }</Text>
-                            <Flex className="arrow-right-style">
+                            <Flex className="arrow-right-style ps-3">
                                 <Base className="icon icon-notification_arrow_left" />
                             </Flex>
                         </Flex>

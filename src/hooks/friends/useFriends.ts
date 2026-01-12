@@ -1,5 +1,5 @@
 import { AcceptFriendMessageComposer, DeclineFriendMessageComposer, FindFriendsProcessResultEvent, FollowFriendMessageComposer, FriendListFragmentEvent, FriendListUpdateComposer, FriendListUpdateEvent, FriendParser, FriendRequestsEvent, GetFriendRequestsComposer, MessengerInitComposer, MessengerInitEvent, NewFriendRequestEvent, RequestFriendComposer, SetRelationshipStatusComposer } from '@nitrots/nitro-renderer';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { useBetween } from 'use-between';
 import { CloneObject, GetSessionDataManager, LocalizeText, MessengerFriend, MessengerRequest, MessengerSettings, SendMessageComposer } from '../../api';
 import { useMessageEvent } from '../events';
@@ -12,6 +12,9 @@ const useFriendsState = () =>
     const [ sentRequests, setSentRequests ] = useState<number[]>([]);
     const [ dismissedRequestIds, setDismissedRequestIds ] = useState<number[]>([]);
     const [ settings, setSettings ] = useState<MessengerSettings>(null);
+    const [ isFriendsListReady, setIsFriendsListReady ] = useState(false);
+    const friendListFragmentsReceived = useRef<boolean[]>(null);
+    const friendListTotalFragments = useRef(0);
     const { simpleAlert } = useNotification();
 
     const onlineFriends = useMemo(() =>
@@ -126,6 +129,14 @@ const useFriendsState = () =>
     {
         const parser = event.getParser();
 
+        setFriends([]);
+        setRequests([]);
+        setSentRequests([]);
+        setDismissedRequestIds([]);
+        setIsFriendsListReady(false);
+        friendListFragmentsReceived.current = null;
+        friendListTotalFragments.current = 0;
+
         setSettings(new MessengerSettings(
             parser.userFriendLimit,
             parser.normalFriendLimit,
@@ -138,6 +149,19 @@ const useFriendsState = () =>
     useMessageEvent<FriendListFragmentEvent>(FriendListFragmentEvent, event =>
     {
         const parser = event.getParser();
+
+        if(!friendListFragmentsReceived.current || (friendListTotalFragments.current !== parser.totalFragments))
+        {
+            friendListTotalFragments.current = parser.totalFragments;
+            friendListFragmentsReceived.current = new Array(parser.totalFragments).fill(false);
+        }
+
+        if(friendListFragmentsReceived.current && (parser.totalFragments > 0) && (parser.fragmentNumber >= 0) && (parser.fragmentNumber < friendListFragmentsReceived.current.length))
+        {
+            friendListFragmentsReceived.current[parser.fragmentNumber] = true;
+
+            if(friendListFragmentsReceived.current.every(Boolean)) setIsFriendsListReady(true);
+        }
 
         setFriends(prevValue =>
         {
@@ -160,6 +184,8 @@ const useFriendsState = () =>
     useMessageEvent<FriendListUpdateEvent>(FriendListUpdateEvent, event =>
     {
         const parser = event.getParser();
+
+        if(!friendListFragmentsReceived.current) setIsFriendsListReady(true);
 
         setFriends(prevValue =>
         {
@@ -271,7 +297,7 @@ const useFriendsState = () =>
         }
     }, []);
 
-    return { friends, requests, sentRequests, dismissedRequestIds, setDismissedRequestIds, settings, onlineFriends, offlineFriends, getFriend, canRequestFriend, requestFriend, requestResponse, followFriend, updateRelationship };
+    return { friends, requests, sentRequests, dismissedRequestIds, setDismissedRequestIds, settings, onlineFriends, offlineFriends, isFriendsListReady, getFriend, canRequestFriend, requestFriend, requestResponse, followFriend, updateRelationship };
 }
 
 export const useFriends = () => useBetween(useFriendsState);

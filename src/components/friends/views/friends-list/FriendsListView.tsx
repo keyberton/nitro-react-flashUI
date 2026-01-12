@@ -166,11 +166,11 @@ export const FriendsListView: FC<{}> = props =>
                                     <Flex gap={ 1 } className="friend-active-tab p-1">
                                         <div className={ `friend-follow-icon ${ selectedFriendsIds && selectedFriendsIds.length === 0 ? '' : 'active' }` } onClick={ selectedFriendsIds && selectedFriendsIds.length === 0 ? null : () => setShowRoomInvite(true) } onMouseEnter={ selectedFriendsIds && selectedFriendsIds.length === 0 ? null : () => setShowHoverText(LocalizeText('friendlist.tip.invite')) } onMouseLeave={ selectedFriendsIds && selectedFriendsIds.length === 0 ? null : () => setShowHoverText('') } />
                                         <div className={ `friend-profile-icon d-none d-sm-block ${ selectedFriendsIds && selectedFriendsIds.length === 0 ? '' : 'active' }` } onMouseEnter={ selectedFriendsIds && selectedFriendsIds.length === 0 ? null : () => setShowHoverText(LocalizeText('friendlist.tip.home')) } onMouseLeave={ selectedFriendsIds && selectedFriendsIds.length === 0 ? null : () => setShowHoverText('') } />
-                                        { !showSearchInput && <div className={ 'friends-search-icon active' } onClick={ () => setShowSearchInput(true) } /> }
+                                        { !showSearchInput && <div className={ 'friends-search-icon active' } onClick={ () => setShowSearchInput(true) } onMouseEnter={ () => setShowHoverText(LocalizeText('friendlist.tip.search')) } onMouseLeave={ () => setShowHoverText('') } /> }
                                         { showSearchInput && 
-                                            <div className="friends-input-container align-items-center rounded h-full ">
+                                            <div onMouseEnter={ () => setShowHoverText(LocalizeText('friendlist.tip.search')) } onMouseLeave={ () => setShowHoverText('') } className="friends-input-container align-items-center rounded h-full ">
                                                 <div>
-                                                    <input className="search-input" type="text" value={ searchQuery } onChange={ event => setSearchQuery(event.target.value) } />
+                                                    <input className="search-input" type="text" value={ searchQuery } onChange={ event => setSearchQuery(event.target.value) } onMouseEnter={ () => setShowHoverText(LocalizeText('friendlist.tip.search')) } onMouseLeave={ () => setShowHoverText('') } />
                                                 </div>
                                                 <i className="close-saarch" onClick={ () => setShowSearchInput(false) } />
                                             </div>

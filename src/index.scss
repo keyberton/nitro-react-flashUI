@@ -22,8 +22,7 @@ body {
     }
 }
 
-input {
-    cursor: pointer;    
+input { 
 
     &[type="checkbox"] {  
         appearance: none;
@@ -31,7 +30,9 @@ input {
         border: 0!important;
         width: 15px;
         height: 15px;
+        border-radius: 0!important;
         background-image: url(@/assets/flash/buttons/checkbox.png);
+        cursor: pointer;   
     }
 
     &[type="radio"] {
@@ -40,7 +41,8 @@ input {
         border: 0!important;
         background-image: url(@/assets/flash/buttons/radio.png);
         width: 14px;
-        height: 14px
+        height: 14px;
+        cursor: pointer;   
     }
 
     &:checked {
@@ -48,12 +50,14 @@ input {
         background-color: transparent!important;
         border: 0!important;
         background-image: url(@/assets/flash/buttons/checkbox_checked.png);
+        cursor: pointer;  
 
       &[type="radio"] {
         appearance: none;
         background-color: transparent!important;
         border: 0!important;
         background-image: url(@/assets/flash/buttons/radio_marked.png);
+        cursor: pointer;  
       }
     }
 }

@@ -172,16 +172,16 @@ export const RoomToolsWidgetView: FC<{}> = props =>
                         </TransitionAnimation>
                     </Flex>
                     <Column justifyContent="center">
-                        <TransitionAnimation type={ TransitionAnimationTypes.SLIDE_LEFT } inProp={ isOpen } timeout={ 300 }>
+                        <TransitionAnimation type={ TransitionAnimationTypes.SLIDE_RIGHT } inProp={ isOpen } timeout={ 300 }>
                             <Column center>
-                                <Column className="nitro-room-tools-info rounded py-2 px-3">
-                                    <Column gap={ 1 }>
+                                <Column className="nitro-room-tools-info rounded py-1 px-2">
+                                    <Column gap={ 0 }>
                                         <Text wrap variant="white" fontSize={ 4 }>{ roomName }</Text>
-                                        <Text variant="muted" fontSize={ 5 }>{ LocalizeText('room.tool.room.owner.prefix') + ' ' + roomOwner }</Text>
+                                        <Text bold variant="muted" fontSize={ 5 }>{ LocalizeText('room.tool.room.owner.prefix') + ' ' + roomOwner }</Text>
                                     </Column>
                                     { roomTags && roomTags.length > 0 &&
-                                        <Flex gap={ 2 }>
-                                            { roomTags.map((tag, index) => <Text key={ index } small pointer className="tags rounded p-1" onClick={ () => handleToolClick('navigator_search_tag', tag) }>#{ tag }</Text>) }
+                                        <Flex gap={ 1 }>
+                                            { roomTags.map((tag, index) => <Text key={ index } small pointer className="tags rounded" onClick={ () => handleToolClick('navigator_search_tag', tag) }>#{ tag }</Text>) }
                                         </Flex> }
                                 </Column>
                             </Column>

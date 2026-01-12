@@ -1,6 +1,62 @@
 .nitro-achievements {
     width: $achievement-width;
     height: $achievement-height;
+    min-width: $achievement-width;
+    min-height: $achievement-height;
+
+    .nitro-progress-bar {
+        border: none;
+        border-radius: 0;
+        overflow: hidden;
+        background: url(@/assets/flash/boxes/bg-progress-bar.png) no-repeat center;
+        width: 254px;
+        height: 23px;
+        flex-shrink: 0;
+
+        .nitro-progress-bar-inner {
+            background-image: url(@/assets/flash/boxes/bg-percent.png);
+            height: 17px;
+            margin-left: 2px;
+            max-width: 247px;
+        }
+
+        .nitro-progress-bar-text {
+            font-weight: bold;
+            text-shadow: none;
+        }
+    }
+    
+    .earned-text {
+        color: #525252;
+    }
+
+    .nitro-achievements-list {
+        
+    }
+
+    .nitro-categories-list {
+
+        .achieve-name {
+            color: #323030;
+            font-size: 12px;
+        }
+
+        .layout-grid-item {
+            border-image-source: url('@/assets/flash/boxes/card/bg-category.png')!important;
+            border-image-slice: 7 fill!important;
+            border-image-width: 7px!important;
+            background: none!important;
+            margin-top: 1px;
+            margin-left: 1px;
+            width: 110px;
+            height: 103px;
+
+            &:hover {
+                border-image-source: url('@/assets/flash/boxes/card/bg-category-hover.png')!important;
+                transform: translate(-1px, -1px);
+            }
+        }
+    }
 }
 
 .nitro-achievements-back-arrow {

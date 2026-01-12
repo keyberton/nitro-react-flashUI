@@ -14,11 +14,14 @@ export const NavigatorSearchView: FC<NavigatorSearchViewProps> = props =>
     const { sendSearch = null } = props;
     const [ searchFilterIndex, setSearchFilterIndex ] = useState(0);
     const [ searchValue, setSearchValue ] = useState('');
+    const [ hasSearched, setHasSearched ] = useState(false);
     const { topLevelContext = null, searchResult = null } = useNavigator();
 
     const processSearch = () =>
     {
         if(!topLevelContext) return;
+
+        setHasSearched(true);
 
         let searchFilter = SearchFilterOptions[searchFilterIndex];
 
@@ -76,7 +79,12 @@ export const NavigatorSearchView: FC<NavigatorSearchViewProps> = props =>
             </Flex>
             <Flex className='pe-5' fullWidth gap={ 2 }>
                 <input type="text" style={ { width: 235 } } className="form-control border-black form-control-sm" placeholder={ LocalizeText('navigator.filter.input.placeholder') } value={ searchValue } onChange={ event => setSearchValue(event.target.value) } onKeyDown={ event => handleKeyDown(event) } />
-                <i className="icon icon-pen navigator-search-button position-absolute" onClick={ processSearch } />
+                { (!searchValue || !searchValue.length) &&
+                    <i className="icon icon-pen position-absolute navigator-search-button"/> }
+                { searchValue && !!searchValue.length &&
+                    <i className="icon icon-clear position-absolute navigator-clear-button cursor-pointer" onClick={ event => setSearchValue('') } /> }
+                { hasSearched && searchValue && !!searchValue.length &&
+                    <i className="icon icon-reload-navigator cursor-pointer" onClick={ processSearch } /> }
             </Flex>
         </Flex>
     );

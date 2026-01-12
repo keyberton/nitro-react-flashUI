@@ -101,9 +101,9 @@ export const GroupInformationView: FC<GroupInformationViewProps> = props =>
 
     return (
         <Column className="group-information" overflow={ overflow } { ...rest }>
-            <Column className='group-information-content'>
+            <Column className='group-information-content overflow-hidden'>
                 <Flex>
-                    <Column gap={2} className='badge-container' alignItems='center' overflow="hidden">
+                    <Column gap={0} className='badge-container' alignItems='center' overflow="hidden">
                         <Flex className="p-2 pe-3">
                             <Flex alignItems="center" overflow="hidden" className="group-badge">
                                 <LayoutBadgeImageView style={ { transform: 'scale(1)' } } badgeCode={ groupInformation.badge } isGroup={ true } scale={ 2 } />
@@ -133,7 +133,7 @@ export const GroupInformationView: FC<GroupInformationViewProps> = props =>
                             <Text style={ { fontSize: 12.5 } } small textBreak overflow="auto" className="group-description">{ groupInformation.description }</Text>
                         </Column>
                         <Column>
-                            <Column gap={ 1 }>
+                            <Column className='mt-2' gap={ 0 }>
                                 <Text small underline pointer onClick={ () => handleAction('homeroom') }>{ LocalizeText('group.linktobase') }</Text>
                                 <Text small underline pointer onClick={ () => handleAction('furniture') }>{ LocalizeText('group.buyfurni') }</Text>
                                 <Text small underline pointer onClick={ () => handleAction('popular_groups') }>{ LocalizeText('group.showgroups') }</Text>
@@ -141,10 +141,10 @@ export const GroupInformationView: FC<GroupInformationViewProps> = props =>
                         </Column>
                     </Column>
                 </Flex>
-                <Flex fullWidth center position='relative'>
+                <Flex className='mt-2' fullWidth center position='relative'>
                     <Flex style={ { left: 35, bottom: 5 } } position='absolute' className='role-icon'>{ getRoleIcon() }</Flex>
                     { (groupInformation.type !== GroupType.PRIVATE || groupInformation.type === GroupType.PRIVATE && groupInformation.membershipType === GroupMembershipType.MEMBER) &&
-                        <Button style={ { minWidth: 160 } } variant={(groupInformation.membershipType === GroupMembershipType.REQUEST_PENDING) ? 'transparent' : 'bold'} className='group-button mt-3' disabled={ isRealOwner } onClick={ handleButtonClick }>
+                        <Button style={ { minWidth: 160 } } variant={(groupInformation.membershipType === GroupMembershipType.REQUEST_PENDING) ? 'transparent' : 'bold'} className='group-button' disabled={ isRealOwner } onClick={ handleButtonClick }>
                             { LocalizeText(getButtonText()) }
                         </Button> }
                 </Flex>

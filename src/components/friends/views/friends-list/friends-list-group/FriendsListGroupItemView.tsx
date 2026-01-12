@@ -73,15 +73,17 @@ export const FriendsListGroupItemView: FC<FriendsListGroupItemViewProps> = props
                 <Base style={ { marginLeft: (friend.id < 0 || !friend.online) ? '14px' : '' } } onClick={ event => event.stopPropagation() } onMouseEnter={ () => setShowHoverText(LocalizeText('infostand.profile.link.tooltip')) } onMouseLeave={ () => setShowHoverText('') }>
                     <UserProfileIconView userId={ friend.id } />
                 </Base>
-                <Text variant="black" className="ms-1">{ friend.name }</Text>
+                <Text variant="black" className="ms-2">{ friend.name }</Text>
             </Flex>
             <Flex alignItems="center" gap={ 1 }>
-                <Flex className={ !friend.followingAllowed ? 'pe-4' : 'pe-1' } onClick={ openRelationship } onMouseEnter={ () => setShowHoverText(LocalizeText('infostand.link.relationship')) } onMouseLeave={ () => setShowHoverText('') }>
+                <Flex className={ !friend.followingAllowed ? 'pe-3' : '' } gap={0} onClick={ openRelationship } onMouseEnter={ () => setShowHoverText(LocalizeText('infostand.link.relationship')) } onMouseLeave={ () => setShowHoverText('') }>
                     { (friend.id > 0) && <Base className={ `nitro-friends-spritesheet icon-${ getCurrentRelationshipName() }` } /> }
-                    { (friend.id > 0) && <Base className="icon icon-friendlist_arrow_black_down" /> }
+                    { (friend.id > 0) && <Base className="icon icon-friendlist_arrow_black_down mt-1" /> }
                 </Flex>
-                { friend.followingAllowed && <Base pointer onClick={ clickFollowFriend } className="nitro-friends-spritesheet icon-follow" onMouseEnter={ () => setShowHoverText(LocalizeText('friendlist.tip.follow')) } onMouseLeave={ () => setShowHoverText('') } /> }
-                <Base pointer className="nitro-friends-spritesheet icon icon-friend_message" onClick={ openMessengerChat } onMouseEnter={ () => setShowHoverText(LocalizeText('friendlist.tip.im')) } onMouseLeave={ () => setShowHoverText('') } />
+                <Flex gap={0}>
+                    { friend.followingAllowed && <Base pointer onClick={ clickFollowFriend } className="nitro-friends-spritesheet icon-follow" onMouseEnter={ () => setShowHoverText(LocalizeText('friendlist.tip.follow')) } onMouseLeave={ () => setShowHoverText('') } /> }
+                    <Base pointer className="nitro-friends-spritesheet icon icon-friend_message" onClick={ openMessengerChat } onMouseEnter={ () => setShowHoverText(LocalizeText('friendlist.tip.im')) } onMouseLeave={ () => setShowHoverText('') } />
+                </Flex>
                 { isRelationshipOpen &&
                     <>
                         <Column position="absolute" className="select-relation">
