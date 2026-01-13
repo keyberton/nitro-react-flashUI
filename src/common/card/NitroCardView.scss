@@ -66,6 +66,7 @@ $nitro-card-tabs-height: 35px;
 
         .nitro-card-tabs {
             background-color: #e9e9e1;
+            text-shadow: none;
         }
 
         .content-area {
@@ -74,6 +75,7 @@ $nitro-card-tabs-height: 35px;
             border-image-width: 0px 7px 8px 7px;
             border-image-repeat: repeat repeat;
             color: #000;
+            text-shadow: 0 1px white;
         }
 
     }

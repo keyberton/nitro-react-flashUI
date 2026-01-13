@@ -18,7 +18,7 @@
     }
 
     .navigator-grid {
-
+        text-shadow: none;
 
         &:not(.two-columns) {
 
@@ -228,9 +228,9 @@
 
 .nav-bottom-buttons-text {
     font-size: 12px;
-
+    text-shadow: none;
     padding-top: 22px;
-    margin-left: 86px;
+    margin-left: 95px;
 }
 
 

@@ -1,7 +1,7 @@
 import { FriendlyTime, RequestFriendComposer, UserProfileParser } from '@nitrots/nitro-renderer';
 import { FC, useEffect, useState } from 'react';
 import { GetSessionDataManager, LocalizeText, SendMessageComposer } from '../../../api';
-import { Column, Flex, LayoutAvatarImageView, Text } from '../../../common';
+import { Button, Column, Flex, LayoutAvatarImageView, Text } from '../../../common';
 
 interface UserContainerViewProps
 {
@@ -47,21 +47,23 @@ export const UserContainerView: FC<UserContainerViewProps> = props =>
                     <Text fontSize={ 7 } small>
                         <b>{ LocalizeText('extendedprofile.achievementscore') }</b> { userProfile.achievementPoints }
                     </Text>
-                    <Flex gap={ 1 }>
+                    <Flex alignItems='center' gap={ 3 }>
                     { userProfile.isOnline &&
                         <i className="icon icon-pf-online" /> }
                     { !userProfile.isOnline &&
                         <i className="icon icon-pf-offline" /> }
                     <Flex alignItems="center" gap={ 1 }>
                         { canSendFriendRequest &&
-                            <Text small underline pointer onClick={ addFriend }>{ LocalizeText('extendedprofile.addasafriend') }</Text> }
+                            <Button className='p-1 px-3'>
+                                <Text small pointer onClick={ addFriend }>{ LocalizeText('extendedprofile.addasafriend') }</Text>
+                            </Button> }
                         { !canSendFriendRequest &&
                             <>
                                 <i className="icon icon-pf-tick" />
                                 { isOwnProfile &&
-                                    <Text bold small>{ LocalizeText('extendedprofile.me') }</Text> }
+                                    <Text bold  small>{ LocalizeText('extendedprofile.me') }</Text> }
                                 { userProfile.isMyFriend &&
-                                    <Text>{ LocalizeText('extendedprofile.friend') }</Text> }
+                                    <Text small bold>{ LocalizeText('extendedprofile.friend') }</Text> }
                                 { (requestSent || userProfile.requestSent) &&
                                     <Text>{ LocalizeText('extendedprofile.friendrequestsent') }</Text> }
                             </> }

@@ -30,6 +30,7 @@
 }
 
 .group-information {
+    text-shadow: none;
     border-image-source: url(@/assets/flash/profile/bg-information-content.png);
     border-image-slice: 7 fill;
     border-image-width: 7px;

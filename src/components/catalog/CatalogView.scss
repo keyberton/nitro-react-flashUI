@@ -82,6 +82,7 @@
         padding: 1rem 6px 1rem 6px;
         z-index: 99;
         height: 60px;
+        text-shadow: none;
     }
 
     .selectproduct-title {
@@ -224,6 +225,7 @@
 }
 
 .nitro-catalog-navigation-grid-container {
+    text-shadow: none;
     gap: 1px !important;
 
     .nitro-catalog-item {

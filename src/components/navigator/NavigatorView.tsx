@@ -236,14 +236,14 @@ export const NavigatorView: FC<{}> = props =>
                                             </Flex>
                                             { (searchResult?.code !== 'myworld_view' && searchResult?.code !== 'roomads_view') &&
                                                 <Flex className="nav-random-room" onClick={ () => SendMessageComposer(new FindNewFriendsMessageComposer()) }>
-                                                    <Text variant="white" bold className="nav-bottom-buttons-text">
+                                                    <Text style={ { marginLeft: 80 } } variant="white" bold className="nav-bottom-buttons-text">
                                                         { LocalizeText('navigator.random.room') }
                                                     </Text>
                                                 </Flex>
                                             }
                                             { (searchResult?.code === 'myworld_view' || searchResult?.code === 'roomads_view') &&
                                                 <Flex className="nav-promote-room" onClick={ () => CreateLinkEvent('catalog/open/room_event') }>
-                                                    <Text variant="white" bold className="nav-bottom-buttons-text">
+                                                    <Text style={ { marginLeft: 90 } } variant="white" bold className="nav-bottom-buttons-text">
                                                         { LocalizeText('navigator.promote.room') }
                                                     </Text>
                                                 </Flex>
