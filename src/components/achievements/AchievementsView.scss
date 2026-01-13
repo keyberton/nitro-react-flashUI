@@ -1,20 +1,18 @@
 .nitro-achievements {
     width: $achievement-width;
-    height: $achievement-height;
     min-width: $achievement-width;
-    min-height: $achievement-height;
 
     .nitro-progress-bar {
         border: none;
         border-radius: 0;
         overflow: hidden;
-        background: url(@/assets/flash/boxes/bg-progress-bar.png) no-repeat center;
+        background: url("@/assets/flash/boxes/bg-progress-bar.png") no-repeat center;
         width: 254px;
         height: 23px;
         flex-shrink: 0;
 
         .nitro-progress-bar-inner {
-            background-image: url(@/assets/flash/boxes/bg-percent.png);
+            background-image: url("@/assets/flash/boxes/bg-percent.png");
             height: 17px;
             margin-left: 2px;
             max-width: 247px;
@@ -25,13 +23,62 @@
             text-shadow: none;
         }
     }
+
+    .nitro-item-count {
+        top: 3px!important;
+        right: 3px!important;
+    }
     
     .earned-text {
         color: #525252;
     }
 
+    .group-information {
+        padding-bottom: 13px!important;
+        padding-left: 16px!important;
+        padding-right: 14px!important;
+        padding-top: 20px!important;
+        height: 130px;
+    }
+
+    .content-area {
+        padding-left: 14px!important;
+        padding-top: 7px!important;
+        padding-right: 14px!important;
+        padding-bottom: 14px!important;
+    }
+
+    .small-progress-bar  {
+        background: url("@/assets/flash/achievements/small-progress-bar.png") no-repeat center;
+        width: 188px;
+        flex-shrink: 0;
+    }
+
+    .nitro-card-sub-header {
+        background-color: #8899A2!important;
+        height: 75px;
+        border: 1px solid black;
+        border-top: 0;
+        padding-left: 14px!important;
+        padding-right: 14px!important;
+        gap: 34px!important;
+    }
+
     .nitro-achievements-list {
-        
+        padding-right: 8px;
+        max-height: 255px;
+        .layout-grid-item {
+            background: url("@/assets/flash/achievements/bg-item.png") no-repeat;
+            width: 62px;
+            height: 60px;
+            border: none !important;
+            background-position: center;
+            border-radius: 6px;
+
+            &.active {
+                background: url("@/assets/flash/achievements/bg-item-active.png") no-repeat;
+            }
+        }
     }
 
     .nitro-categories-list {

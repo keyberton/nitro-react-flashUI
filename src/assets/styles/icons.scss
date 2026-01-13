@@ -9,6 +9,17 @@
     background-repeat: no-repeat;
     background-position: center;
 
+    &.icon-next-menu {
+        background: url('@/assets/flash/friendlist/arrow-gray-right.png');
+        width: 5px;
+        height: 10px;
+        right: 20px;
+
+        &.back {
+            transform: rotate(180deg);
+        }
+    }
+
     &.icon-reload-navigator {
         background-image: url('@/assets/flash/navigator/refresh.png');
         min-width: 25px;

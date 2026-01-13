@@ -137,10 +137,11 @@ export const AvatarInfoWidgetOwnAvatarView: FC<AvatarInfoWidgetOwnAvatarViewProp
                         { LocalizeText('widget.memenu.myclothes') }
                     </ContextMenuListItemView>
                     { (HasHabboClub() && !isRidingHorse) &&
-                        <ContextMenuListItemView onClick={ event => processAction('dance_menu') }>
+                        <ContextMenuListItemView gap={ 2 } onClick={ event => processAction('dance_menu') }>
                             <Flex gap={ 1 }>
                                 { LocalizeText('widget.memenu.dance') }
                             </Flex>
+                            <i className="icon icon-next-menu"/>
                         </ContextMenuListItemView> }
                     { (!isDancing && !HasHabboClub() && !isRidingHorse) &&
                         <ContextMenuListItemView onClick={ event => processAction('dance') }>
@@ -152,15 +153,17 @@ export const AvatarInfoWidgetOwnAvatarView: FC<AvatarInfoWidgetOwnAvatarViewProp
                         <ContextMenuListItemView onClick={ event => processAction('dance_stop') }>
                             { LocalizeText('widget.memenu.dance.stop') }
                         </ContextMenuListItemView> }
-                    <ContextMenuListItemView onClick={ event => processAction('expressions') }>
+                    <ContextMenuListItemView gap={ 2 } onClick={ event => processAction('expressions') }>
                         <Flex gap={ 1 }>
                             { LocalizeText('infostand.link.expressions') }
                         </Flex>
+                        <i className="icon icon-next-menu"/>
                     </ContextMenuListItemView>
-                    <ContextMenuListItemView onClick={ event => processAction('signs') }>
+                    <ContextMenuListItemView gap={ 2 } onClick={ event => processAction('signs') }>
                         <Flex gap={ 1 }>
                             { LocalizeText('infostand.show.signs') }
                         </Flex>
+                        <i className="icon icon-next-menu"/>
                     </ContextMenuListItemView>
                     { (avatarInfo.carryItem > 0) &&
                         <ContextMenuListItemView onClick={ event => processAction('drop_carry_item') }>
@@ -185,7 +188,8 @@ export const AvatarInfoWidgetOwnAvatarView: FC<AvatarInfoWidgetOwnAvatarViewProp
                     <ContextMenuListItemView onClick={ event => processAction('dance_4') }>
                         { LocalizeText('widget.memenu.dance4') }
                     </ContextMenuListItemView>
-                    <ContextMenuListItemView onClick={ event => processAction('back') }>
+                    <ContextMenuListItemView gap={ 1 } onClick={ event => processAction('back') }>
+                        <i className="icon icon-next-menu back"/>
                         <Flex gap={ 1 }>
                             { LocalizeText('generic.back') }
                         </Flex>
@@ -218,7 +222,8 @@ export const AvatarInfoWidgetOwnAvatarView: FC<AvatarInfoWidgetOwnAvatarViewProp
                     <ContextMenuListItemView onClick={ event => processAction('idle') }>
                         { LocalizeText('widget.memenu.idle') }
                     </ContextMenuListItemView>
-                    <ContextMenuListItemView onClick={ event => processAction('back') }>
+                    <ContextMenuListItemView gap={ 1 } onClick={ event => processAction('back') }>
+                        <i className="icon icon-next-menu back"/>
                         <Flex gap={ 1 }>
                             { LocalizeText('generic.back') }
                         </Flex>
@@ -292,7 +297,8 @@ export const AvatarInfoWidgetOwnAvatarView: FC<AvatarInfoWidgetOwnAvatarViewProp
                             <i className="icon icon-sign-red" />
                         </ContextMenuListItemView>
                     </Flex>
-                    <ContextMenuListItemView onClick={ event => processAction('back') }>
+                    <ContextMenuListItemView gap={ 1 } onClick={ event => processAction('back') }>
+                        <i className="icon icon-next-menu back"/>
                         <Flex gap={ 1 }>
                             { LocalizeText('generic.back') }
                         </Flex>

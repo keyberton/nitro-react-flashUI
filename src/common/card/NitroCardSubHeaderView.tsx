@@ -10,7 +10,7 @@ export const NitroCardSubHeaderView: FC<NitroCardSubHeaderProps> = props =>
 
     const getClassNames = useMemo(() =>
     {
-        const newClassNames: string[] = [ 'container-fluid', 'p-1' ];
+        const newClassNames: string[] = [ 'container-fluid', 'p-1', 'nitro-card-sub-header' ];
 
         if(classNames.length) newClassNames.push(...classNames);
 

@@ -28,7 +28,7 @@ export const AchievementCategoryView: FC<AchievementCategoryViewProps> = props =
     if(!category) return null;
 
     return (
-        <Column fullHeight justifyContent="between">
+        <Column fullHeight gap={1}>
             <AchievementListView achievements={ category.achievements } />
             { !!selectedAchievement &&
                 <AchievementDetailsView achievement={ selectedAchievement } /> }
