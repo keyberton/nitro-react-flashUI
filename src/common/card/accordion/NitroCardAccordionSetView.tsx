@@ -72,7 +72,7 @@ export const NitroCardAccordionSetView: FC<NitroCardAccordionSetViewProps> = pro
 
     return (
         <Column classNames={ getClassNames } gap={ gap } { ...rest }>
-            <Flex pointer className="nitro-card-accordion-set-header px-2 py-1" onMouseEnter={ () => setShowHoverText(LocalizeText(`${ friendlistTab }`)) } onMouseLeave={ () => setShowHoverText('') } onClick={ onClick }>
+            <Flex pointer className="nitro-card-accordion-set-header px-2" onMouseEnter={ () => setShowHoverText(LocalizeText(`${ friendlistTab }`)) } onMouseLeave={ () => setShowHoverText('') } onClick={ onClick }>
                 <div className="friend-header-text d-inline">{ headerText }</div>
                 { isOpen && <Base className={ `icon icon-friendlist_${ (friendlistTab === FriendListTabs.YOUR_FRIENDS) ? 'arrow_black' : 'arrow_white' }_down` } /> }
                 { !isOpen && <Base className={ `icon icon-friendlist_${ (friendlistTab === FriendListTabs.YOUR_FRIENDS) ? 'arrow_black' : 'arrow_white' }_right` } /> }

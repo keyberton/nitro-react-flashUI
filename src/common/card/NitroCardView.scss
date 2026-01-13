@@ -751,6 +751,13 @@ $nitro-card-tabs-height: 35px;
 }
 
 .nitro-card-accordion-set {
+    height: 20px;
+    justify-content: center;
+
+    .nitro-card-accordion-set-header {
+        height: 20px;
+        align-items: center;
+    }
 
     &.active {
         height: 100%;

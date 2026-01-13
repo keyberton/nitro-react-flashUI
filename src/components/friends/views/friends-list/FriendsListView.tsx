@@ -126,7 +126,7 @@ export const FriendsListView: FC<{}> = props =>
                         setIsFromSearchToolbar(false);
                         return;
                     case 'search':
-                        setIsVisible(true);
+                        setIsVisible(prevValue => !prevValue);
                         setIsFromSearchToolbar(true);
                         return;
                     case 'request':
