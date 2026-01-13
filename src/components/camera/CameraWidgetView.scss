@@ -19,6 +19,12 @@
         }
     }
 
+    .text-camera {
+        left: 9em;
+        top: 0.7em;
+        font-size: 14px;
+    }
+
     .info-camera {
         top: 8px;
         right: 32px;
@@ -42,6 +48,21 @@
         left: 10px;
         width: 320px;
         height: 320px;
+
+        &.flash {
+            z-index: 10;
+            background: #ffffffcf;
+            animation: camera-flash-animation 0.5s ease-out forwards;
+        }
+    }
+
+    @keyframes camera-flash-animation {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
     }
 
     .camera-canvas {
@@ -78,6 +99,10 @@
         .camera-frame {
             .camera-frame-preview-actions {
                 background: rgba(0, 0, 0, 0.5);
+
+                .btn-success {
+                    padding: 6px 12px 7px 12px !important;
+                }
             }
         }
     }
@@ -89,6 +114,39 @@
         border-bottom-right-radius: 10px;
         border: 1px solid black;
         box-shadow: inset 1px 0px white, inset -1px -1px white;
+
+        .camera-roll-item {
+            width: 58px;
+            height: 58px;
+            background-image: url('@/assets/images/room-widgets/camera-widget/camera-spritesheet.png');
+            background-position: -407px -476px;
+
+            &.selected {
+                background-image: none;
+            }
+        }
+
+        .camera-close-icon {
+            width: 19px;
+            position: absolute;
+            z-index: 2;
+            right: 0;
+            height: 19px;
+            background-image: url('@/assets/images/room-widgets/camera-widget/camera-spritesheet.png');
+            background-position: -468px -476px;
+        }
+
+        .camera-selected-item {
+            background-image: url('@/assets/images/room-widgets/camera-widget/camera-spritesheet.png');
+            background-position: -342px -474px;
+            position: relative;
+            bottom: 2px;
+        }
+
+        .selected {
+            border: 0;
+            border-radius: 6px;
+        }
 
         img {
             width: 56px;

@@ -8,6 +8,7 @@
   border-image-width: 4px 4px 4px 4px;
   padding: .375rem .75rem;
   min-height: 22px;
+  background-color: transparent;
   color: #000;
   font-size: 13px;
   cursor: pointer;
@@ -53,6 +54,19 @@
     border-image-source: url("@/assets/flash/buttons/button_success_active.png");
   }
 
+  &.bolder {
+    border-image-slice: 6 6 6 6 fill;
+    border-image-width: 6px 6px 6px 6px;
+    border-image-source: url("@/assets/flash/buttons/button_bold_success.png");
+
+    &:hover {
+      border-image-source: url("@/assets/flash/buttons/button_bold_success_hover.png");
+    }
+
+    &:active {
+      border-image-source: url("@/assets/flash/buttons/button_bold_success_active.png");
+    }
+  }
 }
 
 .btn-illumina {

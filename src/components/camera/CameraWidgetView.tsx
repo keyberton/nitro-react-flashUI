@@ -32,7 +32,7 @@ export const CameraWidgetView: FC<{}> = props =>
                 {
                     const clone = [ ...prevValue ];
 
-                    clone.splice(selectedPictureIndex, 1);
+                    clone[selectedPictureIndex] = null;
 
                     return clone;
                 });
