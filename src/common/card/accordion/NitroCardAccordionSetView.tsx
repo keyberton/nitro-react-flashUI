@@ -1,6 +1,7 @@
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { Base, Column, ColumnProps, Flex } from '../..';
 import { FriendListTabs, LocalizeText } from '../../../api';
+import { useFriends } from '../../../hooks';
 import { useNitroCardAccordionContext } from './NitroCardAccordionContext';
 
 export interface NitroCardAccordionSetViewProps extends ColumnProps
@@ -9,22 +10,34 @@ export interface NitroCardAccordionSetViewProps extends ColumnProps
     isExpanded?: boolean;
     friendlistTab?: FriendListTabs;
     setShowHoverText?: (text: string) => void;
+    onToggle?: (isOpen: boolean) => void;
 }
 
 export const NitroCardAccordionSetView: FC<NitroCardAccordionSetViewProps> = props =>
 {
-    const { headerText = '', isExpanded = false, friendlistTab = null, setShowHoverText = null, gap = 0, classNames = [], children = null, ...rest } = props;
-    const [ isOpen, setIsOpen ] = useState(false);
+    const { headerText = '', isExpanded = false, friendlistTab = null, setShowHoverText = null, onToggle = null, gap = 0, classNames = [], children = null, ...rest } = props;
+    const [ isOpen, setIsOpen ] = useState(isExpanded);
     const { setClosers = null, closeAll = null } = useNitroCardAccordionContext();
+    const { requests = [] } = useFriends();
 
     const onClick = () =>
     {
-        closeAll();
+        const wasOpen = isOpen;
 
-        setIsOpen(prevValue => !prevValue);
+        if(closeAll) closeAll();
+
+        if(!wasOpen)
+        {
+            setIsOpen(true);
+            if(onToggle) onToggle(true);
+        }
     }
 
-    const onClose = useCallback(() => setIsOpen(false), []);
+    const onClose = useCallback(() =>
+    {
+        setIsOpen(false);
+        if(onToggle) onToggle(false);
+    }, [ onToggle ]);
 
     const getClassNames = useMemo(() =>
     {
@@ -44,36 +57,19 @@ export const NitroCardAccordionSetView: FC<NitroCardAccordionSetViewProps> = pro
 
     useEffect(() =>
     {
-        const closeFunction = onClose;
-
-        setClosers(prevValue =>
-        {
-            const newClosers = [ ...prevValue ];
-
-            newClosers.push(closeFunction);
-
-            return newClosers;
-        });
+        if(setClosers) setClosers(prevValue => [...prevValue, onClose]);
 
         return () =>
         {
-            setClosers(prevValue =>
-            {
-                const newClosers = [ ...prevValue ];
-
-                const index = newClosers.indexOf(closeFunction);
-
-                if(index >= 0) newClosers.splice(index, 1);
-
-                return newClosers;
-            });
+            if(setClosers) setClosers(prevValue => prevValue.filter(closer => closer !== onClose));
         }
-    }, [ onClose, setClosers ]);
+    }, [ setClosers, onClose ]);
 
     return (
         <Column classNames={ getClassNames } gap={ gap } { ...rest }>
-            <Flex pointer className="nitro-card-accordion-set-header px-2" onMouseEnter={ () => setShowHoverText(LocalizeText(`${ friendlistTab }`)) } onMouseLeave={ () => setShowHoverText('') } onClick={ onClick }>
+            <Flex pointer className="nitro-card-accordion-set-header px-2" onMouseEnter={ () => setShowHoverText && friendlistTab && setShowHoverText(LocalizeText(`${ friendlistTab }`)) } onMouseLeave={ () => setShowHoverText && setShowHoverText('') } onClick={ onClick }>
                 <div className="friend-header-text d-inline">{ headerText }</div>
+                { (friendlistTab === FriendListTabs.REQUESTS) && <div className={ `friend-requests-icon ${ requests.length > 0 ? 'active' : '' }` }/> }
                 { isOpen && <Base className={ `icon icon-friendlist_${ (friendlistTab === FriendListTabs.YOUR_FRIENDS) ? 'arrow_black' : 'arrow_white' }_down` } /> }
                 { !isOpen && <Base className={ `icon icon-friendlist_${ (friendlistTab === FriendListTabs.YOUR_FRIENDS) ? 'arrow_black' : 'arrow_white' }_right` } /> }
             </Flex>

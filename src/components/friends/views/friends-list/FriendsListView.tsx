@@ -21,6 +21,7 @@ export const FriendsListView: FC<{}> = props =>
     const [ showSearchInput, setShowSearchInput ] = useState<boolean>(false);
     const [ searchQuery, setSearchQuery ] = useState<string>('');
     const { onlineFriends = [], offlineFriends = [], requests = [], requestFriend = null } = useFriends();
+    const [ activeTab, setActiveTab ] = useState<string>(null);
 
     const removeFriendsText = useMemo(() =>
     {
@@ -144,15 +145,32 @@ export const FriendsListView: FC<{}> = props =>
         return () => RemoveLinkEventTracker(linkTracker);
     }, [ requestFriend ]);
 
+    useEffect(() =>
+    {
+        if(isFromSearchToolbar)
+        {
+            setActiveTab('search');
+            return;
+        }
+
+        if(requests.length > 0)
+        {
+            setActiveTab('requests');
+            return;
+        }
+
+        setActiveTab('friends');
+    }, [ isFromSearchToolbar, requests.length ]);
+
     if(!isVisible) return null;
 
     return (
         <>
-            <NitroCardView className="nitro-friends" uniqueKey="nitro-friends" theme="friendlist">
+            <NitroCardView className="nitro-friends" uniqueKey="nitro-friends" theme="friendlist" style={ { height: activeTab ? '350px' : '120px' } }>
                 <NitroCardHeaderView hideButtonClose headerText={ LocalizeText('friendlist.friends') } onCloseClick={ event => setIsVisible(false) } />
                 <NitroCardContentView overflow="hidden" gap={ 1 } className="text-black p-0">
                     <NitroCardAccordionView fullHeight overflow="hidden">
-                        <NitroCardAccordionSetView className="friend-headers" headerText={ LocalizeText('friendlist.friends') } isExpanded={ (!isFromSearchToolbar && requests.length === 0) ? true : false } friendlistTab={ FriendListTabs.YOUR_FRIENDS } setShowHoverText={ (e) => setShowHoverText(e) }>
+                        <NitroCardAccordionSetView className="friend-headers" headerText={ LocalizeText('friendlist.friends') } isExpanded={ activeTab === 'friends' } onToggle={ isOpen => setActiveTab(isOpen ? 'friends' : null) } friendlistTab={ FriendListTabs.YOUR_FRIENDS } setShowHoverText={ (e) => setShowHoverText(e) }>
                             <Column className="w-100 h-100 position-relative">
                                 <Column overflow="auto" gap={ 0 } style={ { height: 'calc(100% - 40px)' } }>
                                     <NitroCardAccordionSetInnerView headerText={ LocalizeText('friendlist.friends') + ` (${ onlineFriends.length })` } isExpanded={ true }>
@@ -168,11 +186,11 @@ export const FriendsListView: FC<{}> = props =>
                                         <div className={ `friend-profile-icon d-none d-sm-block ${ selectedFriendsIds && selectedFriendsIds.length === 0 ? '' : 'active' }` } onMouseEnter={ selectedFriendsIds && selectedFriendsIds.length === 0 ? null : () => setShowHoverText(LocalizeText('friendlist.tip.home')) } onMouseLeave={ selectedFriendsIds && selectedFriendsIds.length === 0 ? null : () => setShowHoverText('') } />
                                         { !showSearchInput && <div className={ 'friends-search-icon active' } onClick={ () => setShowSearchInput(true) } onMouseEnter={ () => setShowHoverText(LocalizeText('friendlist.tip.search')) } onMouseLeave={ () => setShowHoverText('') } /> }
                                         { showSearchInput && 
-                                            <div onMouseEnter={ () => setShowHoverText(LocalizeText('friendlist.tip.search')) } onMouseLeave={ () => setShowHoverText('') } className="friends-input-container align-items-center rounded h-full ">
+                                            <div onMouseEnter={ () => setShowHoverText(LocalizeText('friendlist.tip.search')) } onMouseLeave={ () => setShowHoverText('') } className="friends-input-container align-items-center rounded h-100 ">
                                                 <div>
                                                     <input className="search-input" type="text" value={ searchQuery } onChange={ event => setSearchQuery(event.target.value) } onMouseEnter={ () => setShowHoverText(LocalizeText('friendlist.tip.search')) } onMouseLeave={ () => setShowHoverText('') } />
                                                 </div>
-                                                <i className="close-saarch" onClick={ () => setShowSearchInput(false) } />
+                                                <i className="close-search" onClick={ () => setShowSearchInput(false) } />
                                             </div>
                                         }
                                         <div className={ `friend-delete-icon d-none d-md-block ${ selectedFriendsIds && selectedFriendsIds.length === 0 ? '' : 'active' }` } onClick={ selectedFriendsIds && selectedFriendsIds.length === 0 ? null : () => setShowRemoveFriendsConfirmation(true) } onMouseEnter={ selectedFriendsIds && selectedFriendsIds.length === 0 ? null : () => setShowHoverText(LocalizeText('friendlist.tip.remove')) } onMouseLeave={ selectedFriendsIds && selectedFriendsIds.length === 0 ? null : () => setShowHoverText('') } />
@@ -180,8 +198,8 @@ export const FriendsListView: FC<{}> = props =>
                                 </Column>
                             </Column>
                         </NitroCardAccordionSetView>
-                        <FriendsListRequestView className="friend-req-headers" headerText={ LocalizeText('friendlist.tab.friendrequests') } isExpanded={ (!isFromSearchToolbar && requests.length > 0) ? true : false } setShowHoverText={ (e) => setShowHoverText(e) } />
-                        <FriendsSearchView className="search-headers" headerText={ LocalizeText('people.search.title') } isFromSearchToolbar={ isFromSearchToolbar } setShowHoverText={ (e) => setShowHoverText(e) } />
+                        <FriendsListRequestView className="friend-req-headers" headerText={ LocalizeText('friendlist.tab.friendrequests') } isExpanded={ activeTab === 'requests' } onToggle={ isOpen => setActiveTab(isOpen ? 'requests' : null) } setShowHoverText={ (e) => setShowHoverText(e) } />
+                        <FriendsSearchView className="search-headers" headerText={ LocalizeText('people.search.title') } isFromSearchToolbar={ isFromSearchToolbar } isExpanded={ activeTab === 'search' } onToggle={ isOpen => setActiveTab(isOpen ? 'search' : null) } setShowHoverText={ (e) => setShowHoverText(e) } />
                     </NitroCardAccordionView>
                 </NitroCardContentView>
                 <div className="friendlist-bottom p-1 mt-2">{ showHoverText }</div>

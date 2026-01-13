@@ -76,7 +76,7 @@
     }
 
     &.icon-bobba {
-        width: 16px; height: 14px;
+        width: 16px; height: 17px;
         background-position: -96px -5px;
     }
 
@@ -115,6 +115,8 @@
 .nitro-friends {
     width: $friends-list-width;
     height: $friends-list-height;
+    min-height: 120px;
+    min-width: $friends-list-width;;
 
     .friend-search {
         border-radius: 0px;
@@ -156,8 +158,10 @@
     width: 27px;
     border: 1px solid #999;
     border-radius: 4px;
+    z-index: 2;
     padding: 1px;
-    margin-top: 57px;
+    min-height: 50px;
+    margin-top: -20px;
     background-color: #eee;
 }
 

@@ -1,6 +1,7 @@
-import { FC, MouseEvent, useState } from 'react';
+import { FC, MouseEvent, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { LocalizeText, MessengerFriend, OpenMessengerChat } from '../../../../../api';
-import { Base, Column, Flex, LayoutAvatarImageView, NitroCardAccordionItemView, Text, UserProfileIconView } from '../../../../../common';
+import { Base, Flex, LayoutAvatarImageView, NitroCardAccordionItemView, Text, UserProfileIconView } from '../../../../../common';
 import { useFriends } from '../../../../../hooks';
 
 interface FriendsListGroupItemViewProps
@@ -16,6 +17,7 @@ export const FriendsListGroupItemView: FC<FriendsListGroupItemViewProps> = props
     const { friend = null, selected = false, selectFriend = null, setShowHoverText = null } = props;
     const [ isRelationshipOpen, setIsRelationshipOpen ] = useState<boolean>(false);
     const { followFriend = null, updateRelationship = null } = useFriends();
+    const relationshipButtonRef = useRef<HTMLDivElement>(null);
 
     const clickFollowFriend = (event: MouseEvent<HTMLDivElement>) =>
     {
@@ -75,8 +77,8 @@ export const FriendsListGroupItemView: FC<FriendsListGroupItemViewProps> = props
                 </Base>
                 <Text variant="black" className="ms-2">{ friend.name }</Text>
             </Flex>
-            <Flex alignItems="center" gap={ 1 }>
-                <Flex className={ !friend.followingAllowed ? 'pe-3' : '' } gap={0} onClick={ openRelationship } onMouseEnter={ () => setShowHoverText(LocalizeText('infostand.link.relationship')) } onMouseLeave={ () => setShowHoverText('') }>
+            <Flex position='relative' alignItems="center" gap={ 1 }>
+                <Flex className={ !friend.followingAllowed ? 'pe-3' : '' } gap={0} onClick={ openRelationship } onMouseEnter={ () => setShowHoverText(LocalizeText('infostand.link.relationship')) } onMouseLeave={ () => setShowHoverText('') } innerRef={ relationshipButtonRef }>
                     { (friend.id > 0) && <Base className={ `nitro-friends-spritesheet icon-${ getCurrentRelationshipName() }` } /> }
                     { (friend.id > 0) && <Base className="icon icon-friendlist_arrow_black_down mt-1" /> }
                 </Flex>
@@ -85,14 +87,15 @@ export const FriendsListGroupItemView: FC<FriendsListGroupItemViewProps> = props
                     <Base pointer className="nitro-friends-spritesheet icon icon-friend_message" onClick={ openMessengerChat } onMouseEnter={ () => setShowHoverText(LocalizeText('friendlist.tip.im')) } onMouseLeave={ () => setShowHoverText('') } />
                 </Flex>
                 { isRelationshipOpen &&
-                    <>
-                        <Column position="absolute" className="select-relation">
-                            <Base pointer className="nitro-friends-spritesheet icon-none" onClick={ event => clickUpdateRelationship(event, MessengerFriend.RELATIONSHIP_NONE) } />
-                            <Base pointer className="nitro-friends-spritesheet icon-heart bg-white w-100" onClick={ event => clickUpdateRelationship(event, MessengerFriend.RELATIONSHIP_HEART) } />
-                            <Base pointer className="nitro-friends-spritesheet icon-smile" onClick={ event => clickUpdateRelationship(event, MessengerFriend.RELATIONSHIP_SMILE) } />
-                            <Base pointer className="nitro-friends-spritesheet icon-bobba bg-white w-100" onClick={ event => clickUpdateRelationship(event, MessengerFriend.RELATIONSHIP_BOBBA) } />
-                        </Column>
-                    </>
+                    createPortal(
+                        <div className="d-flex flex-column select-relation" style={ { position: 'fixed', top: relationshipButtonRef.current?.getBoundingClientRect().top + 20, left: relationshipButtonRef.current?.getBoundingClientRect().left, zIndex: 9999 } } onMouseLeave={ () => setIsRelationshipOpen(false) }>
+                            <Flex column gap={1}>
+                                <Flex pointer className="nitro-friends-spritesheet icon-none" onClick={ event => clickUpdateRelationship(event, MessengerFriend.RELATIONSHIP_NONE) } />
+                                <Flex pointer className="nitro-friends-spritesheet icon-heart bg-white w-100" onClick={ event => clickUpdateRelationship(event, MessengerFriend.RELATIONSHIP_HEART) } />
+                                <Flex pointer className="nitro-friends-spritesheet icon-smile" onClick={ event => clickUpdateRelationship(event, MessengerFriend.RELATIONSHIP_SMILE) } />
+                                <Flex center pointer className="nitro-friends-spritesheet icon-bobba bg-white w-100" onClick={ event => clickUpdateRelationship(event, MessengerFriend.RELATIONSHIP_BOBBA) } />
+                            </Flex>
+                        </div>, document.body)
                 }
             </Flex>
         </NitroCardAccordionItemView>
