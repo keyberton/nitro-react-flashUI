@@ -1,6 +1,7 @@
 .nitro-achievements {
     width: $achievement-width;
     min-width: $achievement-width;
+    min-height: $achievement-height-with-category;
 
     .nitro-progress-bar {
         border: none;

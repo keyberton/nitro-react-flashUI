@@ -44,7 +44,7 @@ export const AchievementsView: FC<{}> = props =>
     if(!isVisible) return null;
 
     return (
-        <NitroCardView uniqueKey="achievements" className={ `nitro-achievements ${ selectedCategoryCode ? 'with-category' : '' }` } theme="primary">
+        <NitroCardView uniqueKey="achievements" className={ `no-resize nitro-achievements ${ selectedCategoryCode ? 'with-category' : '' }` } theme="primary">
             <NitroCardHeaderView headerText={ LocalizeText('inventory.achievements') } onCloseClick={ event => setIsVisible(false) } />
             { selectedCategory &&
                 <NitroCardSubHeaderView position="relative" className="justify-content-center align-items-center cursor-pointer" gap={ 3 }>
