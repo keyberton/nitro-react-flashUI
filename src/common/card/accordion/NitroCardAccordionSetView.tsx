@@ -69,9 +69,8 @@ export const NitroCardAccordionSetView: FC<NitroCardAccordionSetViewProps> = pro
         <Column classNames={ getClassNames } gap={ gap } { ...rest }>
             <Flex pointer className="nitro-card-accordion-set-header px-2" onMouseEnter={ () => setShowHoverText && friendlistTab && setShowHoverText(LocalizeText(`${ friendlistTab }`)) } onMouseLeave={ () => setShowHoverText && setShowHoverText('') } onClick={ onClick }>
                 <div className="friend-header-text d-inline">{ headerText }</div>
-                { (friendlistTab === FriendListTabs.REQUESTS) && <div className={ `friend-requests-icon ${ requests.length > 0 ? 'active' : '' }` }/> }
-                { isOpen && <Base className={ `icon icon-friendlist_${ (friendlistTab === FriendListTabs.YOUR_FRIENDS) ? 'arrow_black' : 'arrow_white' }_down` } /> }
-                { !isOpen && <Base className={ `icon icon-friendlist_${ (friendlistTab === FriendListTabs.YOUR_FRIENDS) ? 'arrow_black' : 'arrow_white' }_right` } /> }
+                { isOpen && <Base style={ { marginBottom: '1px' } } className={ `icon icon-friendlist_${ (friendlistTab === FriendListTabs.YOUR_FRIENDS) ? 'arrow_black' : 'arrow_white' }_down` } /> }
+                { !isOpen && <Base style={ { marginBottom: '1px' } } className={ `icon icon-friendlist_${ (friendlistTab === FriendListTabs.YOUR_FRIENDS) ? 'arrow_black' : 'arrow_white' }_right` } /> }
             </Flex>
             { isOpen &&
                 <Column fullHeight style={ { borderTop: friendlistTab === FriendListTabs.YOUR_FRIENDS ? '1px solid #295f82' : friendlistTab === FriendListTabs.SEARCH_HABBOS ? '1px solid #292929' : friendlistTab === FriendListTabs.REQUESTS ? '1px solid #914c00' : '' } } overflow="auto" gap={ 0 } className={ `nitro-card-accordion-set-content${ (friendlistTab === FriendListTabs.SEARCH_HABBOS) ? '-gray' : '' } p-1` }>

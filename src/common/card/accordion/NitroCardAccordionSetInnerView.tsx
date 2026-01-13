@@ -70,7 +70,7 @@ export const NitroCardAccordionSetInnerView: FC<NitroCardAccordionSetInnerViewPr
         <Column classNames={ getClassNames } gap={ gap } { ...rest }>
             <Column fullHeight gap={ 0 }>
                 <Flex pointer gap={ 0 } onClick={ onClick }>
-                    <Text gfbold variant="black" className=" px-2">{ headerText }</Text>
+                    <Text gfbold variant="black" className="px-2">{ headerText }</Text>
                     { isOpen && <Base className="mt-1 icon icon-friendlist_arrow_black_down" /> }
                     { !isOpen && <Base className="mt-1 icon icon-friendlist_arrow_black_right" /> }
                 </Flex>
