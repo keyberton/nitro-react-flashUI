@@ -2,16 +2,24 @@ import { CSSProperties, FC, ReactNode, useEffect, useRef, useState } from 'react
 import { createPortal } from 'react-dom';
 import { Base, Flex, Text } from '.';
 
+export interface SelectOption
+{
+	value: string | number;
+	label: string;
+	colorA?: string | number;
+	colorB?: string | number;
+}
+
 export interface SelectProps
 {
-    options: { value: string | number, label: string }[];
+	options: SelectOption[];
     value: string | number;
     setValue: (value: string | number) => void;
     disabled?: boolean;
     className?: string;
     dropdownClassName?: string;
-    fullWidth?: boolean;
-    flash?: boolean;
+	fullWidth?: boolean;
+	flash?: boolean;
     style?: CSSProperties;
     dropdownStyle?: CSSProperties;
     children?: ReactNode;
@@ -19,12 +27,13 @@ export interface SelectProps
 
 export const Select: FC<SelectProps> = props =>
 {
-    const { options = [], value = null, setValue = null, disabled = false, className = '', dropdownClassName = '', fullWidth = false, flash = false, style = {}, dropdownStyle = {}, children = null } = props;
+	const { options = [], value = null, setValue = null, disabled = false, className = '', dropdownClassName = '', fullWidth = false, flash = false, style = {}, dropdownStyle = {}, children = null } = props;
     const [ isOpen, setIsOpen ] = useState(false);
     const elementRef = useRef<HTMLDivElement>(null);
     const menuRef = useRef<HTMLUListElement>(null);
     const [ anchorRect, setAnchorRect ] = useState<{ left: number, top: number, width: number, height: number }>(null);
-    const safeOptions = options ?? [];
+	const safeOptions = options ?? [];
+	const selectedOption = safeOptions.find(option => option.value === value);
 
     const getOptionLabel = (val: string | number) =>
     {
@@ -76,8 +85,14 @@ export const Select: FC<SelectProps> = props =>
                     <Flex className='align-items-center'>
                         <Text style={ { maxWidth: 160 } } variant={ disabled ? 'muted' : 'black' } truncate>{ getOptionLabel(value) }</Text>
                     </Flex>
-                    <Flex className='align-items-center' justifyContent='center'>
-                        { children }
+                    { children }
+					<Flex className='align-items-center' justifyContent='center'>
+						{ selectedOption?.colorA &&
+							<Flex overflow="hidden" className="color-picker border">
+								<Base fullHeight style={ { width: '20px', backgroundColor: '#' + selectedOption.colorA } } />
+								<Base fullHeight style={ { width: '20px', backgroundColor: '#' + selectedOption.colorB } } />
+							</Flex>
+						}
                         <Base className={`icon ${flash ? 'icon-dropdown flash' : 'icon-dropdown'}`} />
                     </Flex>
                 </Flex>
@@ -101,12 +116,17 @@ export const Select: FC<SelectProps> = props =>
                         ...rest
                     } as CSSProperties;
                 })() }>
-                    { safeOptions.map((option, index) =>
-                        <li key={ index } className={ `position-relative dropdown-item cursor-pointer ${ value === option.value ? 'active' : '' }` } onClick={ () => { setValue(option.value); setIsOpen(false); } }>
-                            { option.label }
-                            { children }
-                        </li>
-                    ) }
+					{ safeOptions.map((option, index) =>
+						<li key={ index } className={ `position-relative dropdown-item cursor-pointer ${ value === option.value ? 'active' : '' }` } onClick={ () => { setValue(option.value); setIsOpen(false); } }>
+							{ option.label }
+							{ option.colorA &&
+								<Flex overflow="hidden" className="color-picker border">
+									<Base fullHeight style={ { width: '20px', backgroundColor: '#' + option.colorA } } />
+									<Base fullHeight style={ { width: '20px', backgroundColor: '#' + option.colorB } } />
+								</Flex>
+							}
+						</li>
+					) }
                 </ul>,
                 document.body
             ) }
