@@ -55,16 +55,22 @@ export const GroupsContainerView: FC<GroupsContainerViewProps> = props =>
     if(!groups || !groups.length)
     {
         return (
-            <Column center fullHeight>
-                <Column className="profile-grey-bg py-3 px-4">
-                    <Text small> { LocalizeText('extendedprofile.nogroups.user') }</Text>
-                    <Flex justifyContent="center" gap={ 4 }>
-                        <Base className="no-group-spritesheet image-1" />
-                        <Base className="no-group-spritesheet image-2" />
-                        <Base className="no-group-spritesheet image-3" />
+            <Column center fullWidth fullHeight>
+                <Flex className='px-2' fullWidth gap={4}>
+                    <Flex gap={1}>
+                        <Text bold fontSize={7} small>{ LocalizeText('avatar.profile.groups') }:</Text>
+                        <Text fontSize={7}>{ groups.length }</Text>
                     </Flex>
-                    <Text small>{ LocalizeText('extendedprofile.nogroups.info') }</Text>
-                </Column>
+                    <Column className="profile-grey-bg py-2 px-4">
+                        <Text small> { LocalizeText('extendedprofile.nogroups.user') }</Text>
+                        <Flex justifyContent="center" className="mx-2" gap={ 3 }>
+                            <Base className="no-group-spritesheet image-1" />
+                            <Base className="no-group-spritesheet image-2" />
+                            <Base className="no-group-spritesheet image-3" />
+                        </Flex>
+                        <Text small>{ LocalizeText('extendedprofile.nogroups.info') }</Text>
+                    </Column>
+                </Flex>
             </Column>
         );
     }
