@@ -16,7 +16,7 @@ export const CatalogLayouGuildCustomFurniView: FC<CatalogLayoutProps> = props =>
     const { currentOffer = null } = useCatalog();
     
     return (
-        <Column>
+        <Column fullHeight>
             <Column className="position-relative" center={ !currentOffer } size={ 5 } overflow="hidden">
                 { !currentOffer &&
                     <>
@@ -27,24 +27,21 @@ export const CatalogLayouGuildCustomFurniView: FC<CatalogLayoutProps> = props =>
                     <>
                         <Base position="relative" overflow="hidden">
                             <CatalogViewProductWidgetView />
-                            <CatalogGuildBadgeWidgetView position="absolute" className="top-1 end-1" />
+                            <Text fontSize={6} bold variant="white" className="item-title top-0 start-0" position='absolute' grow truncate>{ currentOffer.localizationName }</Text>
+                            <CatalogGuildBadgeWidgetView position="absolute" className="bottom-5 end-1" />
                             <CatalogTotalPriceWidget className={ `credits-default-layout ${ getTypePrice(currentOffer.priceType) } py-1 px-2 bottom-2 end-2` } justifyContent="end" alignItems="end" />
-                        </Base>
-                        <Column grow gap={ 1 }>
-                            <Text bold variant="white" className="item-title" grow truncate>{ currentOffer.localizationName }</Text>
-                            <Flex justifyContent="between">
-
-                            </Flex>
-                        </Column>
-                        <Base grow>
-                            <CatalogGuildSelectorWidgetView />
                         </Base>
                     </> }
             </Column>
             <Column className="grid-bg group-furni-picker p-1" size={ 7 } overflow="hidden">
                 <CatalogItemGridWidgetView />
             </Column>
-            <Flex gap={ 2 } className="purchase-buttons align-items-end mt-2">
+            { currentOffer &&
+                <Flex fullWidth>
+                    <CatalogGuildSelectorWidgetView />
+                </Flex>
+            }
+            <Flex gap={ 2 } className="purchase-buttons align-items-end mt-4">
                 <CatalogPurchaseWidgetView />
             </Flex>
         </Column>

@@ -62,16 +62,19 @@ export const CatalogGuildSelectorWidgetView: FC<{}> = props =>
     const selectedGroup = groups[selectedGroupIndex];
 
     return (
-        <Flex gap={ 1 }>
-            { !!selectedGroup &&
-                <Flex overflow="hidden" className="rounded border">
-                    <Base fullHeight style={ { width: '20px', backgroundColor: '#' + selectedGroup.colorA } } />
-                    <Base fullHeight style={ { width: '20px', backgroundColor: '#' + selectedGroup.colorB } } />
-                </Flex> }
+        <Flex justifyContent='center' fullWidth gap={ 1 }>
             <Select
+                className='w-50 group-selector'
+                dropdownClassName='group-selector'
                 options={ groups.map((group, index) => ({ value: index, label: group.groupName })) }
                 value={ selectedGroupIndex }
-                setValue={ value => setSelectedGroupIndex(Number(value)) } />
+                setValue={ value => setSelectedGroupIndex(Number(value)) } >
+                    { !!selectedGroup &&
+                        <Flex overflow="hidden" className="color-picker border">
+                            <Base fullHeight style={ { width: '20px', backgroundColor: '#' + selectedGroup.colorA } } />
+                            <Base fullHeight style={ { width: '20px', backgroundColor: '#' + selectedGroup.colorB } } />
+                        </Flex> }
+                </Select>
         </Flex>
     );
 }

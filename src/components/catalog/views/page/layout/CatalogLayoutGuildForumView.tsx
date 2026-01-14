@@ -1,7 +1,7 @@
 import { CatalogGroupsComposer } from '@nitrots/nitro-renderer';
 import { FC, useEffect, useState } from 'react';
 import { SendMessageComposer } from '../../../../../api';
-import { Base, Column, Flex, Grid, Text } from '../../../../../common';
+import { Base, Column, Flex, Text } from '../../../../../common';
 import { useCatalog } from '../../../../../hooks';
 import { CatalogFirstProductSelectorWidgetView } from '../widgets/CatalogFirstProductSelectorWidgetView';
 import { CatalogGuildSelectorWidgetView } from '../widgets/CatalogGuildSelectorWidgetView';
@@ -24,7 +24,7 @@ export const CatalogLayouGuildForumView: FC<CatalogLayoutProps> = props =>
     return (
         <>
             <CatalogFirstProductSelectorWidgetView />
-            <Column>
+            <Column fullHeight>
                 <Column className="p-1" overflow="hidden">
                     <Text className="group-forum-page" dangerouslySetInnerHTML={ { __html: page.localization.getText(1) } } />
                 </Column>

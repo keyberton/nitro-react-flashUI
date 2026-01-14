@@ -103,8 +103,7 @@
     }
 
     .group-furni-picker {
-        max-height: 110px;
-        min-height: 110px;
+        min-height: calc(100% - 340px);
     }
 
     .quanity-container {
@@ -527,6 +526,34 @@
     width: 38px;
     height: 30px;
     margin-right: 4px;
+}
+
+.group-selector {
+
+    .form-select {
+        height: 26px;
+        font-size: 13px;
+        font-family: Ubuntu;
+    }
+
+    &.dropdown-menu {
+        margin-top: -6px;
+    }
+
+    .dropdown-item {
+        height: 19px!important;
+        font-size: 13px!important;
+        font-family: Ubuntu;
+        align-items: center;
+        display: flex;
+    }
+
+    .color-picker {
+        width: 21px;
+        height: 14px;
+        position: absolute;
+        right: 30px;
+    }
 }
 
 .pets-3 {

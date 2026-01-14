@@ -1,4 +1,4 @@
-import { CSSProperties, FC, useEffect, useRef, useState } from 'react';
+import { CSSProperties, FC, ReactNode, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Base, Flex, Text } from '.';
 
@@ -9,15 +9,17 @@ export interface SelectProps
     setValue: (value: string | number) => void;
     disabled?: boolean;
     className?: string;
+    dropdownClassName?: string;
     fullWidth?: boolean;
     flash?: boolean;
     style?: CSSProperties;
     dropdownStyle?: CSSProperties;
+    children?: ReactNode;
 }
 
 export const Select: FC<SelectProps> = props =>
 {
-    const { options = [], value = null, setValue = null, disabled = false, className = '', fullWidth = false, flash = false, style = {}, dropdownStyle = {} } = props;
+    const { options = [], value = null, setValue = null, disabled = false, className = '', dropdownClassName = '', fullWidth = false, flash = false, style = {}, dropdownStyle = {}, children = null } = props;
     const [ isOpen, setIsOpen ] = useState(false);
     const elementRef = useRef<HTMLDivElement>(null);
     const menuRef = useRef<HTMLUListElement>(null);
@@ -74,11 +76,14 @@ export const Select: FC<SelectProps> = props =>
                     <Flex className='align-items-center'>
                         <Text style={ { maxWidth: 160 } } variant={ disabled ? 'muted' : 'black' } truncate>{ getOptionLabel(value) }</Text>
                     </Flex>
-                    <Base className={`icon ${flash ? 'icon-dropdown flash' : 'icon-dropdown'}`} />
+                    <Flex className='align-items-center' justifyContent='center'>
+                        { children }
+                        <Base className={`icon ${flash ? 'icon-dropdown flash' : 'icon-dropdown'}`} />
+                    </Flex>
                 </Flex>
             </Flex>
             { isOpen && anchorRect && createPortal(
-                <ul ref={ menuRef } className={ `${ flash ? 'flash-form-select' : 'volter-form-select' } dropdown-menu show` } style={ (() =>
+                <ul ref={ menuRef } className={ `${ dropdownClassName ?? '' } ${ flash ? 'flash-form-select' : 'volter-form-select' } dropdown-menu show` } style={ (() =>
                 {
                     const parseNum = (v: any) => (typeof v === 'number') ? v : ((typeof v === 'string') ? (parseFloat(v) || 0) : 0);
                     const extraTop = parseNum((dropdownStyle as any)?.top);
@@ -97,8 +102,9 @@ export const Select: FC<SelectProps> = props =>
                     } as CSSProperties;
                 })() }>
                     { safeOptions.map((option, index) =>
-                        <li key={ index } className={ `dropdown-item cursor-pointer ${ value === option.value ? 'active' : '' }` } onClick={ () => { setValue(option.value); setIsOpen(false); } }>
+                        <li key={ index } className={ `position-relative dropdown-item cursor-pointer ${ value === option.value ? 'active' : '' }` } onClick={ () => { setValue(option.value); setIsOpen(false); } }>
                             { option.label }
+                            { children }
                         </li>
                     ) }
                 </ul>,
