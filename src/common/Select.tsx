@@ -1,8 +1,8 @@
 import { CSSProperties, FC, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { Base, Flex, Text } from '../../../common';
+import { Base, Flex, Text } from '.';
 
-export interface FilterSelectViewProps
+export interface SelectProps
 {
     options: { value: string | number, label: string }[];
     value: string | number;
@@ -10,13 +10,14 @@ export interface FilterSelectViewProps
     disabled?: boolean;
     className?: string;
     fullWidth?: boolean;
+    flash?: boolean;
     style?: CSSProperties;
     dropdownStyle?: CSSProperties;
 }
 
-export const FilterSelectView: FC<FilterSelectViewProps> = props =>
+export const Select: FC<SelectProps> = props =>
 {
-    const { options = [], value = null, setValue = null, disabled = false, className = '', fullWidth = false, style = {}, dropdownStyle = {} } = props;
+    const { options = [], value = null, setValue = null, disabled = false, className = '', fullWidth = false, flash = false, style = {}, dropdownStyle = {} } = props;
     const [ isOpen, setIsOpen ] = useState(false);
     const elementRef = useRef<HTMLDivElement>(null);
     const menuRef = useRef<HTMLUListElement>(null);
@@ -56,7 +57,7 @@ export const FilterSelectView: FC<FilterSelectViewProps> = props =>
     }, [ isOpen ]);
 
     return (
-        <Flex alignItems="center" position="relative" className={ `flash-form-select ${ fullWidth ? 'w-100' : '' } ${ className }` } innerRef={ elementRef } style={ { zIndex: 2000 } }>
+        <Flex alignItems="center" position="relative" className={ `${ flash ? 'flash-form-select' : 'volter-form-select' } ${ fullWidth ? 'w-100' : '' } ${ className }` } innerRef={ elementRef } style={ { zIndex: 2000 } }>
             <Flex style={ { ...style } } className={ `form-select form-select-sm ${ disabled ? 'disabled' : 'cursor-pointer' }` } onClick={ () =>
             {
                 if(disabled) return;
@@ -68,11 +69,11 @@ export const FilterSelectView: FC<FilterSelectViewProps> = props =>
                     <Flex className='align-items-center'>
                         <Text style={ { maxWidth: 160 } } variant={ disabled ? 'muted' : 'black' } truncate>{ getOptionLabel(value) }</Text>
                     </Flex>
-                    <Base className="icon icon-dropdown" />
+                    <Base className={`icon ${flash ? 'icon-dropdown flash' : 'icon-dropdown'}`} />
                 </Flex>
             </Flex>
             { isOpen && anchorRect && createPortal(
-                <ul ref={ menuRef } className="flash-form-select dropdown-menu show" style={ (() =>
+                <ul ref={ menuRef } className={ `${ flash ? 'flash-form-select' : 'volter-form-select' } dropdown-menu show` } style={ (() =>
                 {
                     const parseNum = (v: any) => (typeof v === 'number') ? v : ((typeof v === 'string') ? (parseFloat(v) || 0) : 0);
                     const extraTop = parseNum((dropdownStyle as any)?.top);

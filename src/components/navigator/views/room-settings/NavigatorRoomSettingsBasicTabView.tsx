@@ -3,8 +3,8 @@ import { FC, useEffect, useState } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import { CreateLinkEvent, GetMaxVisitorsList, IRoomData, LocalizeText, SendMessageComposer } from '../../../../api';
 import { Base, Column, Flex, Text } from '../../../../common';
+import { Select } from '../../../../common/Select';
 import { useMessageEvent, useNavigator, useNotification } from '../../../../hooks';
-import { FilterSelectView } from '../../../inventory/views/FilterSelectView';
 
 const ROOM_NAME_MIN_LENGTH = 3;
 const ROOM_NAME_MAX_LENGTH = 60;
@@ -115,7 +115,7 @@ export const NavigatorRoomSettingsBasicTabView: FC<NavigatorRoomSettingsTabViewP
             </Column>
             <Column className="pb-1" alignItems="start" gap={ 0 }>
                 <Text bold className="ps-1">{ LocalizeText('navigator.category') }</Text>
-                <FilterSelectView
+                <Select
                     fullWidth
                     options={ categories && categories.map(category => ({ value: category.id, label: LocalizeText(category.name) })) }
                     value={ roomData.categoryId }
@@ -123,7 +123,7 @@ export const NavigatorRoomSettingsBasicTabView: FC<NavigatorRoomSettingsTabViewP
             </Column>
             <Column className="pb-1" alignItems="start" gap={ 0 }>
                 <Text bold className="ps-1">{ LocalizeText('navigator.maxvisitors') }</Text>
-                <FilterSelectView
+                <Select
                     fullWidth
                     options={ GetMaxVisitorsList && GetMaxVisitorsList.map(value => ({ value, label: value.toString() })) }
                     value={ roomData.userCount }
@@ -131,7 +131,7 @@ export const NavigatorRoomSettingsBasicTabView: FC<NavigatorRoomSettingsTabViewP
             </Column>
             <Column className="pb-2" alignItems="start" gap={ 0 }>
                 <Text bold className="ps-1">{ LocalizeText('navigator.tradesettings') }</Text>
-                <FilterSelectView
+                <Select
                     fullWidth
                     options={ [
                         { value: 0, label: LocalizeText('navigator.roomsettings.trade_not_allowed') },

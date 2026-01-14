@@ -11,7 +11,7 @@ export const CatalogLayoutPets3View: FC<CatalogLayoutProps> = props =>
     const imageUrl = page.localization.getImage(1);
     
     return (
-        <Column grow className="pets-3 rounded text-black p-2" overflow="hidden">
+        <Column grow className="pets-3 catalog-right rounded text-black p-2" overflow="hidden">
             <Flex alignItems="center" gap={ 2 }>
                 { imageUrl && <img alt="" src={ imageUrl } /> }
                 <Base className="fs-5" dangerouslySetInnerHTML={ { __html: page.localization.getText(1) } } />

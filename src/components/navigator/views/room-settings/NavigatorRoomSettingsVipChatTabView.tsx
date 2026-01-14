@@ -2,7 +2,7 @@ import { RoomChatSettings } from '@nitrots/nitro-renderer';
 import { FC, useEffect, useState } from 'react';
 import { IRoomData, LocalizeText } from '../../../../api';
 import { Column, Flex, Text } from '../../../../common';
-import { FilterSelectView } from '../../../inventory/views/FilterSelectView';
+import { Select } from '../../../../common/Select';
 
 interface NavigatorRoomSettingsTabViewProps
 {
@@ -33,7 +33,7 @@ export const NavigatorRoomSettingsVipChatTabView: FC<NavigatorRoomSettingsTabVie
                     <Text>{ LocalizeText('navigator.roomsettings.hide_walls') }</Text>
                 </Flex>
                 <Flex className="pe-4" gap={ 1 } column>
-                    <FilterSelectView
+                    <Select
                         fullWidth
                         options={ [
                             { value: 0, label: LocalizeText('navigator.roomsettings.wall_thickness.normal') },
@@ -43,7 +43,7 @@ export const NavigatorRoomSettingsVipChatTabView: FC<NavigatorRoomSettingsTabVie
                         ] }
                         value={ roomData.wallThickness }
                         setValue={ value => handleChange('wall_thickness', Number(value)) } />
-                    <FilterSelectView
+                    <Select
                         fullWidth
                         options={ [
                             { value: 0, label: LocalizeText('navigator.roomsettings.floor_thickness.normal') },
@@ -59,7 +59,7 @@ export const NavigatorRoomSettingsVipChatTabView: FC<NavigatorRoomSettingsTabVie
                 <Text bold>{ LocalizeText('navigator.roomsettings.chat_settings') }</Text>
                 <Text>{ LocalizeText('navigator.roomsettings.chat_settings.info') }</Text>
                 <Flex className="pe-4" column gap={ 1 }>
-                    <FilterSelectView
+                    <Select
                         fullWidth
                         options={ [
                             { value: RoomChatSettings.CHAT_MODE_FREE_FLOW, label: LocalizeText('navigator.roomsettings.chat.mode.free.flow') },
@@ -67,7 +67,7 @@ export const NavigatorRoomSettingsVipChatTabView: FC<NavigatorRoomSettingsTabVie
                         ] }
                         value={ roomData.chatSettings.mode }
                         setValue={ value => handleChange('bubble_mode', Number(value)) } />
-                    <FilterSelectView
+                    <Select
                         fullWidth
                         options={ [
                             { value: RoomChatSettings.CHAT_BUBBLE_WIDTH_NORMAL, label: LocalizeText('navigator.roomsettings.chat.bubbles.width.normal') },
@@ -76,7 +76,7 @@ export const NavigatorRoomSettingsVipChatTabView: FC<NavigatorRoomSettingsTabVie
                         ] }
                         value={ roomData.chatSettings.weight }
                         setValue={ value => handleChange('chat_weight', Number(value)) } />
-                    <FilterSelectView
+                    <Select
                         fullWidth
                         options={ [
                             { value: RoomChatSettings.CHAT_SCROLL_SPEED_FAST, label: LocalizeText('navigator.roomsettings.chat.speed.fast') },
@@ -85,7 +85,7 @@ export const NavigatorRoomSettingsVipChatTabView: FC<NavigatorRoomSettingsTabVie
                         ] }
                         value={ roomData.chatSettings.speed }
                         setValue={ value => handleChange('bubble_speed', Number(value)) } />
-                    <FilterSelectView
+                    <Select
                         fullWidth
                         options={ [
                             { value: RoomChatSettings.FLOOD_FILTER_LOOSE, label: LocalizeText('navigator.roomsettings.chat.flood.loose') },

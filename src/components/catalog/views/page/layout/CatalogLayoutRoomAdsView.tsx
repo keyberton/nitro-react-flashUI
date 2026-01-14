@@ -1,9 +1,8 @@
 import { GetRoomAdPurchaseInfoComposer, GetUserEventCatsMessageComposer, PurchaseRoomAdMessageComposer, RoomAdPurchaseInfoEvent, RoomEntryData } from '@nitrots/nitro-renderer';
 import { FC, useEffect, useMemo, useState } from 'react';
 import { LocalizeText, SendMessageComposer } from '../../../../../api';
-import { Base, Button, Column, Text } from '../../../../../common';
+import { Base, Button, Column, Select, Text } from '../../../../../common';
 import { useCatalog, useMessageEvent, useNavigator, useNotification, useRoomPromote } from '../../../../../hooks';
-import { FilterSelectView } from '../../../../inventory/views/FilterSelectView';
 import { CatalogLayoutProps } from './CatalogLayout.types';
 
 export const CatalogLayoutRoomAdsView: FC<CatalogLayoutProps> = props =>
@@ -38,17 +37,21 @@ export const CatalogLayoutRoomAdsView: FC<CatalogLayoutProps> = props =>
 
     useEffect(() =>
     {
-        if(isExtended)
+        if(isExtended && promoteInformation)
         {
-            setRoomId(promoteInformation.data.flatId);
-            setEventName(promoteInformation.data.eventName);
-            setEventDesc(promoteInformation.data.eventDescription);
-            setCategoryId(promoteInformation.data.categoryId);
+            const data = promoteInformation.data;
+
+            if(!data) return;
+
+            setRoomId(data.flatId);
+            setEventName(data.eventName);
+            setEventDesc(data.eventDescription);
+            setCategoryId(data.categoryId);
             setExtended(isExtended); // This is for sending to packet
             setIsExtended(false); // This is from hook useRoomPromotte
         }
 
-    }, [ isExtended, eventName, eventDesc, categoryId, roomId, promoteInformation.data.flatId, promoteInformation.data.eventName, promoteInformation.data.eventDescription, promoteInformation.data.categoryId, setIsExtended ]);
+    }, [ isExtended, eventName, eventDesc, categoryId, roomId, promoteInformation, setIsExtended ]);
 
     const resetData = () =>
     {
@@ -99,7 +102,7 @@ export const CatalogLayoutRoomAdsView: FC<CatalogLayoutProps> = props =>
                 <Text bold noWrap>{ LocalizeText('roomad.catalog_text', [ 'duration' ], [ '120' ]) }</Text>
                 <Base className="rounded p-1">
                     <Column gap={ 2 }>
-                        <FilterSelectView
+                        <Select
                             fullWidth
                             options={ categories?.map(cat => ({ value: cat.id, label: LocalizeText(cat.name) })) ?? [] }
                             value={ categoryId }
@@ -116,7 +119,7 @@ export const CatalogLayoutRoomAdsView: FC<CatalogLayoutProps> = props =>
                     </Column>
                     <Column gap={ 0 } className="mt-2">
                         <Text small>{ LocalizeText('roomad.catalog_roomname') }</Text>
-                        <FilterSelectView
+                        <Select
                             fullWidth
                             options={ roomSelectOptions }
                             value={ roomId }

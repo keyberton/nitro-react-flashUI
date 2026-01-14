@@ -48,6 +48,16 @@
         height: 15px;
         margin-bottom: 1px;
         margin-left: 18px!important;
+
+        &.flash {
+            background-image: url('@/assets/flash/buttons/select-end-flash.png');
+            width: 21px;
+            height: 19px;
+
+            &:hover {
+                background-image: url('@/assets/flash/buttons/select-end-flash-hover.png');
+            }
+        }
     }
 
     &.icon-nitro-light {

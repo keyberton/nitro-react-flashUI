@@ -3,8 +3,8 @@ import { FaPlus, FaTrash } from 'react-icons/fa';
 import ReactSlider from 'react-slider';
 import { LocalizeText, WiredFurniType } from '../../../../api';
 import { Button, Column, Flex, Text } from '../../../../common';
+import { Select } from '../../../../common/Select';
 import { useWired } from '../../../../hooks';
-import { FilterSelectView } from '../../../inventory/views/FilterSelectView';
 import { WiredActionBaseView } from './WiredActionBaseView';
 
 export const WiredActionGiveRewardView: FC<{}> = props =>
@@ -113,7 +113,7 @@ export const WiredActionGiveRewardView: FC<{}> = props =>
             <Column gap={ 1 }>
                 <Text gfbold>How often can a user be rewarded?</Text>
                 <Flex gap={ 1 }>
-                    <FilterSelectView
+                    <Select
                         fullWidth
                         options={ [
                             { value: 0, label: 'Once' },

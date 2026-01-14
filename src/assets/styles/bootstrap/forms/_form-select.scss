@@ -6,10 +6,6 @@
 .form-select {
   height: 24px;
   width: 110px;
-  border-image-slice:4 4 4 4 fill;
-  border-image-width:4px 4px 4px 4px;
-  border-image-repeat:repeat repeat;
-  border-image-source: url("@/assets/flash/boxes/card/dropdown.png");
   background-color: transparent;
   appearance: none;
 
@@ -80,7 +76,63 @@
 }
 
 .flash-form-select {
-    
+  .full-width {
+      width: 100%;
+  }
+
+  .form-select {
+      height: 24px;
+      padding: 3px 2px 3px 12px;
+      width: 100%;
+      align-content: center;
+      align-items: center;
+      border-image-slice: 6 6 6 6 fill;
+      border-image-width: 6px 6px 6px 6px;
+      border-image-repeat:repeat repeat;
+      border-image-source: url("@/assets/flash/boxes/card/dropdown.png");
+
+      &.disabled {
+          color: #808080 !important;
+      }
+  }
+
+  &.dropdown-menu {
+      border-image-slice: 6 6 6 6 fill;
+      border-image-width: 6px 6px 6px 6px;
+      border-image-repeat: repeat repeat;
+      border-image-source: url(@/assets/flash/boxes/card/dropdown-b.png);
+      z-index: 2;
+      min-width: 120px;
+      font-family: Goldfish;
+      background-color: transparent;
+      box-shadow: none;
+      padding: 2px 6px 3px 6px;
+      border-radius: 4px;
+
+      .dropdown-item { 
+          font-size: 9px !important;
+          padding: 0px 6px;
+          height: 16px;
+          align-content: center;
+
+          &.active {
+              background-color: #f2f2f2;
+              color: black;
+          }
+
+          &:hover {
+              background-color: #d9d9d9;
+          }
+
+          &:active {
+              background-color: #d9d9d9;
+              color: black;
+          }
+      }
+  }
+}
+
+.volter-form-select {
   .full-width {
       width: 100%;
   }
@@ -91,6 +143,10 @@
       width: 100%;
       align-content: center;
       align-items: center;
+      border-image-slice:4 4 4 4 fill;
+      border-image-width:4px 4px 4px 4px;
+      border-image-repeat:repeat repeat;
+      border-image-source: url("@/assets/flash/boxes/card/dropdown.png");
 
       &.disabled {
           color: #808080 !important;

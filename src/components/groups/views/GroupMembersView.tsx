@@ -3,8 +3,8 @@ import { FC, useCallback, useEffect, useState } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { AddEventLinkTracker, CreateLinkEvent, GetSessionDataManager, GetUserProfile, LocalizeText, RemoveLinkEventTracker, SendMessageComposer } from '../../../api';
 import { Base, Button, Column, Flex, Grid, LayoutAvatarImageView, LayoutBadgeImageView, NitroCardContentView, NitroCardHeaderView, NitroCardView, Text } from '../../../common';
+import { Select } from '../../../common/Select';
 import { useMessageEvent, useNotification } from '../../../hooks';
-import { FilterSelectView } from '../../inventory/views/FilterSelectView';
 
 export const GroupMembersView: FC<{}> = props =>
 {
@@ -181,7 +181,7 @@ export const GroupMembersView: FC<{}> = props =>
                     </Flex>
                     <Column fullWidth gap={ 1 }>
                         <input type="text" className="form-control form-control-sm w-100" placeholder={ LocalizeText('group.members.searchinfo') } value={ searchQuery } onChange={ event => setSearchQuery(event.target.value) } />
-                        <FilterSelectView
+                        <Select
                             fullWidth
                             options={ [
                                 { value: 0, label: LocalizeText('group.members.search.all') },

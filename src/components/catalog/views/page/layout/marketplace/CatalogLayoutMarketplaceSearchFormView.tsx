@@ -1,7 +1,7 @@
 import { FC, useCallback, useEffect, useState } from 'react';
 import { IMarketplaceSearchOptions, LocalizeText, MarketplaceSearchType } from '../../../../../../api';
 import { Button, Column, Flex, Text } from '../../../../../../common';
-import { FilterSelectView } from '../../../../../inventory/views/FilterSelectView';
+import { Select } from '../../../../../../common/Select';
 
 export interface SearchFormViewProps
 {
@@ -50,7 +50,7 @@ export const SearchFormView: FC<SearchFormViewProps> = props =>
             { searchType !== MarketplaceSearchType.ADVANCED &&
                 <Column className="mt-4" justifyContent="center" alignItems="center">
                     <Text variant="muted" className="font-size-marketplace">{ LocalizeText('catalog.marketplace.sort_order') }</Text>
-                    <FilterSelectView
+                    <Select
                         className="w-50"
                         options={ sortTypes.map(type => ({ value: type, label: LocalizeText(`catalog.marketplace.sort.${ type }`) })) }
                         value={ sortType }
@@ -77,7 +77,7 @@ export const SearchFormView: FC<SearchFormViewProps> = props =>
                         </Flex>
                         <Flex alignItems="center">
                             <Text variant="muted" className="col-4 font-size-marketplace">{ LocalizeText('catalog.marketplace.sort_order') }</Text>
-                            <FilterSelectView
+                            <Select
                                 fullWidth
                                 options={ sortTypes.map(type => ({ value: type, label: LocalizeText(`catalog.marketplace.sort.${ type }`) })) }
                                 value={ sortType }

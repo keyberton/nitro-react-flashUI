@@ -1,8 +1,8 @@
 import { FC, useEffect, useState } from 'react';
 import { LocalizeText, WiredFurniType } from '../../../../api';
 import { Column, Text } from '../../../../common';
+import { Select } from '../../../../common/Select';
 import { useWired } from '../../../../hooks';
-import { FilterSelectView } from '../../../inventory/views/FilterSelectView';
 import { WiredConditionBaseView } from './WiredConditionBaseView';
 
 const ALLOWED_HAND_ITEM_IDS: number[] = [ 2, 5, 7, 8, 9, 10, 27 ];
@@ -23,7 +23,7 @@ export const WiredConditionActorHasHandItemView: FC<{}> = props =>
         <WiredConditionBaseView requiresFurni={ WiredFurniType.STUFF_SELECTION_OPTION_NONE } hasSpecialInput={ true } save={ save }>
             <Column gap={ 1 }>
                 <Text gfbold>{ LocalizeText('wiredfurni.params.handitem') }</Text>
-                <FilterSelectView
+                <Select
                     fullWidth
                     options={ ALLOWED_HAND_ITEM_IDS.map(value => ({ value, label: LocalizeText(`handitem${ value }`) })) }
                     value={ handItemId }

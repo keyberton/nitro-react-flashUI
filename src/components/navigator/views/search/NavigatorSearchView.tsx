@@ -1,8 +1,8 @@
 import { FC, KeyboardEvent, useEffect, useState } from 'react';
 import { INavigatorSearchFilter, LocalizeText, SearchFilterOptions } from '../../../../api';
 import { Flex } from '../../../../common';
+import { Select } from '../../../../common/Select';
 import { useNavigator } from '../../../../hooks';
-import { FilterSelectView } from '../../../inventory/views/FilterSelectView';
 
 export interface NavigatorSearchViewProps
 {
@@ -69,7 +69,7 @@ export const NavigatorSearchView: FC<NavigatorSearchViewProps> = props =>
     return (
         <Flex fullWidth style={ { gap: 13 } } className="mb-2 ps-1">
             <Flex className='search-input' shrink>
-                <FilterSelectView
+                <Select
                     style={ { height: 23 } }
                     dropdownStyle={ { top: -4 } }
                     fullWidth

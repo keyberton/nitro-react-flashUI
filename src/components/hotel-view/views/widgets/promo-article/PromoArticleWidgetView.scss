@@ -16,12 +16,18 @@
 	}
 
 	.promo-article {
+		width: 100%;
+
 		.promo-article-image {
 			width: 150px;
 			height: 150px;
 			margin-right: 10px;
 			background-repeat: no-repeat;
 			background-position: top center;
+		}
+		
+		.promo-article-text {
+			width: 65%;
 		}
 	}
 }

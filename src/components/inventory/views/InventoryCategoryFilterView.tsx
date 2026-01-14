@@ -1,8 +1,8 @@
 import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 import { GroupItem, LocalizeBadgeName, LocalizeText } from '../../../api';
 import { Flex } from '../../../common';
+import { Select } from '../../../common/Select';
 import { InventoryFilterType, TAB_BADGES, TAB_FURNITURE } from '../constants';
-import { FilterSelectView } from './FilterSelectView';
 
 export interface InventoryCategoryFilterViewProps
 {
@@ -93,14 +93,14 @@ export const InventoryCategoryFilterView: FC<InventoryCategoryFilterViewProps> =
             </Flex>
             { (currentTab !== TAB_BADGES) &&
                 <Flex gap={1}>
-                    <FilterSelectView options={ [
+                    <Select options={ [
                             { value: InventoryFilterType.EVERYTHING, label: LocalizeText(InventoryFilterType.EVERYTHING) },
                             { value: InventoryFilterType.FLOOR, label: LocalizeText(InventoryFilterType.FLOOR) },
                             { value: InventoryFilterType.WALL, label: LocalizeText(InventoryFilterType.WALL) } ] }
                         value={ filterType }
                         dropdownStyle={ { top: 2 } }
                         setValue={ (val) => setFilterType(String(val)) } />
-                    <FilterSelectView options={ [
+                    <Select options={ [
                             { value: InventoryFilterType.ANYWHERE, label: LocalizeText(InventoryFilterType.ANYWHERE) },
                             { value: InventoryFilterType.IN_ROOM, label: LocalizeText(InventoryFilterType.IN_ROOM) },
                             { value: InventoryFilterType.IN_INVENTORY, label: LocalizeText(InventoryFilterType.IN_INVENTORY) }] }

@@ -3,9 +3,9 @@ import { CreateFlatMessageComposer, HabboClubLevelEnum } from '@nitrots/nitro-re
 import { FC, useEffect, useState } from 'react';
 import { CreateLinkEvent, GetClubMemberLevel, GetConfiguration, IRoomModel, LocalizeText, SendMessageComposer } from '../../../api';
 import { AutoGrid, Base, Button, Column, Flex, LayoutInputErrorView, NitroCardContentView, NitroCardHeaderView, NitroCardView, Text } from '../../../common';
+import { Select } from '../../../common/Select';
 import { RoomCreatorGridItem } from '../../../common/layout/RoomCreatorGridItem';
 import { useNavigator } from '../../../hooks';
-import { FilterSelectView } from '../../inventory/views/FilterSelectView';
 export const NavigatorRoomCreatorView: FC<{}> = props =>
 {
     const [ maxVisitorsList, setMaxVisitorsList ] = useState<number[]>(null);
@@ -86,7 +86,7 @@ export const NavigatorRoomCreatorView: FC<{}> = props =>
                             <Column> 
                                 <Column gap={ 1 }>
                                     <Text className='ms-1' gfbold>{ LocalizeText('navigator.category') }</Text>
-                                    <FilterSelectView
+                                    <Select
                                         options={ categories && (categories.length > 0) ? categories.map(category => ({ value: category.id, label: LocalizeText(category.name) })) : [] }
                                         value={ category }
                                         setValue={ (val) => setCategory(Number(val)) }
@@ -94,7 +94,7 @@ export const NavigatorRoomCreatorView: FC<{}> = props =>
                                 </Column>
                                 <Column gap={ 1 }>
                                     <Text className='ms-1' gfbold>{ LocalizeText('navigator.maxvisitors') }</Text>
-                                    <FilterSelectView
+                                    <Select
                                         options={ (maxVisitorsList && maxVisitorsList.map(value => ({ value, label: value.toString() }))) || [] }
                                         value={ visitorsCount }
                                         setValue={ (val) => setVisitorsCount(Number(val)) }
@@ -102,7 +102,7 @@ export const NavigatorRoomCreatorView: FC<{}> = props =>
                                 </Column>
                                 <Column gap={ 1 }>
                                     <Text className='ms-1' gfbold>{ LocalizeText('navigator.tradesettings') }</Text>
-                                    <FilterSelectView
+                                    <Select
                                         options={ [
                                             { value: 0, label: LocalizeText('navigator.roomsettings.trade_not_allowed') },
                                             { value: 1, label: LocalizeText('navigator.roomsettings.trade_not_with_Controller') },

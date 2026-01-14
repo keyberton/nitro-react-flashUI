@@ -16,6 +16,7 @@ export * from './HorizontalRule';
 export * from './InfiniteScroll';
 export * from './layout';
 export * from './layout/limited-edition';
+export * from './Select';
 export * from './Text';
 export * from './transitions';
 export * from './types';

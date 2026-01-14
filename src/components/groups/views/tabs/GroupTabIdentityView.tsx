@@ -2,8 +2,8 @@ import { GroupDeleteComposer, GroupSaveInformationComposer } from '@nitrots/nitr
 import { Dispatch, FC, SetStateAction, useCallback, useEffect, useState } from 'react';
 import { CreateLinkEvent, IGroupData, LocalizeText, SendMessageComposer } from '../../../../api';
 import { Base, Button, Column, Flex, Text } from '../../../../common';
+import { Select } from '../../../../common/Select';
 import { useNotification } from '../../../../hooks';
-import { FilterSelectView } from '../../../inventory/views/FilterSelectView';
 
 interface GroupTabIdentityViewProps
 {
@@ -96,7 +96,7 @@ export const GroupTabIdentityView: FC<GroupTabIdentityViewProps> = props =>
                         <Flex alignItems="center" gap={ 1 }>
                             <Text center className="col-3">{ LocalizeText('group.edit.base') }</Text>
                             <Column fullWidth gap={ 1 }>
-                                <FilterSelectView
+                                <Select
                                     fullWidth
                                     options={ [
                                         { value: -1, label: LocalizeText('group.edit.base.select.room') },

@@ -2,8 +2,8 @@ import { BannedUserData, BannedUsersFromRoomEvent, RoomBannedUsersComposer, Room
 import { FC, useEffect, useState } from 'react';
 import { IRoomData, LocalizeText, SendMessageComposer } from '../../../../api';
 import { Button, Column, Flex, Grid, Text, UserProfileIconView } from '../../../../common';
+import { Select } from '../../../../common/Select';
 import { useMessageEvent } from '../../../../hooks';
-import { FilterSelectView } from '../../../inventory/views/FilterSelectView';
 
 interface NavigatorRoomSettingsTabViewProps
 {
@@ -56,7 +56,7 @@ export const NavigatorRoomSettingsModTabView: FC<NavigatorRoomSettingsTabViewPro
                 <Column gap={ 1 }>
                     <Text bold>{ LocalizeText('navigator.roomsettings.moderation.mute.header') }</Text>
                     <Flex className="pe-5" alignItems="center" gap={ 1 }>
-                        <FilterSelectView
+                        <Select
                             fullWidth
                             options={ [
                                 { value: RoomModerationSettings.MODERATION_LEVEL_NONE, label: LocalizeText('navigator.roomsettings.moderation.none') },
@@ -69,7 +69,7 @@ export const NavigatorRoomSettingsModTabView: FC<NavigatorRoomSettingsTabViewPro
                 <Column gap={ 1 }>
                     <Text bold>{ LocalizeText('navigator.roomsettings.moderation.kick.header') }</Text>
                     <Flex className="pe-5" alignItems="center" gap={ 1 }>
-                        <FilterSelectView
+                        <Select
                             fullWidth
                             options={ [
                                 { value: RoomModerationSettings.MODERATION_LEVEL_NONE, label: LocalizeText('navigator.roomsettings.moderation.none') },
@@ -83,7 +83,7 @@ export const NavigatorRoomSettingsModTabView: FC<NavigatorRoomSettingsTabViewPro
                 <Column gap={ 1 }>
                     <Text bold>{ LocalizeText('navigator.roomsettings.moderation.ban.header') }</Text>
                     <Flex className="pe-5" alignItems="center" gap={ 1 }>
-                        <FilterSelectView
+                        <Select
                             fullWidth
                             options={ [
                                 { value: RoomModerationSettings.MODERATION_LEVEL_NONE, label: LocalizeText('navigator.roomsettings.moderation.none') },

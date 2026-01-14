@@ -2,8 +2,8 @@ import { CallForHelpTopicData, DefaultSanctionMessageComposer, ModAlertMessageCo
 import { FC, useMemo, useState } from 'react';
 import { ISelectedUser, LocalizeText, ModActionDefinition, NotificationAlertType, SendMessageComposer } from '../../../../api';
 import { Button, Column, DraggableWindowPosition, Flex, NitroCardContentView, NitroCardHeaderView, NitroCardView, Text } from '../../../../common';
+import { Select } from '../../../../common/Select';
 import { useModTools, useNotification } from '../../../../hooks';
-import { FilterSelectView } from '../../../inventory/views/FilterSelectView';
 
 interface ModToolsUserModActionViewProps
 {
@@ -155,7 +155,7 @@ export const ModToolsUserModActionView: FC<ModToolsUserModActionViewProps> = pro
         <NitroCardView className="nitro-mod-tools-user-action" theme="modtool-windows" windowPosition={ DraggableWindowPosition.TOP_CENTER }>
             <NitroCardHeaderView headerText={ 'Mod Action: ' + (user ? user.username : '') } onCloseClick={ () => onCloseClick() } />
             <NitroCardContentView className="text-black">
-                <FilterSelectView
+                <Select
                     fullWidth
                     options={ [
                         { value: -1, label: 'CFH Topic' },
@@ -168,7 +168,7 @@ export const ModToolsUserModActionView: FC<ModToolsUserModActionViewProps> = pro
                         if(nextValue === -1) return;
                         setSelectedTopic(nextValue);
                     } } />
-                <FilterSelectView
+                <Select
                     fullWidth
                     options={ [
                         { value: -1, label: 'Sanction Type' },
