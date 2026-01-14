@@ -106,9 +106,16 @@ export const RoomToolsWidgetView: FC<{}> = props =>
 
     useEffect(() =>
     {
+        if(!show)
+        {
+            setIsOpen(false);
+
+            return;
+        }
+
         setIsOpen(true);
 
-        const timeout = setTimeout(() => setIsOpen(false), 5000);
+        const timeout = setTimeout(() => setIsOpen(false), 3000);
 
         return () => clearTimeout(timeout);
     }, [ roomName, roomOwner, roomTags, show ]);
@@ -123,9 +130,8 @@ export const RoomToolsWidgetView: FC<{}> = props =>
             <div className="btn-toggle toggle-roomtool d-flex align-items-center" onClick={ () => setShow(!show) }>
                 <div className={ 'toggle-icon ' + (!show ? 'right' : 'left') } />
             </div>
-            { show && (
                 <>
-                    <Column gap={ 0 } center className="nitro-room-tools p-3 px-3">
+                    <Column gap={ 0 } center className={ classNames('nitro-room-tools p-3 px-3', (!show && 'collapsed')) }>
                         <Flex>
                             <Column className="margin-icons p-2">
                                 <Flex className='nitro-item-room-tool' alignItems='center' gap={ 2 } pointer onClick={ () => handleToolClick('settings') }>
@@ -172,23 +178,20 @@ export const RoomToolsWidgetView: FC<{}> = props =>
                         </TransitionAnimation>
                     </Flex>
                     <Column justifyContent="center">
-                        <TransitionAnimation type={ TransitionAnimationTypes.SLIDE_RIGHT } inProp={ isOpen } timeout={ 300 }>
-                            <Column center>
-                                <Column className="nitro-room-tools-info rounded py-1 px-2">
-                                    <Column gap={ 0 }>
-                                        <Text wrap variant="white" fontSize={ 4 }>{ roomName }</Text>
-                                        <Text bold variant="muted" fontSize={ 5 }>{ LocalizeText('room.tool.room.owner.prefix') + ' ' + roomOwner }</Text>
-                                    </Column>
-                                    { roomTags && roomTags.length > 0 &&
-                                        <Flex gap={ 1 }>
-                                            { roomTags.map((tag, index) => <Text key={ index } small pointer className="tags rounded" onClick={ () => handleToolClick('navigator_search_tag', tag) }>#{ tag }</Text>) }
-                                        </Flex> }
+                        <Column center className={ classNames('nitro-room-tools-info-wrapper', (!isOpen && 'closed')) }>
+                            <Column className="nitro-room-tools-info rounded py-1 px-2">
+                                <Column gap={ 0 }>
+                                    <Text wrap variant="white" fontSize={ 4 }>{ roomName }</Text>
+                                    <Text bold variant="muted" fontSize={ 5 }>{ LocalizeText('room.tool.room.owner.prefix') + ' ' + roomOwner }</Text>
                                 </Column>
+                                { roomTags && roomTags.length > 0 &&
+                                    <Flex gap={ 1 }>
+                                        { roomTags.map((tag, index) => <Text key={ index } small pointer className="tags rounded" onClick={ () => handleToolClick('navigator_search_tag', tag) }>#{ tag }</Text>) }
+                                    </Flex> }
                             </Column>
-                        </TransitionAnimation>
+                        </Column>
                     </Column>
                 </>
-            ) }
         </Flex>
     );
 }
