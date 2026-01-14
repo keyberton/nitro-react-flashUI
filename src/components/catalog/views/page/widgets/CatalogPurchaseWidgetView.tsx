@@ -1,6 +1,5 @@
-import { PurchaseFromCatalogComposer } from '@nitrots/nitro-renderer';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
-import { CatalogPurchaseState, CreateLinkEvent, DispatchUiEvent, GetClubMemberLevel, LocalStorageKeys, LocalizeText, Offer, SendMessageComposer } from '../../../../../api';
+import { CatalogPurchaseState, CreateLinkEvent, DispatchUiEvent, GetClubMemberLevel, LocalStorageKeys, LocalizeText, Offer } from '../../../../../api';
 import { Button, LayoutLoadingSpinnerView } from '../../../../../common';
 import { CatalogEvent, CatalogInitGiftEvent, CatalogNotEnoughBalanceEvent, CatalogPurchaseConfirmationEvent, CatalogPurchaseFailureEvent, CatalogPurchaseNotAllowedEvent, CatalogPurchaseSoldOutEvent, CatalogPurchasedEvent } from '../../../../../events';
 import { useCatalog, useLocalStorage, usePurse, useUiEvent } from '../../../../../hooks';
@@ -123,27 +122,27 @@ export const CatalogPurchaseWidgetView: FC<CatalogPurchaseWidgetViewProps> = pro
             </div>
         </div>;
 
-        if(priceCredits > getCurrencyAmount(-1)) return <Button variant="success" disabled={ (purchaseOptions.extraParamRequired && (!purchaseOptions.extraData || !purchaseOptions.extraData.length)) } onClick={ () => DispatchUiEvent(new CatalogNotEnoughBalanceEvent('credits', -1)) }>{ LocalizeText('catalog.purchase_confirmation.' + (currentOffer.isRentOffer ? 'rent' : 'buy')) }</Button>;
+        if(priceCredits > getCurrencyAmount(-1)) return <Button className='bolder' variant="success" disabled={ (purchaseOptions.extraParamRequired && (!purchaseOptions.extraData || !purchaseOptions.extraData.length)) } onClick={ () => DispatchUiEvent(new CatalogNotEnoughBalanceEvent('credits', -1)) }>{ LocalizeText('catalog.purchase_confirmation.' + (currentOffer.isRentOffer ? 'rent' : 'buy')) }</Button>;
 
-        if(pricePoints > getCurrencyAmount(currentOffer.activityPointType)) return <Button variant="success" onClick={ () => DispatchUiEvent(new CatalogNotEnoughBalanceEvent(LocalizeText('catalog.alert.notenough.activitypoints.title.' + currentOffer.activityPointType), currentOffer.activityPointType)) }>{ LocalizeText('catalog.purchase_confirmation.' + (currentOffer.isRentOffer ? 'rent' : 'buy')) }</Button>;
+        if(pricePoints > getCurrencyAmount(currentOffer.activityPointType)) return <Button variant="success" className='bolder' onClick={ () => DispatchUiEvent(new CatalogNotEnoughBalanceEvent(LocalizeText('catalog.alert.notenough.activitypoints.title.' + currentOffer.activityPointType), currentOffer.activityPointType)) }>{ LocalizeText('catalog.purchase_confirmation.' + (currentOffer.isRentOffer ? 'rent' : 'buy')) }</Button>;
 
         switch(purchaseState)
         {
             case CatalogPurchaseState.PURCHASE:
-                return <Button disabled><LayoutLoadingSpinnerView /></Button>;
+                return <Button fullWidth disabled><LayoutLoadingSpinnerView /></Button>;
             case CatalogPurchaseState.FAILED:
-                return <Button variant="danger">{ LocalizeText('generic.failed') }</Button>;
+                return <Button fullWidth variant="danger">{ LocalizeText('generic.failed') }</Button>;
             case CatalogPurchaseState.SOLD_OUT:
-                return <Button variant="danger">{ LocalizeText('generic.failed') + ' - ' + LocalizeText('catalog.alert.limited_edition_sold_out.title') }</Button>;
+                return <Button fullWidth variant="danger">{ LocalizeText('generic.failed') + ' - ' + LocalizeText('catalog.alert.limited_edition_sold_out.title') }</Button>;
             case CatalogPurchaseState.NONE:
             default:
-                return <Button variant="success" disabled={ (purchaseOptions.extraParamRequired && (!purchaseOptions.extraData || !purchaseOptions.extraData.length)) } onClick={ event => purchase() }>{ LocalizeText('catalog.purchase_confirmation.' + (currentOffer.isRentOffer ? 'rent' : 'buy')) }</Button>;
+                return <Button fullWidth variant="success" className='bolder' disabled={ (purchaseOptions.extraParamRequired && (!purchaseOptions.extraData || !purchaseOptions.extraData.length)) } onClick={ event => purchase() }>{ LocalizeText('catalog.purchase_confirmation.' + (currentOffer.isRentOffer ? 'rent' : 'buy')) }</Button>;
         }
     }
 
     return (
         <>
-            <Button disabled={ ((purchaseOptions.quantity > 1) || !currentOffer.giftable || isLimitedSoldOut || GetClubMemberLevel() < currentOffer.clubLevel || (purchaseOptions.extraParamRequired && (!purchaseOptions.extraData || !purchaseOptions.extraData.length))) } onClick={ event => purchase(true) }>
+            <Button fullWidth disabled={ ((purchaseOptions.quantity > 1) || !currentOffer.giftable || isLimitedSoldOut || GetClubMemberLevel() < currentOffer.clubLevel || (purchaseOptions.extraParamRequired && (!purchaseOptions.extraData || !purchaseOptions.extraData.length))) } onClick={ event => purchase(true) }>
                 { LocalizeText('catalog.purchase_confirmation.gift') }
             </Button>
             <PurchaseButton />

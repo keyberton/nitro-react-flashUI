@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Flex } from '../../../../../common';
 import { Column } from '../../../../../common/Column';
 import { Grid } from '../../../../../common/Grid';
 import { Text } from '../../../../../common/Text';
@@ -28,9 +29,6 @@ export const CatalogLayoutSingleBundleView: FC<CatalogLayoutProps> = props =>
                         <CatalogAddOnBadgeWidgetView position="absolute" className="bg-muted rounded bottom-0 start-0" />
                         <CatalogSimplePriceWidgetView position="absolute" className="bottom-0 end-0" />
                     </Column>
-                    <Column gap={ 1 }>
-                        <CatalogPurchaseWidgetView />
-                    </Column>
                 </Column>
                 <Column size={ 7 } overflow="hidden">
                     { !!page.localization.getText(2) &&
@@ -40,6 +38,9 @@ export const CatalogLayoutSingleBundleView: FC<CatalogLayoutProps> = props =>
                     </Column>
                 </Column>
             </Grid>
+            <Flex gap={2} className='bundle-purchase-buttons' fullWidth>
+                <CatalogPurchaseWidgetView />
+            </Flex>
         </>
     );
 }

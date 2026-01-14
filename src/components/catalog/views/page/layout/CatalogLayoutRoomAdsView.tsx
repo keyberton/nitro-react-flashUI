@@ -103,6 +103,7 @@ export const CatalogLayoutRoomAdsView: FC<CatalogLayoutProps> = props =>
                 <Base className="rounded p-1">
                     <Column gap={ 2 }>
                         <Select
+                            flash
                             fullWidth
                             options={ categories?.map(cat => ({ value: cat.id, label: LocalizeText(cat.name) })) ?? [] }
                             value={ categoryId }
@@ -120,6 +121,7 @@ export const CatalogLayoutRoomAdsView: FC<CatalogLayoutProps> = props =>
                     <Column gap={ 0 } className="mt-2">
                         <Text small>{ LocalizeText('roomad.catalog_roomname') }</Text>
                         <Select
+                            flash
                             fullWidth
                             options={ roomSelectOptions }
                             value={ roomId }

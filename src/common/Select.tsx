@@ -42,7 +42,12 @@ export const Select: FC<SelectProps> = props =>
             setIsOpen(false);
         }
 
-        const handleScrollOrResize = () => setIsOpen(false);
+        const handleScrollOrResize = (event: Event) =>
+        {
+            if(event.type === 'scroll' && menuRef.current && menuRef.current.contains(event.target as Node)) return;
+
+            setIsOpen(false);
+        }
 
         document.addEventListener('click', handleDocumentClick);
         window.addEventListener('scroll', handleScrollOrResize, true);

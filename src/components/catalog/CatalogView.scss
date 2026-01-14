@@ -3,7 +3,7 @@
     height: $catalog-height;
     min-width: $catalog-width;
     max-width: $catalog-width;
-    min-height: $catalog-height - 20px;
+    min-height: $catalog-height;
 
     font[size='16'] {
         font-size: 20px;
@@ -173,6 +173,38 @@
 
 .catalog-right {
     text-shadow: none;
+}
+
+.marketplace-select {
+    width: 220px;
+}
+
+.pets-selector {
+    .group-furni-picker {
+        max-height: 80px!important;
+        min-height: 80px!important;
+
+        .layout-grid-item {
+            border: none!important;
+            border-radius: 4px!important;
+            background-position: 0 0!important;
+            width: 27px;
+            height: 22px;
+            background-image: url(@/assets/flash/catalogue/pets/spritesheet.png);
+
+            &.active {
+                background-position: -28px 0!important;
+            }
+        }
+    }
+    
+    .flash-form-select {
+        padding-left: 0;
+    }
+}
+
+.bundle-purchase-buttons {
+    max-height: 25px;
 }
 
 .catalog-header {
@@ -397,6 +429,7 @@
 .nitro-catalog-layout-bundle-grid {
     .layout-grid-item {
         background-color: transparent;
+        border: none!important;
     }
 }
 

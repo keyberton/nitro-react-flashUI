@@ -51,7 +51,8 @@ export const SearchFormView: FC<SearchFormViewProps> = props =>
                 <Column className="mt-4" justifyContent="center" alignItems="center">
                     <Text variant="muted" className="font-size-marketplace">{ LocalizeText('catalog.marketplace.sort_order') }</Text>
                     <Select
-                        className="w-50"
+                        flash
+                        className="marketplace-select"
                         options={ sortTypes.map(type => ({ value: type, label: LocalizeText(`catalog.marketplace.sort.${ type }`) })) }
                         value={ sortType }
                         setValue={ value => onSortTypeChange(Number(value)) } />
@@ -78,6 +79,7 @@ export const SearchFormView: FC<SearchFormViewProps> = props =>
                         <Flex alignItems="center">
                             <Text variant="muted" className="col-4 font-size-marketplace">{ LocalizeText('catalog.marketplace.sort_order') }</Text>
                             <Select
+                                flash
                                 fullWidth
                                 options={ sortTypes.map(type => ({ value: type, label: LocalizeText(`catalog.marketplace.sort.${ type }`) })) }
                                 value={ sortType }
