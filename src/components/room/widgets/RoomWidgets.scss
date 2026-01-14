@@ -17,7 +17,7 @@
 
         &.collapsed {
             transform: translateX(-170px);
-            height: 0;
+            height: 130px;
         }
 
         .icon-width {
@@ -84,7 +84,7 @@
         transition: transform .3s ease;
 
         &.closed {
-            transform: translateX(-400px);
+            transform: translateX(-999px);
         }
     }
 
