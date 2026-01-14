@@ -31,7 +31,7 @@ export const CatalogLayoutFrontpage4View: FC<CatalogLayoutProps> = props =>
     }, [ page, hideNavigation ]);
 
     return (
-        <Grid>
+        <Grid className='featured-page'>
             <Column size={ 4 }>
                 { frontPageItems[0] &&
                     <CatalogLayoutFrontPageItemView item={ frontPageItems[0] } onClick={ event => selectItem(frontPageItems[0]) } /> }

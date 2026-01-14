@@ -53,6 +53,10 @@
         border-image-source: none;
     }
 
+    .featured-page {
+        text-shadow: none;
+    }
+
     .currencies-bg {
         border-image-source: url(@/assets/flash/catalogue/currencies_bg.png);
         border-image-slice: 6 6 6 6 fill;
