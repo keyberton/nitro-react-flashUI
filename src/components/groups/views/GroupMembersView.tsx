@@ -182,6 +182,7 @@ export const GroupMembersView: FC<{}> = props =>
                     <Column fullWidth gap={ 1 }>
                         <input type="text" className="form-control form-control-sm w-100" placeholder={ LocalizeText('group.members.searchinfo') } value={ searchQuery } onChange={ event => setSearchQuery(event.target.value) } />
                         <Select
+                            flash
                             fullWidth
                             options={ [
                                 { value: 0, label: LocalizeText('group.members.search.all') },
