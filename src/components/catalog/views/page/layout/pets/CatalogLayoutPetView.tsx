@@ -1,15 +1,13 @@
 import { ApproveNameMessageComposer, ApproveNameMessageEvent, ColorConverter, GetSellablePetPalettesComposer, PurchaseFromCatalogComposer, SellablePetPaletteData } from '@nitrots/nitro-renderer';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
-import { DispatchUiEvent, GetPetAvailableColors, GetPetIndexFromLocalization, LocalizeText, SendMessageComposer, getTypePrice } from '../../../../../../api';
+import { DispatchUiEvent, GetPetAvailableColors, GetPetIndexFromLocalization, LocalizeText, SendMessageComposer } from '../../../../../../api';
 import { AutoGrid, Base, Column, Flex, LayoutGridItem, Select, Text } from '../../../../../../common';
 import { CatalogPurchaseFailureEvent } from '../../../../../../events';
 import { useCatalog, useMessageEvent } from '../../../../../../hooks';
 import { CatalogAddOnBadgeWidgetView } from '../../widgets/CatalogAddOnBadgeWidgetView';
 import { CatalogPurchaseWidgetView } from '../../widgets/CatalogPurchaseWidgetView';
-import { CatalogTotalPriceWidget } from '../../widgets/CatalogTotalPriceWidget';
-import { CatalogViewProductWidgetView } from '../../widgets/CatalogViewProductWidgetView';
+import { CatalogViewPetProductWidgetView } from '../../widgets/CatalogViewPetProductWidgetView';
 import { CatalogLayoutProps } from '../CatalogLayout.types';
-
 export const CatalogLayoutPetView: FC<CatalogLayoutProps> = props =>
 {
     const { page = null } = props;
@@ -85,6 +83,13 @@ export const CatalogLayoutPetView: FC<CatalogLayoutProps> = props =>
 
         return LocalizeText(key);
     }, [ approvalResult ]);
+
+    const extraData = useMemo(() =>
+    {
+        if((petIndex === -1) || !sellablePalettes.length || (selectedPaletteIndex === -1)) return '';
+
+        return `${ petIndex } ${ sellablePalettes[selectedPaletteIndex].paletteId } ${ getColor.toString(16) }`;
+    }, [ petIndex, sellablePalettes, selectedPaletteIndex, getColor ]);
 
     const purchasePet = useCallback(() =>
     {
@@ -202,9 +207,8 @@ export const CatalogLayoutPetView: FC<CatalogLayoutProps> = props =>
                     </> }
                 { currentOffer &&
                     <Column gap={1}>
-                        <Base position="relative" overflow="hidden">
-                            <CatalogViewProductWidgetView />
-                            <CatalogTotalPriceWidget className={ `credits-default-layout ${ getTypePrice(currentOffer.priceType) } py-1 px-2 bottom-2 end-2` } justifyContent="end" alignItems="end" />
+                        <Base position="relative" overflow="hidden" className='pets-preview'>
+                            <CatalogViewPetProductWidgetView scale={ 2 } productType={ currentOffer.product.productType } productClassId={ currentOffer.product.productClassId } extraData={ extraData } />
                             <CatalogAddOnBadgeWidgetView position="absolute" className="bg-muted rounded bottom-1 end-1" />
                         </Base>
                         <Text className='ms-1' fontSize={7}>{ LocalizeText('catalog.page.pet_crocs_savannah.text_2') }</Text>

@@ -19,7 +19,7 @@ export const FriendsListRequestView: FC<FriendsListRequestViewProps> = props =>
     return (
         <NitroCardAccordionSetView friendlistTab={ FriendListTabs.REQUESTS } setShowHoverText={ (e) => setShowHoverText(e) } { ...rest }>
             <Column fullHeight justifyContent="between" className="position-relative" overflow="hidden">
-                <Column gap={ 0 } overflow="auto" style={ { height: 'calc(100% - 40px)' } }>
+                <Column gap={ 0 } overflow="auto">
                     { requests.map((request, index) => <FriendsListRequestItemView key={ index } request={ request } setShowHoverText={ (e) => setShowHoverText(e) } />) }
                 </Column>
                 <Column className="position-absolute bottom-0 w-100">

@@ -43,7 +43,7 @@ export const FriendsSearchView: FC<FriendsSearchViewProps> = props =>
     return (
         <NitroCardAccordionSetView friendlistTab={ FriendListTabs.SEARCH_HABBOS } isExpanded={ isFromSearchToolbar ? true : false } setShowHoverText={ (e) => setShowHoverText(e) } { ...rest }>
             <Column className="w-100 h-100 position-relative">
-                <Column gap={ 0 } overflow="auto" style={ { height: 'calc(100% - 40px)' } }>
+                <Column gap={ 0 }>
                     { friendResults &&
                     <>
                         { (friendResults.length === 0) &&
